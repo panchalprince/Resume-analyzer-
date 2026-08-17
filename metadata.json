@@ -1,0 +1,6 @@
+{
+  "name": "SP ResumAI",
+  "description": "AI-powered Resume Analyzer with ATS score calculation, strengths & weaknesses evaluation, keyword matching, skill detection, and job description alignment.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

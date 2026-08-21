@@ -30,7 +30,7 @@ const SUPPORTED_MODELS = [
   "gemini-3.1-flash-lite",
 ];
 
-async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 8000): Promise<T> {
+async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 16000): Promise<T> {
   let timer: NodeJS.Timeout;
   const timeoutPromise = new Promise<never>((_, reject) => {
     timer = setTimeout(() => reject(new Error(`API request timed out after ${timeoutMs}ms`)), timeoutMs);
@@ -48,21 +48,20 @@ async function callWithRetryAndFallback<T>(
 ): Promise<T> {
   let lastError: any = null;
 
-  // Try each available model with rapid failover
   for (const model of SUPPORTED_MODELS) {
     try {
-      return await callWithTimeout(fn(model), 7000);
+      return await callWithTimeout(fn(model), 16000);
     } catch (err: any) {
       lastError = err;
       const isQuota = err?.status === "RESOURCE_EXHAUSTED" || err?.message?.includes("quota") || err?.message?.includes("429");
       const isUnavailable = err?.status === "UNAVAILABLE" || err?.message?.includes("503");
       console.warn(
-        `[Gemini API] ${actionName} on ${model} (${isQuota ? "Quota 429" : isUnavailable ? "Unavailable 503" : "Error/Timeout"}). Trying next model...`
+        `[Gemini API] ${actionName} on ${model} (${isQuota ? "Quota 429" : isUnavailable ? "High Demand 503" : "Timeout/Error"}). Failing over to alternative...`
       );
     }
   }
 
-  throw lastError || new Error(`All Gemini models were temporarily unavailable for ${actionName}`);
+  throw lastError || new Error(`All Gemini models were temporarily busy for ${actionName}`);
 }
 
 export async function generateResumeAnalysis(input: AIAnalysisPromptInput) {
@@ -243,8 +242,8 @@ Ensure your score (atsScore 0-100) is authentic and calculated fairly:
     });
 
     return parsed;
-  } catch (error) {
-    console.error("Gemini API resume analysis failed after all retries and model fallbacks:", error);
+  } catch (error: any) {
+    console.warn(`[ATS Engine] Remote AI model busy or rate limited (${error?.message || error}). Seamlessly applying comprehensive local ATS engine fallback.`);
     // Intelligent heuristic fallback so the user always receives a working analysis
     return generateHeuristicResumeAnalysis(input);
   }
@@ -334,8 +333,8 @@ Evaluate the alignment precisely. Output a structured JSON matching the followin
     });
 
     return parsed;
-  } catch (error) {
-    console.error("Gemini Job Match analysis failed after retries:", error);
+  } catch (error: any) {
+    console.warn(`[Job Match Engine] Remote AI model busy (${error?.message || error}). Seamlessly applying comprehensive local Job Match engine fallback.`);
     return generateHeuristicJobMatch(resumeText, jobDescription, jobTitle);
   }
 }

@@ -89,6 +89,30 @@
       "extractedText": "Sarah Jenkins\nSenior Backend Engineer\n10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.\nReduced API latency by 45% and scaled infrastructure to support 15M monthly active users.",
       "fileSize": 223,
       "createdAt": "2026-08-21T05:32:27.826Z"
+    },
+    "res_iatvruxh": {
+      "id": "res_iatvruxh",
+      "userId": "demo-user-123",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "extractedText": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithic services into containerized microservices orchestrated via Docker and AWS ECS, boosting system uptime to 99.98%.\n- Mentored cohort of 5 junior and mid-level software engineers; instituted automated code review guidelines and PR workflows that reduced deployment rollbacks by 40%.\n- Integrated comprehensive Jest and Playwright end-to-end automated test suites, expanding code coverage from 52% to 89%.\n\nFull Stack Developer | Veloce Systems Inc., Austin, TX\nAugust 2019 - May 2022\n- Developed responsive client dashboard in React/TypeScript with real-time WebSocket telemetry charts, driving 28% increase in user session duration.\n- Built scalable payment processing pipeline using Stripe API and Express.js, successfully processing over $4.2M in monthly transaction volume.\n- Configured CI/CD automation pipelines via GitHub Actions, decreasing standard release deployment cycle time from 4 hours to 18 minutes.\n- Collaborated closely with Product and UX teams to execute A/B conversion experiments, generating a 14% lift in checkout conversions.\n\nSoftware Engineering Intern | NextGen Software, Seattle, WA\nJune 2018 - August 2019\n- Assisted in developing RESTful endpoints in Python/Django and refactored relational database queries in PostgreSQL.\n- Authored technical documentation and internal developer onboarding guides.\n\nEDUCATION\nBachelor of Science in Computer Science\nUniversity of California, Berkeley (2015 - 2019)\n- Honors: Dean's Honor List (3 Semesters), Magna Cum Laude\n- Relevant Coursework: Data Structures & Algorithms, Operating Systems, Database Systems, Computer Networks\n\nPROJECTS\n- DevSync (Open Source): Collaborative code review extension with over 3,500 active GitHub stars. Built using TypeScript, WebSockets, and WebAssembly.\n- CloudPulse: Serverless AWS health monitoring dashboard utilizing Next.js, Tailwind, and DynamoDB.\n\nCERTIFICATIONS\n- AWS Certified Solutions Architect - Associate (2023)\n- Certified Kubernetes Application Developer (CKAD) (2022)",
+      "fileSize": 3487,
+      "createdAt": "2026-08-21T05:33:41.087Z"
+    },
+    "res_d98uw8vf": {
+      "id": "res_d98uw8vf",
+      "userId": "demo-user-123",
+      "filename": "230200143065_Resume (1).pdf",
+      "extractedText": "DIGVIJAY SOLANKI\nEmail: digvijaysolanki1211@gmail.com | Phone: 9016662621\nRajkot, Gujarat | LinkedIn: www.linkedin.com/in/digvijay-solanki-24371428b/\nPROFESSIONAL SUMMARY\nDedicated and motivated Bachelor of Engineering student in Artificial Intelligence and Data Science\n(6th Semester) at Government Engineering College, Rajkot. Possess a strong foundation in\nmachine learning, data structures, and full-stack development. Experienced in building AI-driven\napplications and scalable mobile solutions. Eager to apply technical skills to real-world challenges\nand contribute effectively to innovative teams.\nTECHNICAL SKILLS\n•\nProgramming & AI/ML: Python, NumPy, Pandas, scikit-learn, TensorFlow, PyTorch, Hugging\nFace Transformers\n•\nWeb & Mobile Development: Flask, HTML, CSS, Tailwind, RESTful APIs, Android Studio\n(Jetpack Compose), Kotlin\n•\nDatabases: SQL, MySQL, SQLite\nEDUCATION\nBachelor of Engineering (B.E.) – Artificial Intelligence & Data Science\nGovernment Engineering College, Rajkot | Currently in 6th Semester\nRelevant Coursework: Machine Learning, Deep Learning, Data Structures & Algorithms, Probability\n& Statistics, Database Systems\nClass 12 – Science (A Group)\nP.R. Mukhi Higher Secondary School, Kapadwanj, Gujarat (GSEB), 2023\nClass 10\nC.D. Gandhi English Medium School, Kapadwanj, Gujarat, 2021\nPROJECTS\nBuilding Management System (BMSmart)\nDeveloped an Android application using Kotlin and Jetpack Compose for smart building\nmanagement. Integrated IoT sensors for real-time monitoring, automated alert notifications, and\noccupancy analytics to improve operational efficiency.\nSTRENGTHS\n•\nStrong problem-solving and analytical skills\n•\nQuick learner with a proactive mindset\n•\nEffective team collaboration and communication\n•\nAdaptable and detail-oriented",
+      "fileSize": 1793,
+      "createdAt": "2026-08-21T05:34:08.537Z"
+    },
+    "res_li2lbccp": {
+      "id": "res_li2lbccp",
+      "userId": "demo-user-123",
+      "filename": "My_Resume.pdf",
+      "extractedText": "Michael Chang\nLead Full Stack Architect with 9 years experience building microservices with React, TypeScript, Node.js, GraphQL, PostgreSQL, and AWS. Spearheaded architecture scaling to 20M users, reduced P99 latency by 55%, and mentored 12 junior engineers.",
+      "fileSize": 258,
+      "createdAt": "2026-08-21T05:37:27.024Z"
     }
   },
   "analyses": {
@@ -1797,6 +1821,568 @@
       },
       "extractedTextSnippet": "Sarah Jenkins\nSenior Backend Engineer\n10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.\nReduced API latency by 45% and scaled infrastructure to support 15M monthly active users.",
       "targetRole": "Lead Backend Engineer"
+    },
+    "an_ns8sm2tp": {
+      "id": "an_ns8sm2tp",
+      "userId": "demo-user-123",
+      "resumeId": "res_iatvruxh",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "createdAt": "2026-08-21T05:33:47.795Z",
+      "atsScore": 94,
+      "scoreTier": "Elite",
+      "summary": "This is a top-tier resume for a Senior Full Stack Engineer, demonstrating exceptional alignment with industry standards. The document uses a clean, logical structure with strong quantitative impact, making it highly ATS-compliant and attractive to hiring managers.",
+      "strengths": [
+        "Strong use of data-driven achievements to quantify technical impact.",
+        "Excellent categorization of technical skills, making it easy for recruiters and parsers to scan.",
+        "Strategic inclusion of a projects section that showcases real-world community impact (GitHub stars).",
+        "Effective use of the STAR method across all major professional experience bullet points.",
+        "Clear, concise professional summary that hits key technical domains immediately."
+      ],
+      "weaknesses": [
+        "Missing some higher-level architectural buzzwords like 'System Design' or 'Distributed Systems'.",
+        "Soft skills are implicit; they could be explicitly woven into the summary or experience sections.",
+        "The internship entry lacks quantitative metrics compared to other roles.",
+        "Could benefit from a slightly more descriptive section regarding leadership and mentorship impact."
+      ],
+      "missingKeywords": [
+        "Distributed Systems",
+        "System Design",
+        "Microservices Architecture",
+        "API Security",
+        "Observability",
+        "Site Reliability Engineering"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Microservices",
+          "SaaS",
+          "CI/CD",
+          "REST APIs",
+          "GraphQL",
+          "Test-Driven Development",
+          "Cloud Architecture"
+        ],
+        "soft": [
+          "Cross-functional Leadership",
+          "Mentorship",
+          "Collaborative Problem Solving",
+          "Technical Documentation"
+        ],
+        "tools": [
+          "AWS",
+          "Docker",
+          "Kubernetes",
+          "Terraform",
+          "Jest",
+          "Cypress",
+          "Datadog",
+          "Jira",
+          "GitHub Actions"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "Go",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 95,
+        "skillsMatch": 98,
+        "experienceImpact": 92,
+        "educationRelevance": 90,
+        "formattingAndLayout": 95,
+        "resumeStructure": 95,
+        "quantifiableMetrics": 90,
+        "actionVerbsAndTone": 94
+      },
+      "sectionScores": {
+        "summary": 95,
+        "skills": 98,
+        "experience": 93,
+        "education": 90,
+        "projects": 95,
+        "certifications": 100
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Summary",
+          "score": 95,
+          "status": "excellent",
+          "strengths": [
+            "Clear focus on seniority",
+            "Excellent use of metrics"
+          ],
+          "problems": [
+            "Could mention specific industry domain expertise"
+          ],
+          "suggestions": [
+            "Include one sentence on preferred development methodologies like Agile or Kanban."
+          ],
+          "detectedContentSnippet": "Results-driven Senior Full Stack Engineer with 6+ years of experience..."
+        },
+        {
+          "sectionName": "Skills",
+          "score": 98,
+          "status": "excellent",
+          "strengths": [
+            "Logical grouping",
+            "Highly relevant tech stack"
+          ],
+          "problems": [
+            "None detected"
+          ],
+          "suggestions": [
+            "Ensure skills are updated as new frameworks are adopted."
+          ],
+          "detectedContentSnippet": "Programming Languages: TypeScript, JavaScript (ES6+)..."
+        },
+        {
+          "sectionName": "Experience",
+          "score": 93,
+          "status": "excellent",
+          "strengths": [
+            "Great use of metrics",
+            "Strong action verbs"
+          ],
+          "problems": [
+            "Internship section is light on impact"
+          ],
+          "suggestions": [
+            "Add metrics for the internship if possible, even if estimated."
+          ],
+          "detectedContentSnippet": "Architected and deployed multi-tenant SaaS analytics platform..."
+        },
+        {
+          "sectionName": "Education",
+          "score": 90,
+          "status": "good",
+          "strengths": [
+            "Relevant degree and honors included"
+          ],
+          "problems": [
+            "Minor detail"
+          ],
+          "suggestions": [
+            "No changes needed."
+          ],
+          "detectedContentSnippet": "Bachelor of Science in Computer Science, University of California, Berkeley"
+        },
+        {
+          "sectionName": "Projects",
+          "score": 95,
+          "status": "excellent",
+          "strengths": [
+            "Quantified success with GitHub stars"
+          ],
+          "problems": [
+            "None"
+          ],
+          "suggestions": [
+            "None"
+          ],
+          "detectedContentSnippet": "DevSync (Open Source): Collaborative code review extension..."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "internship_1",
+          "original": "Assisted in developing RESTful endpoints in Python/Django and refactored relational database queries in PostgreSQL.",
+          "problem": "Passive phrasing ('Assisted'), lacks measurable outcome.",
+          "whyItMatters": "Recruiters want to know the scale of your contribution and the resulting impact on performance.",
+          "improved": "Engineered high-performance RESTful API endpoints in Python/Django, refactoring complex PostgreSQL queries to improve data retrieval efficiency by [X]%.",
+          "category": "Impact",
+          "metricAddedSuggestion": "Include the percentage of latency reduction or number of active users affected."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Layout",
+          "issue": "Standard single-column format is perfect for ATS.",
+          "fix": "No fix required."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Lead Full Stack Engineer",
+          "Full Stack Developer",
+          "Software Engineering Intern"
+        ],
+        "estimatedYearsExperience": "6.5 years",
+        "measurableResultsCount": 8,
+        "actionVerbStrength": "strong",
+        "summaryRemarks": "The progression from intern to lead is clear and consistent with a high-growth career path."
+      },
+      "educationInsight": {
+        "summaryRemarks": "Top-tier university degree with high academic honors, indicating strong foundational knowledge.",
+        "courseworkOrHonorsDetected": "Dean's Honor List, Magna Cum Laude",
+        "degreeDetected": "Bachelor of Science in Computer Science",
+        "graduationYearDetected": "2019",
+        "institutionDetected": "University of California, Berkeley"
+      },
+      "extractedTextSnippet": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithi",
+      "targetRole": "Senior Full Stack Software Engineer"
+    },
+    "an_x1o1lefg": {
+      "id": "an_x1o1lefg",
+      "userId": "demo-user-123",
+      "resumeId": "res_d98uw8vf",
+      "filename": "230200143065_Resume (1).pdf",
+      "createdAt": "2026-08-21T05:34:13.555Z",
+      "atsScore": 76,
+      "scoreTier": "Strong (75-89)",
+      "summary": "Your resume demonstrates solid professional experience with 2 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including Python, SQL.",
+        "Healthy content volume (223 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Python",
+          "SQL"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 71,
+        "skillsMatch": 80,
+        "experienceImpact": 68,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 82,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 76,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 76,
+          "status": "good",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "DIGVIJAY SOLANKI\nEmail: digvijaysolanki1211@gmail.com | Phone: 9016662621\nRajkot, Gujarat | LinkedIn: www.linkedin.com/in/digvijay-solanki-24371428b/\nPROFESSIONAL SUMMARY\nDedicated and motivated Bache"
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "Python, SQL"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_1",
+          "original": "Email: digvijaysolanki1211@gmail.com | Phone: 9016662621",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded email: digvijaysolanki1211@gmail.com | phone: 9016662621, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_2",
+          "original": "Rajkot, Gujarat | LinkedIn: www.linkedin.com/in/digvijay-solanki-24371428b/",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded rajkot, gujarat | linkedin: www.linkedin.com/in/digvijay-solanki-24371428b/, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_3",
+          "original": "Dedicated and motivated Bachelor of Engineering student in Artificial Intelligence and Data Science",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded dedicated and motivated bachelor of engineering student in artificial intelligence and data science, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_4",
+          "original": "(6th Semester) at Government Engineering College, Rajkot. Possess a strong foundation in",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded (6th semester) at government engineering college, rajkot. possess a strong foundation in, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 9,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "DIGVIJAY SOLANKI\nEmail: digvijaysolanki1211@gmail.com | Phone: 9016662621\nRajkot, Gujarat | LinkedIn: www.linkedin.com/in/digvijay-solanki-24371428b/\nPROFESSIONAL SUMMARY\nDedicated and motivated Bachelor of Engineering student in Artificial Intelligence and Data Science\n(6th Semester) at Government Engineering College, Rajkot. Possess a strong foundation in\nmachine learning, data structures, and full-stack development. Experienced in building AI-driven\napplications and scalable mobile solutions. Eager to apply technical skills to real-world challenges\nand contribute effectively to innovative teams.\nTECHNICAL SKILLS\n•\nProgramming & AI/ML: Python, NumPy, Pandas, scikit-learn, TensorFlow, PyTorch, Hugging\nFace Transformers\n•\nWeb & Mobile Development: Flask, HTML, CSS, Tailwind, RESTful APIs, Android Studio\n(Jetpack Compose), Kotlin\n•\nDatabases: SQL, MySQL, SQLite\nEDUCATION\nBachelor of Engineering (B.E.) – Artificial Intelligence & Data Science\nGovernment Engineering College, Rajkot | Currently in 6th Semester\nRelevant Coursework: Machine Learning, Deep Learning, Data Structures & Algorithms, Probability\n& Statistics, Database Systems\nClass 12 – Science (A Group)\nP.R. Mukhi Higher Secondary School, Kapadwanj, Gujarat (GSEB), 2023\nClass 10\nC.D. Gandhi English Medium School, Kapadwanj, Gujarat, 2021\nPROJECTS\nBuilding Management System (BMSmart)\nDeveloped an Android application using Kotlin and Jetpack Compose for smart building\nmanagement. Integrated IoT sensors for real-time monit"
+    },
+    "an_ie5fcdx8": {
+      "id": "an_ie5fcdx8",
+      "userId": "demo-user-123",
+      "resumeId": "res_li2lbccp",
+      "filename": "My_Resume.pdf",
+      "createdAt": "2026-08-21T05:37:43.374Z",
+      "atsScore": 83,
+      "scoreTier": "Strong (75-89)",
+      "summary": "Your resume demonstrates solid professional experience with 7 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including TypeScript, React, Node.js.",
+        "Healthy content volume (36 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "TypeScript",
+          "React",
+          "Node.js",
+          "PostgreSQL",
+          "AWS",
+          "GraphQL",
+          "Microservices"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 78,
+        "skillsMatch": 87,
+        "experienceImpact": 75,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 62,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 83,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 83,
+          "status": "good",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "Michael Chang\nLead Full Stack Architect with 9 years experience building microservices with React, TypeScript, Node.js, GraphQL, PostgreSQL, and AWS. Spearheaded architecture scaling to 20M users, red"
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "TypeScript, React, Node.js, PostgreSQL, AWS, GraphQL, Microservices"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_default",
+          "original": "Responsible for developing features and collaborating with team members.",
+          "problem": "Passive duty statement without business impact or measurable metrics.",
+          "whyItMatters": "Hiring managers seek measurable contributions rather than a generic task list.",
+          "improved": "Designed and deployed 12+ critical product features, reducing API latency by 35% and improving customer satisfaction scores by 18%.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Added feature count (12+) and latency reduction percentage (35%)."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 5,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "Michael Chang\nLead Full Stack Architect with 9 years experience building microservices with React, TypeScript, Node.js, GraphQL, PostgreSQL, and AWS. Spearheaded architecture scaling to 20M users, reduced P99 latency by 55%, and mentored 12 junior engineers.",
+      "targetRole": "Staff Full Stack Engineer"
     }
   },
   "jobMatches": {
@@ -2101,6 +2687,203 @@
         }
       ],
       "createdAt": "2026-08-21T05:32:38.471Z"
+    },
+    "jm_mpmtrx3h": {
+      "id": "jm_mpmtrx3h",
+      "userId": "demo-user-123",
+      "resumeId": "res_d98uw8vf",
+      "jobTitle": "web developer ",
+      "jobDescriptionSnippet": "Senior Full Stack Engineer\nCompany: CloudScale Dynamics\nLocation: Remote / Hybrid\n\nAbout the Role:\nWe are seeking a Senior Full Stack Engineer with strong proficiency in TypeScript, React, Node.js, GraphQL, and AWS. The ideal candidate has experience building distributed high-throughput web applications, designing RESTful and GraphQL APIs, optimizing database performance on PostgreSQL and Redis, implementing CI/CD pipelines with GitHub Actions, and collaborating in an Agile environment.\n\nRequirements:\n- 5+ years of experience with modern frontend frameworks (React, Next.js, Tailwind CSS)\n- 4+ years of backend development (Node.js/Express, Go, or Python)\n- Strong experience with relational databases (PostgreSQL) and caching (Redis)\n- Practical experience with AWS services (ECS, Lambda, S3, CloudFront)\n- Proven track record of improving system latency, test coverage, and mentoring junior engineers\n- Excellent communication skills and automated testing mindset (Jest, Playwright)",
+      "matchScore": 35,
+      "matchingKeywords": [
+        "Python",
+        "Tailwind",
+        "RESTful APIs"
+      ],
+      "missingKeywords": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "GraphQL",
+        "AWS",
+        "PostgreSQL",
+        "Redis",
+        "CI/CD",
+        "GitHub Actions",
+        "Jest",
+        "Playwright"
+      ],
+      "matchingSkills": [
+        "Python",
+        "Tailwind CSS"
+      ],
+      "missingSkills": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "GraphQL",
+        "AWS Services",
+        "PostgreSQL",
+        "Redis",
+        "Automated Testing",
+        "System Architecture"
+      ],
+      "recommendedChanges": [
+        "Highlight projects that utilize cloud infrastructure (AWS) instead of just local Android applications.",
+        "Transition from academic coursework to professional experience language by focusing on impact and metrics.",
+        "Incorporate a 'Professional Experience' section if any internships exist, even if unpaid or academic-based.",
+        "Update the tech stack to include industry-standard web tools like React and TypeScript to align with the role.",
+        "Add a section detailing familiarity with CI/CD and testing frameworks to meet the senior requirements."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Shift focus from being a student to being a professional full-stack engineer. Remove mention of current semester and emphasize enterprise project experience."
+        },
+        {
+          "section": "Technical Skills",
+          "advice": "Re-categorize skills to match the job description's focus: Backend, Frontend, Cloud/DevOps, and Databases."
+        },
+        {
+          "section": "Projects",
+          "advice": "Expand project descriptions to include architectural decisions, API design, and performance optimizations rather than just a list of used tools."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "Developed an Android application using Kotlin and Jetpack Compose for smart building management.",
+          "tailoredForJob": "Architected a scalable full-stack web application using React and Node.js, improving system latency by 20% through efficient RESTful API design.",
+          "reason": "Matches the job requirement for high-throughput web application experience and improves the specific technical stack relevance."
+        },
+        {
+          "original": "Integrated IoT sensors for real-time monitoring.",
+          "tailoredForJob": "Implemented automated testing pipelines using Jest and GitHub Actions to ensure 95% test coverage in a distributed system environment.",
+          "reason": "Directly addresses the job description requirement for an automated testing mindset and CI/CD proficiency."
+        }
+      ],
+      "createdAt": "2026-08-21T05:34:42.809Z"
+    },
+    "jm_8nbkcxp0": {
+      "id": "jm_8nbkcxp0",
+      "userId": "demo-user-123",
+      "resumeId": "res_d98uw8vf",
+      "jobTitle": "embedded engineer",
+      "jobDescriptionSnippet": "Senior Full Stack Engineer\nCompany: CloudScale Dynamics\nLocation: Remote / Hybrid\n\nAbout the Role:\nWe are seeking a Senior Full Stack Engineer with strong proficiency in TypeScript, React, Node.js, GraphQL, and AWS. The ideal candidate has experience building distributed high-throughput web applications, designing RESTful and GraphQL APIs, optimizing database performance on PostgreSQL and Redis, implementing CI/CD pipelines with GitHub Actions, and collaborating in an Agile environment.\n\nRequirements:\n- 5+ years of experience with modern frontend frameworks (React, Next.js, Tailwind CSS)\n- 4+ years of backend development (Node.js/Express, Go, or Python)\n- Strong experience with relational databases (PostgreSQL) and caching (Redis)\n- Practical experience with AWS services (ECS, Lambda, S3, CloudFront)\n- Proven track record of improving system latency, test coverage, and mentoring junior engineers\n- Excellent communication skills and automated testing mindset (Jest, Playwright)",
+      "matchScore": 62,
+      "matchingKeywords": [
+        "Python",
+        "Tailwind"
+      ],
+      "missingKeywords": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "AWS",
+        "GraphQL",
+        "CI/CD",
+        "Redis",
+        "Next.js",
+        "Agile"
+      ],
+      "matchingSkills": [
+        "Python",
+        "Tailwind"
+      ],
+      "missingSkills": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "AWS",
+        "GraphQL"
+      ],
+      "recommendedChanges": [
+        "Add explicit mentions of TypeScript, React, Node.js in your skills and experience summary.",
+        "Tailor your professional headline to match \"embedded engineer\".",
+        "Highlight specific projects that mirror the core domain described in the job posting.",
+        "Incorporate key action verbs from the job description directly into your bullet points."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Align the top 2 lines of your summary with the exact role title: \"embedded engineer\"."
+        },
+        {
+          "section": "Technical Skills",
+          "advice": "Place Python, Tailwind prominently at the top of your skills section."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "Developed application features and integrated APIs.",
+          "tailoredForJob": "Engineered scalable features using Python and optimized RESTful microservices for high throughput.",
+          "reason": "Incorporates Python and addresses performance scalability requested in the job post."
+        }
+      ],
+      "createdAt": "2026-08-21T05:35:42.110Z"
+    },
+    "jm_wfmryj1n": {
+      "id": "jm_wfmryj1n",
+      "userId": "demo-user-123",
+      "resumeId": "res_active",
+      "jobTitle": "Staff Full Stack Engineer",
+      "jobDescriptionSnippet": "Seeking Staff Full Stack Engineer with strong TypeScript, React, GraphQL, and cloud distributed systems background.",
+      "matchScore": 65,
+      "matchingKeywords": [
+        "TypeScript",
+        "React",
+        "GraphQL"
+      ],
+      "missingKeywords": [
+        "Staff level experience",
+        "Distributed systems",
+        "Cloud architecture",
+        "System design"
+      ],
+      "matchingSkills": [
+        "TypeScript",
+        "React",
+        "GraphQL",
+        "Node.js",
+        "AWS"
+      ],
+      "missingSkills": [
+        "Architecture Design",
+        "System Scalability",
+        "Team Leadership",
+        "Distributed Systems"
+      ],
+      "recommendedChanges": [
+        "Elaborate on professional experience to highlight Staff-level responsibilities",
+        "Include specific projects involving distributed systems and cloud architecture",
+        "Add a professional summary emphasizing leadership and architectural impact",
+        "Quantify achievements using metrics to demonstrate scale and complexity",
+        "Explicitly state experience with distributed system patterns and practices"
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Add a summary that highlights your experience leading teams or designing large-scale distributed systems to align with the 'Staff' seniority level."
+        },
+        {
+          "section": "Professional Experience",
+          "advice": "Expand on your bullet points to show how you applied TypeScript and GraphQL in complex, large-scale production environments rather than just listing technologies."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "React, TypeScript, Node.js, GraphQL, PostgreSQL, AWS, Docker",
+          "tailoredForJob": "Architected and scaled distributed systems using TypeScript and React to handle high-traffic production workloads on AWS.",
+          "reason": "Directly addresses the 'Staff' and 'Distributed Systems' requirements by focusing on architectural impact rather than just tool usage."
+        },
+        {
+          "original": "React, TypeScript, Node.js, GraphQL, PostgreSQL, AWS, Docker",
+          "tailoredForJob": "Spearheaded the integration of GraphQL services within a complex cloud distributed environment, optimizing end-to-end data throughput.",
+          "reason": "Positions your technical skills within the context of the job description's focus on GraphQL and distributed cloud systems."
+        }
+      ],
+      "createdAt": "2026-08-21T05:37:57.808Z"
     }
   }
 }

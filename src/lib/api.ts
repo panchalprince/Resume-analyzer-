@@ -128,7 +128,6 @@ export async function apiAnalyzeResume(params: {
   }
 
   if (result) {
-    saveAnalysisToLocalStorage(result);
     return result;
   }
 
@@ -168,7 +167,6 @@ export async function apiJobMatch(params: {
   }
 
   if (result) {
-    saveJobMatchToLocalStorage(result);
     return result;
   }
 
@@ -216,30 +214,19 @@ export async function apiGetAnalyses(
   userId?: string,
 ): Promise<ResumeAnalysisResult[]> {
   const uId = userId || "demo-user-123";
-  let serverAnalyses: ResumeAnalysisResult[] = [];
+  if (uId.startsWith("demo")) return [];
 
   try {
     const data = await safeFetchJson<ResumeAnalysisResult[]>(
       `/api/analyses?userId=${uId}`,
     );
     if (Array.isArray(data)) {
-      serverAnalyses = data;
+      return data;
     }
   } catch (err) {
-    // Server offline or static deploy
+    console.warn("Failed to load analyses from server:", err);
   }
-
-  const localAnalyses = getLocalAnalyses();
-  // Merge and deduplicate by id
-  const map = new Map<string, ResumeAnalysisResult>();
-  serverAnalyses.forEach((a) => map.set(a.id, a));
-  localAnalyses.forEach((a) => {
-    if (!map.has(a.id)) map.set(a.id, a);
-  });
-
-  return Array.from(map.values()).sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
+  return [];
 }
 
 /**
@@ -250,64 +237,13 @@ export async function apiDeleteAnalysis(
   userId?: string,
 ): Promise<boolean> {
   const uId = userId || "demo-user-123";
-  try {
-    await safeFetchJson(`/api/analyses/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: uId }),
-    });
-  } catch (err) {
-    // Continue and delete from local storage
-  }
+  if (uId.startsWith("demo")) return false;
 
-  deleteLocalAnalysis(id);
+  await safeFetchJson(`/api/analyses/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId: uId }),
+  });
   return true;
 }
 
-// Local Storage helpers
-function getLocalAnalyses(): ResumeAnalysisResult[] {
-  try {
-    const raw = localStorage.getItem(LOCAL_STORAGE_ANALYSES_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveAnalysisToLocalStorage(analysis: ResumeAnalysisResult) {
-  try {
-    const current = getLocalAnalyses();
-    const filtered = current.filter((a) => a.id !== analysis.id);
-    filtered.unshift(analysis);
-    localStorage.setItem(
-      LOCAL_STORAGE_ANALYSES_KEY,
-      JSON.stringify(filtered.slice(0, 30)),
-    );
-  } catch (e) {
-    console.warn("Could not save analysis to local storage:", e);
-  }
-}
-
-function deleteLocalAnalysis(id: string) {
-  try {
-    const current = getLocalAnalyses();
-    const filtered = current.filter((a) => a.id !== id);
-    localStorage.setItem(LOCAL_STORAGE_ANALYSES_KEY, JSON.stringify(filtered));
-  } catch (e) {
-    console.warn("Could not delete analysis from local storage:", e);
-  }
-}
-
-function saveJobMatchToLocalStorage(match: JobMatchResult) {
-  try {
-    const raw = localStorage.getItem(LOCAL_STORAGE_MATCHES_KEY);
-    const list: JobMatchResult[] = raw ? JSON.parse(raw) : [];
-    list.unshift(match);
-    localStorage.setItem(
-      LOCAL_STORAGE_MATCHES_KEY,
-      JSON.stringify(list.slice(0, 30)),
-    );
-  } catch (e) {
-    console.warn("Could not save match to local storage:", e);
-  }
-}

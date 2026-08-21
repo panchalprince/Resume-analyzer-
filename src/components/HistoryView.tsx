@@ -32,16 +32,19 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 }) => {
   const [analyses, setAnalyses] = useState<ResumeAnalysisResult[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
   const fetchHistory = async () => {
     setLoading(true);
+    setError(false);
     try {
       const data = await apiGetAnalyses(userId || "demo-user-123");
       setAnalyses(data);
     } catch (err) {
       console.error("Failed to load history:", err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -75,6 +78,8 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
     return "#EF4444";
   };
 
+  const isDemo = userId?.startsWith("demo") || !userId;
+
   return (
     <div
       id="history-page"
@@ -84,7 +89,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-semibold text-[#F5F7FA] tracking-tight">
-            Analysis History
+            Resume Analysis History
           </h1>
           <p className="text-[14px] text-[#8B93A1] mt-1">
             Review your past resume optimization reports.
@@ -109,14 +114,42 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by filename or role..."
           className="w-full pl-11 pr-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1]"
+          disabled={isDemo || loading || error || (analyses.length === 0 && !searchTerm)}
         />
       </div>
 
       {/* History List or Empty State */}
-      {loading ? (
+      {isDemo ? (
+        <div className="p-12 text-center bg-[#151922] rounded-xl border border-[#242A35]">
+          <div className="w-12 h-12 rounded-xl bg-[#101318] text-[#8B93A1] mx-auto flex items-center justify-center border border-[#242A35] mb-4">
+            <History className="w-5 h-5" />
+          </div>
+          <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-1">
+            Demo History Unavailable
+          </h3>
+          <p className="text-[13px] text-[#8B93A1] mb-6">
+            History is disabled in Demo Mode. Sign in to save your resume analyses.
+          </p>
+        </div>
+      ) : loading ? (
         <div className="py-16 text-center space-y-3">
           <div className="w-6 h-6 border-2 border-[#6366F1] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-[13px] text-[#8B93A1]">Loading history...</p>
+        </div>
+      ) : error ? (
+        <div className="p-12 text-center bg-[#151922] rounded-xl border border-[#242A35]">
+          <div className="w-12 h-12 rounded-xl bg-[#101318] text-[#EF4444] mx-auto flex items-center justify-center border border-[#242A35] mb-4">
+            <FileText className="w-5 h-5" />
+          </div>
+          <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-1">
+            Unable to load history
+          </h3>
+          <button
+            onClick={fetchHistory}
+            className="px-5 py-2 mt-4 rounded-lg bg-transparent border border-[#242A35] text-[#F5F7FA] text-[13px] font-medium hover:bg-[#242A35] transition-colors inline-flex items-center gap-2"
+          >
+            Try Again
+          </button>
         </div>
       ) : filtered.length === 0 ? (
         <div className="p-12 text-center bg-[#151922] rounded-xl border border-[#242A35]">
@@ -124,12 +157,12 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             <FileText className="w-5 h-5" />
           </div>
           <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-1">
-            {searchTerm ? "No matching analyses" : "No analyses yet"}
+            {searchTerm ? "No matching analyses" : "No Resume History"}
           </h3>
           <p className="text-[13px] text-[#8B93A1] mb-6">
             {searchTerm
               ? "Try searching with a different term."
-              : "Generate your first ATS score by uploading a resume."}
+              : "Analyze your first resume to see your results here."}
           </p>
           {!searchTerm && (
             <button
@@ -210,19 +243,25 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                   </button>
 
                   {isConfirmingDelete ? (
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="px-4 py-2 text-[13px] font-medium rounded-lg bg-[#EF4444] text-white hover:bg-[#DC2626]"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        onClick={() => setDeleteConfirmId(null)}
-                        className="px-4 py-2 text-[13px] font-medium rounded-lg border border-[#242A35] text-[#F5F7FA] hover:bg-[#242A35]"
-                      >
-                        Cancel
-                      </button>
+                    <div className="flex flex-col sm:flex-row items-center gap-3">
+                      <div className="text-right sm:text-left text-[12px]">
+                        <span className="block font-medium text-[#EF4444]">Delete this analysis?</span>
+                        <span className="text-[#8B93A1]">This action cannot be undone.</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => setDeleteConfirmId(null)}
+                          className="px-4 py-2 text-[13px] font-medium rounded-lg border border-[#242A35] text-[#F5F7FA] hover:bg-[#242A35]"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item.id)}
+                          className="px-4 py-2 text-[13px] font-medium rounded-lg bg-[#EF4444] text-white hover:bg-[#DC2626]"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <button

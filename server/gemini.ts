@@ -25,12 +25,12 @@ export interface AIAnalysisPromptInput {
 
 // Supported models in priority order for rapid failover during demand spikes
 const SUPPORTED_MODELS = [
-  "gemini-2.5-flash",
-  "gemini-2.0-flash",
-  "gemini-1.5-flash",
+  "gemini-3.7-flash",
+  "gemini-flash-latest",
+  "gemini-3.1-flash-lite",
 ];
 
-async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 16000): Promise<T> {
+async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 60000): Promise<T> {
   let timer: NodeJS.Timeout;
   const timeoutPromise = new Promise<never>((_, reject) => {
     timer = setTimeout(() => reject(new Error(`API request timed out after ${timeoutMs}ms`)), timeoutMs);
@@ -50,7 +50,7 @@ async function callWithRetryAndFallback<T>(
 
   for (const model of SUPPORTED_MODELS) {
     try {
-      return await callWithTimeout(fn(model), 16000);
+      return await callWithTimeout(fn(model), 60000);
     } catch (err: any) {
       lastError = err;
       const isQuota = err?.status === "RESOURCE_EXHAUSTED" || err?.message?.includes("quota") || err?.message?.includes("429");

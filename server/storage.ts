@@ -100,6 +100,7 @@ export function saveResumeRecord(record: {
   fileSize: number;
   createdAt: string;
 }) {
+  if (record.userId.startsWith("demo")) return record;
   const db = ensureDbLoaded();
   db.resumes[record.id] = record;
   persistDb();
@@ -107,6 +108,7 @@ export function saveResumeRecord(record: {
 }
 
 export function saveAnalysis(analysis: ResumeAnalysisResult): ResumeAnalysisResult {
+  if (analysis.userId.startsWith("demo")) return analysis;
   const db = ensureDbLoaded();
   db.analyses[analysis.id] = analysis;
   persistDb();
@@ -117,24 +119,26 @@ export function getAnalysisById(analysisId: string, userId?: string): ResumeAnal
   const db = ensureDbLoaded();
   const item = db.analyses[analysisId];
   if (!item) return null;
-  if (userId && item.userId !== userId && !item.userId.startsWith("demo")) {
+  if (userId && item.userId !== userId) {
     return null; // Row Level Security
   }
   return item;
 }
 
 export function getUserAnalyses(userId: string): ResumeAnalysisResult[] {
+  if (userId.startsWith("demo")) return [];
   const db = ensureDbLoaded();
   return Object.values(db.analyses)
-    .filter((a) => a.userId === userId || (userId.startsWith("demo") && a.userId.startsWith("demo")))
+    .filter((a) => a.userId === userId)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
 export function deleteAnalysis(analysisId: string, userId: string): boolean {
+  if (userId.startsWith("demo")) return false;
   const db = ensureDbLoaded();
   const item = db.analyses[analysisId];
   if (!item) return false;
-  if (item.userId !== userId && !userId.startsWith("demo")) {
+  if (item.userId !== userId) {
     return false; // RLS violation
   }
   delete db.analyses[analysisId];
@@ -144,6 +148,7 @@ export function deleteAnalysis(analysisId: string, userId: string): boolean {
 
 // Job Match Operations
 export function saveJobMatch(match: JobMatchResult): JobMatchResult {
+  if (match.userId.startsWith("demo")) return match;
   const db = ensureDbLoaded();
   db.jobMatches[match.id] = match;
   persistDb();
@@ -151,17 +156,19 @@ export function saveJobMatch(match: JobMatchResult): JobMatchResult {
 }
 
 export function getUserJobMatches(userId: string): JobMatchResult[] {
+  if (userId.startsWith("demo")) return [];
   const db = ensureDbLoaded();
   return Object.values(db.jobMatches)
-    .filter((m) => m.userId === userId || (userId.startsWith("demo") && m.userId.startsWith("demo")))
+    .filter((m) => m.userId === userId)
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
 export function deleteJobMatch(matchId: string, userId: string): boolean {
+  if (userId.startsWith("demo")) return false;
   const db = ensureDbLoaded();
   const item = db.jobMatches[matchId];
   if (!item) return false;
-  if (item.userId !== userId && !userId.startsWith("demo")) {
+  if (item.userId !== userId) {
     return false;
   }
   delete db.jobMatches[matchId];

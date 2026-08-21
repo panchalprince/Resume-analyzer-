@@ -16,7 +16,11 @@ import { UserProfile } from "../types.js";
 interface ProfileViewProps {
   user: UserProfile | null;
   onUpdateUser: (updated: UserProfile) => void;
-  onShowToast: (title: string, message?: string, type?: "success" | "error" | "info" | "warning") => void;
+  onShowToast: (
+    title: string,
+    message?: string,
+    type?: "success" | "error" | "info" | "warning",
+  ) => void;
 }
 
 export const ProfileView: React.FC<ProfileViewProps> = ({
@@ -26,12 +30,15 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 }) => {
   const [fullName, setFullName] = useState(user?.fullName || "Alex Morgan");
   const [email, setEmail] = useState(user?.email || "alex.morgan@example.com");
-  const [targetJobTitle, setTargetJobTitle] = useState(user?.targetJobTitle || "Senior Full Stack Engineer");
+  const [targetJobTitle, setTargetJobTitle] = useState(
+    user?.targetJobTitle || "Senior Full Stack Engineer",
+  );
   const [experienceLevel, setExperienceLevel] = useState<
     "entry" | "mid" | "senior" | "lead" | "executive"
   >(user?.experienceLevel || "senior");
   const [skillsInput, setSkillsInput] = useState(
-    user?.savedSkills?.join(", ") || "React, TypeScript, Node.js, Next.js, PostgreSQL, AWS, Docker, GraphQL"
+    user?.savedSkills?.join(", ") ||
+      "React, TypeScript, Node.js, Next.js, PostgreSQL, AWS, Docker, GraphQL",
   );
   const [isSaving, setIsSaving] = useState(false);
 
@@ -62,7 +69,11 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
       if (res.ok) {
         onUpdateUser(updatedUser);
-        onShowToast("Profile Saved", "Your career preferences and target skills have been updated.", "success");
+        onShowToast(
+          "Profile Saved",
+          "Your career preferences and target skills have been updated.",
+          "success",
+        );
       } else {
         throw new Error("Failed to save profile.");
       }
@@ -75,28 +86,32 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
   };
 
   return (
-    <div id="profile-page" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div
+      id="profile-page"
+      className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8"
+    >
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-          <User className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+          <User className="w-7 h-7 text-indigo-600 " />
           <span>Candidate Profile & ATS Settings</span>
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-1">
-          Customize your career targets and default skill inventory to fine-tune AI resume scoring.
+          Customize your career targets and default skill inventory to fine-tune
+          AI resume scoring.
         </p>
       </div>
 
       <form onSubmit={handleSave} className="space-y-6">
         {/* Personal Details */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-md space-y-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-md space-y-4">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100 ">
             Account Information
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Full Name
               </label>
               <div className="relative">
@@ -106,13 +121,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950"
+                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 "
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Email Address
               </label>
               <div className="relative">
@@ -122,7 +137,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950"
+                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 "
                 />
               </div>
             </div>
@@ -130,14 +145,14 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
         </div>
 
         {/* Career Preferences */}
-        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-md space-y-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-md space-y-4">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 pb-2 border-b border-slate-100 ">
             Target Career Goals
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Target Role / Job Title
               </label>
               <div className="relative">
@@ -147,19 +162,19 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
                   value={targetJobTitle}
                   onChange={(e) => setTargetJobTitle(e.target.value)}
                   placeholder="e.g. Senior Staff Engineer"
-                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950"
+                  className="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 "
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Experience Level
               </label>
               <select
                 value={experienceLevel}
                 onChange={(e) => setExperienceLevel(e.target.value as any)}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 capitalize"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 capitalize"
               >
                 <option value="entry">Entry-Level (0-2 years)</option>
                 <option value="mid">Mid-Level (3-5 years)</option>
@@ -171,7 +186,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Core Skills & Tools Inventory (comma separated)
             </label>
             <textarea
@@ -179,10 +194,11 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
               value={skillsInput}
               onChange={(e) => setSkillsInput(e.target.value)}
               placeholder="e.g. React, Python, Product Strategy, Agile, SQL..."
-              className="w-full p-3 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 font-mono"
+              className="w-full p-3 text-xs rounded-xl border border-slate-200 bg-slate-50 font-mono"
             />
             <p className="text-[11px] text-slate-500 mt-1">
-              The AI will check your resumes against this inventory when analyzing gaps.
+              The AI will check your resumes against this inventory when
+              analyzing gaps.
             </p>
           </div>
         </div>

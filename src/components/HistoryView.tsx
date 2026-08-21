@@ -20,7 +20,11 @@ interface HistoryViewProps {
   userId?: string;
   onSelectAnalysis: (analysis: ResumeAnalysisResult) => void;
   onStartNewAnalysis: () => void;
-  onShowToast: (title: string, message?: string, type?: "success" | "error" | "info" | "warning") => void;
+  onShowToast: (
+    title: string,
+    message?: string,
+    type?: "success" | "error" | "info" | "warning",
+  ) => void;
 }
 
 export const HistoryView: React.FC<HistoryViewProps> = ({
@@ -61,22 +65,28 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
     }
   };
 
-  const filtered = analyses.filter((a) =>
-    a.filename.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (a.targetRole && a.targetRole.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filtered = analyses.filter(
+    (a) =>
+      a.filename.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (a.targetRole &&
+        a.targetRole.toLowerCase().includes(searchTerm.toLowerCase())),
   );
 
   return (
-    <div id="history-page" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div
+      id="history-page"
+      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6"
+    >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 ">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
-            <History className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+            <History className="w-7 h-7 text-indigo-600 " />
             <span>Resume Analysis History</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Track your ATS score progress and review past resume optimization reports.
+            Track your ATS score progress and review past resume optimization
+            reports.
           </p>
         </div>
 
@@ -97,7 +107,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by resume filename or target role..."
-          className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+          className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
         />
       </div>
 
@@ -108,13 +118,15 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
           <p className="text-xs text-slate-500">Loading analysis history...</p>
         </div>
       ) : filtered.length === 0 ? (
-        <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
-          <div className="w-14 h-14 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-500 mx-auto flex items-center justify-center">
+        <div className="p-12 text-center bg-white rounded-2xl border border-slate-200 space-y-4">
+          <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-500 mx-auto flex items-center justify-center">
             <FileText className="w-7 h-7" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
-              {searchTerm ? "No matching analyses found" : "No resume analyses yet"}
+            <h3 className="text-base font-bold text-slate-900 ">
+              {searchTerm
+                ? "No matching analyses found"
+                : "No resume analyses yet"}
             </h3>
             <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
               {searchTerm
@@ -139,7 +151,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             return (
               <div
                 key={item.id}
-                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs hover:shadow-md hover:border-indigo-200 dark:hover:border-indigo-800 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-indigo-200 :border-indigo-800 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
               >
                 <div className="flex items-start sm:items-center gap-4">
                   {/* Score circle badge */}
@@ -153,7 +165,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                   </div>
 
                   <div>
-                    <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                       <span>{item.filename}</span>
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mt-1">
@@ -164,13 +176,15 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                       {item.targetRole && (
                         <>
                           <span>•</span>
-                          <span className="font-semibold text-indigo-600 dark:text-indigo-400">
+                          <span className="font-semibold text-indigo-600 ">
                             {item.targetRole}
                           </span>
                         </>
                       )}
                       <span>•</span>
-                      <span className={`px-2 py-0.2 rounded text-[10px] font-bold ${colors.badge}`}>
+                      <span
+                        className={`px-2 py-0.2 rounded text-[10px] font-bold ${colors.badge}`}
+                      >
                         {item.scoreTier}
                       </span>
                     </div>
@@ -178,10 +192,10 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2 w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 ">
                   <button
                     onClick={() => onSelectAnalysis(item)}
-                    className="px-3.5 py-2 text-xs font-bold rounded-xl bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3.5 py-2 text-xs font-bold rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 flex items-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <Eye className="w-4 h-4" />
                     <span>View Analysis</span>
@@ -205,7 +219,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
                   ) : (
                     <button
                       onClick={() => setDeleteConfirmId(item.id)}
-                      className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition-colors"
+                      className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 :bg-rose-950/40 rounded-xl transition-colors"
                       title="Delete Analysis"
                     >
                       <Trash2 className="w-4 h-4" />

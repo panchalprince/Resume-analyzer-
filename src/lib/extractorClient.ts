@@ -44,10 +44,12 @@ function extractTextFromPdfBinary(buffer: ArrayBuffer): string {
 /**
  * Extract text from a PDF in the browser using PDF.js
  */
-export async function extractPdfClient(file: File): Promise<{ text: string; pageCount: number }> {
+export async function extractPdfClient(
+  file: File,
+): Promise<{ text: string; pageCount: number }> {
   try {
     const arrayBuffer = await file.arrayBuffer();
-    
+
     try {
       const loadingTask = pdfjsLib.getDocument({
         data: new Uint8Array(arrayBuffer),
@@ -73,14 +75,22 @@ export async function extractPdfClient(file: File): Promise<{ text: string; page
         return { text: fullText, pageCount: numPages };
       }
     } catch (workerErr) {
-      console.warn("PDF.js primary extraction failed, trying binary fallback:", workerErr);
+      console.warn(
+        "PDF.js primary extraction failed, trying binary fallback:",
+        workerErr,
+      );
     }
 
     // Binary text extraction fallback
     const fallbackText = extractTextFromPdfBinary(arrayBuffer);
-    return { text: fallbackText || "Extracted resume content from PDF.", pageCount: 1 };
+    return {
+      text: fallbackText || "Extracted resume content from PDF.",
+      pageCount: 1,
+    };
   } catch (err: any) {
-    throw new Error(`Failed to extract text from PDF: ${err?.message || "Unknown error"}`);
+    throw new Error(
+      `Failed to extract text from PDF: ${err?.message || "Unknown error"}`,
+    );
   }
 }
 
@@ -106,15 +116,17 @@ export async function extractPlainTextClient(file: File): Promise<string> {
 export function detectSections(text: string) {
   const lines = text.split("\n");
   const sections: Record<string, string> = {};
-  
+
   let currentSection = "header";
   let buffer: string[] = [];
 
   const sectionKeywords: Record<string, RegExp> = {
     summary: /^(professional\s+summary|summary|profile|about\s+me|objective)/i,
-    experience: /^(work\s+experience|professional\s+experience|experience|employment\s+history|career\s+history)/i,
+    experience:
+      /^(work\s+experience|professional\s+experience|experience|employment\s+history|career\s+history)/i,
     education: /^(education|academic\s+background|degrees|qualifications)/i,
-    skills: /^(skills|technical\s+skills|core\s+competencies|technologies|expertise)/i,
+    skills:
+      /^(skills|technical\s+skills|core\s+competencies|technologies|expertise)/i,
     projects: /^(projects|personal\s+projects|featured\s+projects|portfolio)/i,
     certifications: /^(certifications|certificates|licenses|accreditations)/i,
     achievements: /^(achievements|honors|awards|accomplishments)/i,
@@ -152,8 +164,13 @@ export function detectSections(text: string) {
 
   // Extract contact info
   const emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w+/);
-  const phoneMatch = text.match(/(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/);
-  const contact = [emailMatch ? emailMatch[0] : "", phoneMatch ? phoneMatch[0] : ""]
+  const phoneMatch = text.match(
+    /(\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}/,
+  );
+  const contact = [
+    emailMatch ? emailMatch[0] : "",
+    phoneMatch ? phoneMatch[0] : "",
+  ]
     .filter(Boolean)
     .join(" | ");
 
@@ -173,7 +190,9 @@ export function detectSections(text: string) {
 /**
  * Universal client-side resume file extractor
  */
-export async function extractResumeFileClient(file: File): Promise<ExtractedResumeData> {
+export async function extractResumeFileClient(
+  file: File,
+): Promise<ExtractedResumeData> {
   const fileNameLower = file.name.toLowerCase();
   let extractedText = "";
   let pageCount = 1;
@@ -182,13 +201,19 @@ export async function extractResumeFileClient(file: File): Promise<ExtractedResu
     const res = await extractPdfClient(file);
     extractedText = res.text;
     pageCount = res.pageCount;
-  } else if (fileNameLower.endsWith(".docx") || fileNameLower.endsWith(".doc")) {
+  } else if (
+    fileNameLower.endsWith(".docx") ||
+    fileNameLower.endsWith(".doc")
+  ) {
     extractedText = await extractDocxClient(file);
   } else {
     extractedText = await extractPlainTextClient(file);
   }
 
-  const cleanText = extractedText.replace(/\r\n/g, "\n").replace(/\t/g, "  ").trim();
+  const cleanText = extractedText
+    .replace(/\r\n/g, "\n")
+    .replace(/\t/g, "  ")
+    .trim();
   const wordCount = cleanText.split(/\s+/).filter(Boolean).length;
   const detected = detectSections(cleanText);
 

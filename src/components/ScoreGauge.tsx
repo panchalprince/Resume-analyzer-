@@ -23,9 +23,24 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
 
   const sizeMap = {
     sm: { dimension: 80, stroke: 7, fontSize: "text-lg", labelSize: "text-xs" },
-    md: { dimension: 120, stroke: 10, fontSize: "text-2xl", labelSize: "text-xs" },
-    lg: { dimension: 160, stroke: 12, fontSize: "text-4xl", labelSize: "text-sm" },
-    xl: { dimension: 200, stroke: 14, fontSize: "text-5xl", labelSize: "text-base" },
+    md: {
+      dimension: 120,
+      stroke: 10,
+      fontSize: "text-2xl",
+      labelSize: "text-xs",
+    },
+    lg: {
+      dimension: 160,
+      stroke: 12,
+      fontSize: "text-4xl",
+      labelSize: "text-sm",
+    },
+    xl: {
+      dimension: 200,
+      stroke: 14,
+      fontSize: "text-5xl",
+      labelSize: "text-base",
+    },
   };
 
   const currentSize = sizeMap[size];
@@ -63,13 +78,17 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
             strokeLinecap="round"
             fill="transparent"
             style={{
-              transition: animate ? "stroke-dashoffset 1s ease-in-out, stroke 0.5s ease" : "none",
+              transition: animate
+                ? "stroke-dashoffset 1s ease-in-out, stroke 0.5s ease"
+                : "none",
             }}
           />
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={`font-black tracking-tight text-slate-900 dark:text-white ${currentSize.fontSize}`}>
+          <span
+            className={`font-black tracking-tight text-slate-900 dark:text-white ${currentSize.fontSize}`}
+          >
             {clampedScore}
           </span>
           <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
@@ -80,7 +99,9 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
 
       {showLabel && (
         <div className="mt-2.5 flex flex-col items-center">
-          <span className={`font-semibold text-slate-800 dark:text-slate-200 ${currentSize.labelSize}`}>
+          <span
+            className={`font-semibold text-slate-800 dark:text-slate-200 ${currentSize.labelSize}`}
+          >
             {label}
           </span>
           {sublabel && (

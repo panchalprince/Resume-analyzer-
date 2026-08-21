@@ -14,7 +14,10 @@ const LOCAL_STORAGE_MATCHES_KEY = "sp_resumai_saved_matches";
  * Safely parse JSON from a fetch response, preventing `Unexpected token '<'` syntax crashes
  * when a static hosting provider (e.g. AWS Amplify, SPA server) returns index.html.
  */
-async function safeFetchJson<T = any>(url: string, options?: RequestInit): Promise<T> {
+async function safeFetchJson<T = any>(
+  url: string,
+  options?: RequestInit,
+): Promise<T> {
   const res = await fetch(url, options);
   const text = await res.text();
 
@@ -27,7 +30,7 @@ async function safeFetchJson<T = any>(url: string, options?: RequestInit): Promi
 
   if (isHtml) {
     throw new Error(
-      `Server returned an HTML response for ${url}. Switching to client-side processing mode.`
+      `Server returned an HTML response for ${url}. Switching to client-side processing mode.`,
     );
   }
 
@@ -35,7 +38,9 @@ async function safeFetchJson<T = any>(url: string, options?: RequestInit): Promi
   try {
     data = JSON.parse(text);
   } catch (err: any) {
-    throw new Error(`Invalid response format from server: ${text.substring(0, 80)}`);
+    throw new Error(
+      `Invalid response format from server: ${text.substring(0, 80)}`,
+    );
   }
 
   if (!res.ok) {
@@ -49,7 +54,9 @@ async function safeFetchJson<T = any>(url: string, options?: RequestInit): Promi
  * Extract text from resume file (PDF, DOCX, TXT)
  * Automatically falls back to client-side extraction if server is unavailable or returns HTML.
  */
-export async function apiExtractResume(file: File): Promise<ExtractedResumeData> {
+export async function apiExtractResume(
+  file: File,
+): Promise<ExtractedResumeData> {
   try {
     // Attempt server-side extraction first
     const base64Data = await new Promise<string>((resolve, reject) => {
@@ -73,7 +80,10 @@ export async function apiExtractResume(file: File): Promise<ExtractedResumeData>
       return data;
     }
   } catch (err) {
-    console.warn("Server extraction unavailable or returned HTML, running client-side extractor:", err);
+    console.warn(
+      "Server extraction unavailable or returned HTML, running client-side extractor:",
+      err,
+    );
   }
 
   // Client-side fallback extraction (PDF.js / Mammoth / FileReader)
@@ -105,12 +115,15 @@ export async function apiAnalyzeResume(params: {
       }),
     });
   } catch (err) {
-    console.warn("Server analysis unavailable, running client ATS engine:", err);
+    console.warn(
+      "Server analysis unavailable, running client ATS engine:",
+      err,
+    );
     result = runClientATSAnalysis(
       params.resumeText,
       params.filename,
       userId,
-      params.targetRole
+      params.targetRole,
     );
   }
 
@@ -142,12 +155,15 @@ export async function apiJobMatch(params: {
       body: JSON.stringify(params),
     });
   } catch (err) {
-    console.warn("Server job match unavailable, executing client match engine:", err);
+    console.warn(
+      "Server job match unavailable, executing client match engine:",
+      err,
+    );
     result = runClientJobMatch(
       params.resumeText,
       params.jobDescription,
       params.jobTitle,
-      userId
+      userId,
     );
   }
 
@@ -162,7 +178,10 @@ export async function apiJobMatch(params: {
 /**
  * Rewrite single bullet point
  */
-export async function apiRewriteBullet(bullet: string, context?: string): Promise<{
+export async function apiRewriteBullet(
+  bullet: string,
+  context?: string,
+): Promise<{
   metricsFocused: string;
   actionOriented: string;
   atsOptimized: string;
@@ -175,13 +194,17 @@ export async function apiRewriteBullet(bullet: string, context?: string): Promis
       body: JSON.stringify({ bullet, context }),
     });
   } catch (err) {
-    console.warn("Server rewrite unavailable, generating client enhancements:", err);
+    console.warn(
+      "Server rewrite unavailable, generating client enhancements:",
+      err,
+    );
     const clean = bullet.trim().replace(/^[-*•]\s*/, "");
     return {
       metricsFocused: `Spearheaded ${clean.toLowerCase()}, increasing performance efficiency by 35% and saving 15+ developer hours weekly.`,
       actionOriented: `Orchestrated the architectural delivery of ${clean.toLowerCase()}, collaborating with 4 cross-functional teams to deploy features ahead of schedule.`,
       atsOptimized: `Engineered scalable solutions for ${clean.toLowerCase()} utilizing TypeScript, modern APIs, and automated CI/CD pipelines.`,
-      critique: "Added active leadership verbs and quantifiable success metrics to maximize ATS scoring impact.",
+      critique:
+        "Added active leadership verbs and quantifiable success metrics to maximize ATS scoring impact.",
     };
   }
 }
@@ -189,12 +212,16 @@ export async function apiRewriteBullet(bullet: string, context?: string): Promis
 /**
  * Fetch analysis history
  */
-export async function apiGetAnalyses(userId?: string): Promise<ResumeAnalysisResult[]> {
+export async function apiGetAnalyses(
+  userId?: string,
+): Promise<ResumeAnalysisResult[]> {
   const uId = userId || "demo-user-123";
   let serverAnalyses: ResumeAnalysisResult[] = [];
 
   try {
-    const data = await safeFetchJson<ResumeAnalysisResult[]>(`/api/analyses?userId=${uId}`);
+    const data = await safeFetchJson<ResumeAnalysisResult[]>(
+      `/api/analyses?userId=${uId}`,
+    );
     if (Array.isArray(data)) {
       serverAnalyses = data;
     }
@@ -211,14 +238,17 @@ export async function apiGetAnalyses(userId?: string): Promise<ResumeAnalysisRes
   });
 
   return Array.from(map.values()).sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
 }
 
 /**
  * Delete analysis
  */
-export async function apiDeleteAnalysis(id: string, userId?: string): Promise<boolean> {
+export async function apiDeleteAnalysis(
+  id: string,
+  userId?: string,
+): Promise<boolean> {
   const uId = userId || "demo-user-123";
   try {
     await safeFetchJson(`/api/analyses/${id}`, {
@@ -249,7 +279,10 @@ function saveAnalysisToLocalStorage(analysis: ResumeAnalysisResult) {
     const current = getLocalAnalyses();
     const filtered = current.filter((a) => a.id !== analysis.id);
     filtered.unshift(analysis);
-    localStorage.setItem(LOCAL_STORAGE_ANALYSES_KEY, JSON.stringify(filtered.slice(0, 30)));
+    localStorage.setItem(
+      LOCAL_STORAGE_ANALYSES_KEY,
+      JSON.stringify(filtered.slice(0, 30)),
+    );
   } catch (e) {
     console.warn("Could not save analysis to local storage:", e);
   }
@@ -270,7 +303,10 @@ function saveJobMatchToLocalStorage(match: JobMatchResult) {
     const raw = localStorage.getItem(LOCAL_STORAGE_MATCHES_KEY);
     const list: JobMatchResult[] = raw ? JSON.parse(raw) : [];
     list.unshift(match);
-    localStorage.setItem(LOCAL_STORAGE_MATCHES_KEY, JSON.stringify(list.slice(0, 30)));
+    localStorage.setItem(
+      LOCAL_STORAGE_MATCHES_KEY,
+      JSON.stringify(list.slice(0, 30)),
+    );
   } catch (e) {
     console.warn("Could not save match to local storage:", e);
   }

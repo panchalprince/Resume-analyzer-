@@ -17,7 +17,8 @@ export const SAMPLE_RESUMES: SampleResumePreset[] = [
     role: "Senior Full Stack Software Engineer",
     filename: "Alex_Morgan_Senior_SWE_Resume.pdf",
     experienceLevel: "Senior",
-    description: "Cloud-native web developer with 6+ years experience in React, Node.js, AWS, and distributed microservices.",
+    description:
+      "Cloud-native web developer with 6+ years experience in React, Node.js, AWS, and distributed microservices.",
     sampleJobDescription: `Senior Full Stack Engineer
 Company: CloudScale Dynamics
 Location: Remote / Hybrid
@@ -86,7 +87,8 @@ CERTIFICATIONS
     role: "Product Manager (B2B SaaS)",
     filename: "Jordan_Taylor_PM_Resume.docx",
     experienceLevel: "Mid-Level",
-    description: "Product leader with 4+ years driving user growth, roadmap prioritization, user research, and revenue growth in B2B enterprise software.",
+    description:
+      "Product leader with 4+ years driving user growth, roadmap prioritization, user research, and revenue growth in B2B enterprise software.",
     sampleJobDescription: `Product Manager - Growth & Monetization
 Company: SaaSify Global
 Location: New York, NY
@@ -140,7 +142,8 @@ CERTIFICATIONS
     role: "Junior Data Analyst / BI Specialist",
     filename: "Sam_Patel_Data_Analyst_Resume.pdf",
     experienceLevel: "Entry",
-    description: "Analytical problem solver skilled in SQL, Python, Tableau, Power BI, and statistical modeling with internships in retail and finance.",
+    description:
+      "Analytical problem solver skilled in SQL, Python, Tableau, Power BI, and statistical modeling with internships in retail and finance.",
     sampleJobDescription: `Junior Data Analyst
 Company: Metro Analytics Group
 Location: Chicago, IL / Remote

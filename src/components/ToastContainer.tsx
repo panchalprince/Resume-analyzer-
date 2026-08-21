@@ -1,5 +1,11 @@
 import React from "react";
-import { CheckCircle2, AlertTriangle, AlertCircle, Info, X } from "lucide-react";
+import {
+  CheckCircle2,
+  AlertTriangle,
+  AlertCircle,
+  Info,
+  X,
+} from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export interface ToastMessage {
@@ -14,7 +20,10 @@ interface ToastContainerProps {
   onDismiss: (id: string) => void;
 }
 
-export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onDismiss }) => {
+export const ToastContainer: React.FC<ToastContainerProps> = ({
+  toasts,
+  onDismiss,
+}) => {
   return (
     <div
       id="toast-container"
@@ -23,17 +32,23 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onDismis
       <AnimatePresence>
         {toasts.map((t) => {
           const icons = {
-            success: <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />,
-            error: <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />,
-            warning: <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />,
+            success: (
+              <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+            ),
+            error: (
+              <AlertCircle className="w-5 h-5 text-rose-500 shrink-0 mt-0.5" />
+            ),
+            warning: (
+              <AlertTriangle className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+            ),
             info: <Info className="w-5 h-5 text-indigo-500 shrink-0 mt-0.5" />,
           };
 
           const borderColors = {
-            success: "border-emerald-200 bg-white dark:bg-slate-900 dark:border-emerald-800/80 shadow-emerald-500/10",
-            error: "border-rose-200 bg-white dark:bg-slate-900 dark:border-rose-800/80 shadow-rose-500/10",
-            warning: "border-amber-200 bg-white dark:bg-slate-900 dark:border-amber-800/80 shadow-amber-500/10",
-            info: "border-indigo-200 bg-white dark:bg-slate-900 dark:border-indigo-800/80 shadow-indigo-500/10",
+            success: "border-emerald-200 bg-white shadow-emerald-500/10",
+            error: "border-rose-200 bg-white shadow-rose-500/10",
+            warning: "border-amber-200 bg-white shadow-amber-500/10",
+            info: "border-indigo-200 bg-white shadow-indigo-500/10",
           };
 
           return (
@@ -48,11 +63,11 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onDismis
               <div className="flex items-start gap-3">
                 {icons[t.type]}
                 <div>
-                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
+                  <h4 className="text-sm font-semibold text-slate-900 ">
                     {t.title}
                   </h4>
                   {t.message && (
-                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 leading-relaxed">
+                    <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
                       {t.message}
                     </p>
                   )}
@@ -60,7 +75,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onDismis
               </div>
               <button
                 onClick={() => onDismiss(t.id)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-md transition-colors"
+                className="text-slate-400 hover:text-slate-600 :text-slate-200 p-1 rounded-md transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>

@@ -2,11 +2,26 @@
 
 @layer base {
   :root {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family:
+      "Plus Jakarta Sans",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      sans-serif;
   }
 
-  code, pre, kbd, samp {
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family:
+      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
   }
 }
 

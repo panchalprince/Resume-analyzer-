@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { X, Sparkles, Lock, Mail, User, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
+import {
+  X,
+  Sparkles,
+  Lock,
+  Mail,
+  User,
+  ArrowRight,
+  Zap,
+  CheckCircle2,
+} from "lucide-react";
 import { UserProfile } from "../types.js";
 
 interface AuthModalProps {
@@ -78,7 +87,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         onSuccess(data.user);
         onClose();
       } else {
-        setError(data.error || "Authentication failed. Please check credentials.");
+        setError(
+          data.error || "Authentication failed. Please check credentials.",
+        );
       }
     } catch {
       setError("Network error during authentication.");
@@ -94,30 +105,34 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     >
       <div
         id="auth-modal-card"
-        className="w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 relative"
+        className="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-2xl p-6 sm:p-8 relative"
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg transition-colors"
+          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 :text-slate-200 rounded-lg transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-indigo-600/10 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 mx-auto flex items-center justify-center mb-3">
+          <div className="w-12 h-12 rounded-xl bg-indigo-600/10 text-indigo-600 mx-auto flex items-center justify-center mb-3">
             <Sparkles className="w-6 h-6" />
           </div>
-          <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-            {tab === "signup" ? "Create SP ResumAI Account" : tab === "forgot" ? "Reset Password" : "Sign In to SP ResumAI"}
+          <h3 className="text-2xl font-black text-slate-900 tracking-tight">
+            {tab === "signup"
+              ? "Create SP ResumAI Account"
+              : tab === "forgot"
+                ? "Reset Password"
+                : "Sign In to SP ResumAI"}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             {tab === "signup"
               ? "Get unlimited ATS analyses, job matches, and history tracking."
               : tab === "forgot"
-              ? "Enter your email to receive recovery instructions."
-              : "Access your saved resumes and personalized ATS optimization reports."}
+                ? "Enter your email to receive recovery instructions."
+                : "Access your saved resumes and personalized ATS optimization reports."}
           </p>
         </div>
 
@@ -126,23 +141,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           type="button"
           onClick={handleDemoLogin}
           disabled={loading}
-          className="w-full mb-5 py-2.5 px-4 rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50/80 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 text-xs font-bold flex items-center justify-center gap-2 hover:bg-amber-100 transition-colors shadow-xs"
+          className="w-full mb-5 py-2.5 px-4 rounded-xl border border-amber-300 bg-amber-50/80 text-amber-900 text-xs font-bold flex items-center justify-center gap-2 hover:bg-amber-100 transition-colors shadow-xs"
         >
           <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
           <span>Instant 1-Click Demo Login (No Signup Needed)</span>
         </button>
 
         <div className="relative flex py-2 items-center mb-4">
-          <div className="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
+          <div className="flex-grow border-t border-slate-200 "></div>
           <span className="shrink mx-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
             or continue with email
           </span>
-          <div className="flex-grow border-t border-slate-200 dark:border-slate-800"></div>
+          <div className="flex-grow border-t border-slate-200 "></div>
         </div>
 
         {/* Tabs for Login / Signup */}
         {tab !== "forgot" && (
-          <div className="grid grid-cols-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl mb-5">
+          <div className="grid grid-cols-2 p-1 bg-slate-100 rounded-xl mb-5">
             <button
               type="button"
               onClick={() => {
@@ -151,8 +166,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               }}
               className={`py-2 text-xs font-bold rounded-lg transition-all ${
                 tab === "login"
-                  ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                  ? "bg-white text-indigo-600 shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               Sign In
@@ -165,8 +180,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               }}
               className={`py-2 text-xs font-bold rounded-lg transition-all ${
                 tab === "signup"
-                  ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs"
-                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
+                  ? "bg-white text-indigo-600 shadow-xs"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               Create Account
@@ -176,12 +191,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Error / Success Feedback */}
         {error && (
-          <div className="mb-4 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs font-medium text-rose-700 dark:text-rose-300">
+          <div className="mb-4 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs font-medium text-rose-700 ">
             {error}
           </div>
         )}
         {successMsg && (
-          <div className="mb-4 p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs font-medium text-emerald-700 dark:text-emerald-300 flex items-center gap-1.5">
+          <div className="mb-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-700 flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-emerald-500" />
             <span>{successMsg}</span>
           </div>
@@ -191,7 +206,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         <form onSubmit={handleSubmit} className="space-y-3.5">
           {tab === "signup" && (
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 Full Name
               </label>
               <div className="relative">
@@ -202,14 +217,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Jordan Taylor"
-                  className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                  className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Email Address
             </label>
             <div className="relative">
@@ -220,7 +235,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
-                className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -228,7 +243,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           {tab !== "forgot" && (
             <div>
               <div className="flex justify-between items-center mb-1">
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <label className="block text-xs font-semibold text-slate-700 ">
                   Password
                 </label>
                 {tab === "login" && (
@@ -238,7 +253,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setTab("forgot");
                       setError(null);
                     }}
-                    className="text-[11px] text-indigo-600 dark:text-indigo-400 hover:underline"
+                    className="text-[11px] text-indigo-600 hover:underline"
                   >
                     Forgot?
                   </button>
@@ -252,7 +267,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                  className="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
             </div>
@@ -267,7 +282,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
               <>
-                <span>{tab === "signup" ? "Create Account" : tab === "forgot" ? "Send Recovery Link" : "Sign In"}</span>
+                <span>
+                  {tab === "signup"
+                    ? "Create Account"
+                    : tab === "forgot"
+                      ? "Send Recovery Link"
+                      : "Sign In"}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </>
             )}
@@ -283,7 +304,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 setError(null);
                 setSuccessMsg(null);
               }}
-              className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+              className="text-xs font-semibold text-indigo-600 hover:underline"
             >
               ← Back to Sign In
             </button>

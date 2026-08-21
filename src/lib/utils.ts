@@ -18,7 +18,8 @@ export function getScoreColor(score: number): {
       text: "text-emerald-600 dark:text-emerald-400",
       bg: "bg-emerald-50 dark:bg-emerald-950/40",
       border: "border-emerald-200 dark:border-emerald-800",
-      badge: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300",
+      badge:
+        "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300",
       progress: "bg-emerald-500",
       hex: "#10b981",
     };
@@ -38,7 +39,8 @@ export function getScoreColor(score: number): {
       text: "text-amber-600 dark:text-amber-400",
       bg: "bg-amber-50 dark:bg-amber-950/40",
       border: "border-amber-200 dark:border-amber-800",
-      badge: "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300",
+      badge:
+        "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300",
       progress: "bg-amber-500",
       hex: "#f59e0b",
     };

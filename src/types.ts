@@ -41,7 +41,7 @@ export interface DetailedCategoryScores {
 export interface SectionAnalysisDetail {
   sectionName: string;
   score: number;
-  status: 'excellent' | 'good' | 'needs_work' | 'missing';
+  status: "excellent" | "good" | "needs_work" | "missing";
   strengths: string[];
   problems: string[];
   suggestions: string[];
@@ -54,12 +54,12 @@ export interface BulletPointImprovement {
   problem: string;
   whyItMatters: string;
   improved: string;
-  category: 'metrics' | 'action_verb' | 'clarity' | 'ats_keywords';
+  category: "metrics" | "action_verb" | "clarity" | "ats_keywords";
   metricAddedSuggestion?: string;
 }
 
 export interface FormattingIssue {
-  severity: 'low' | 'medium' | 'high';
+  severity: "low" | "medium" | "high";
   category: string;
   issue: string;
   fix: string;
@@ -69,7 +69,7 @@ export interface ExperienceInsight {
   jobTitlesDetected: string[];
   estimatedYearsExperience: string;
   measurableResultsCount: number;
-  actionVerbStrength: 'weak' | 'moderate' | 'strong';
+  actionVerbStrength: "weak" | "moderate" | "strong";
   summaryRemarks: string;
 }
 
@@ -88,7 +88,8 @@ export interface ResumeAnalysisResult {
   filename: string;
   createdAt: string;
   atsScore: number;
-  scoreTier: 'Elite (90-100)' | 'Strong (75-89)' | 'Fair (60-74)' | 'Needs Work (<60)';
+  scoreTier:
+    "Elite (90-100)" | "Strong (75-89)" | "Fair (60-74)" | "Needs Work (<60)";
   summary: string;
   strengths: string[];
   weaknesses: string[];

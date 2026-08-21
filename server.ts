@@ -1,4 +1,5 @@
 import express from "express";
+import http from "http";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 import { generateResumeAnalysis, generateJobMatchAnalysis, rewriteSingleBulletPoint } from "./server/gemini.js";
@@ -21,6 +22,17 @@ import { ResumeAnalysisResult, JobMatchResult, UserProfile } from "./src/types.j
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // CORS & Security Headers
+  app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    if (req.method === "OPTIONS") {
+      return res.status(204).end();
+    }
+    next();
+  });
 
   // Middleware for parsing JSON with generous payload limits for base64 resumes
   app.use(express.json({ limit: "25mb" }));
@@ -331,10 +343,32 @@ async function startServer() {
     res.json({ success: true, message: "Job match removed successfully" });
   });
 
+  // Catch-all 404 handler for undefined /api routes so they return JSON instead of HTML
+  app.all("/api/*", (req, res) => {
+    res.status(404).json({ error: `API endpoint ${req.method} ${req.path} not found` });
+  });
+
+  // Global error handler for uncaught server-side API errors
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error("Unhandled API error:", err);
+    if (res.headersSent) {
+      return next(err);
+    }
+    res.status(err.status || 500).json({
+      error: err.message || "Internal server error occurred while processing request.",
+    });
+  });
+
+  const httpServer = http.createServer(app);
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
+    const isHmrDisabled = process.env.DISABLE_HMR === "true";
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: isHmrDisabled ? false : { server: httpServer },
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);
@@ -346,7 +380,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  httpServer.listen(PORT, "0.0.0.0", () => {
     console.log(`SP ResumAI server running on http://0.0.0.0:${PORT}`);
   });
 }

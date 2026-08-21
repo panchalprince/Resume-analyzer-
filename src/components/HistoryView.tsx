@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { ResumeAnalysisResult } from "../types.js";
 import { formatDate, getScoreColor } from "../lib/utils.js";
+import { apiGetAnalyses, apiDeleteAnalysis } from "../lib/api.js";
 
 interface HistoryViewProps {
   userId?: string;
@@ -36,11 +37,8 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/analyses?userId=${userId || "demo-user-123"}`);
-      const data = await res.json();
-      if (res.ok && Array.isArray(data)) {
-        setAnalyses(data);
-      }
+      const data = await apiGetAnalyses(userId || "demo-user-123");
+      setAnalyses(data);
     } catch (err) {
       console.error("Failed to load history:", err);
     } finally {
@@ -54,16 +52,10 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
 
   const handleDelete = async (id: string) => {
     try {
-      const res = await fetch(`/api/analyses/${id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: userId || "demo-user-123" }),
-      });
-      if (res.ok) {
-        setAnalyses((prev) => prev.filter((a) => a.id !== id));
-        setDeleteConfirmId(null);
-        onShowToast("Analysis Removed", "Report deleted successfully.", "info");
-      }
+      await apiDeleteAnalysis(id, userId || "demo-user-123");
+      setAnalyses((prev) => prev.filter((a) => a.id !== id));
+      setDeleteConfirmId(null);
+      onShowToast("Analysis Removed", "Report deleted successfully.", "info");
     } catch {
       onShowToast("Error", "Could not delete analysis record.", "error");
     }

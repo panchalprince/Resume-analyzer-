@@ -1,0 +1,963 @@
+{
+  "profiles": {
+    "demo-user-123": {
+      "id": "demo-user-123",
+      "email": "alex.demo@spresumai.com",
+      "fullName": "Alex Morgan",
+      "createdAt": "2026-08-20T19:50:00.123Z",
+      "targetRole": "Senior Full Stack Engineer",
+      "isDemo": true
+    }
+  },
+  "resumes": {
+    "res_fh544z3k": {
+      "id": "res_fh544z3k",
+      "userId": "demo-user-123",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "extractedText": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithic services into containerized microservices orchestrated via Docker and AWS ECS, boosting system uptime to 99.98%.\n- Mentored cohort of 5 junior and mid-level software engineers; instituted automated code review guidelines and PR workflows that reduced deployment rollbacks by 40%.\n- Integrated comprehensive Jest and Playwright end-to-end automated test suites, expanding code coverage from 52% to 89%.\n\nFull Stack Developer | Veloce Systems Inc., Austin, TX\nAugust 2019 - May 2022\n- Developed responsive client dashboard in React/TypeScript with real-time WebSocket telemetry charts, driving 28% increase in user session duration.\n- Built scalable payment processing pipeline using Stripe API and Express.js, successfully processing over $4.2M in monthly transaction volume.\n- Configured CI/CD automation pipelines via GitHub Actions, decreasing standard release deployment cycle time from 4 hours to 18 minutes.\n- Collaborated closely with Product and UX teams to execute A/B conversion experiments, generating a 14% lift in checkout conversions.\n\nSoftware Engineering Intern | NextGen Software, Seattle, WA\nJune 2018 - August 2019\n- Assisted in developing RESTful endpoints in Python/Django and refactored relational database queries in PostgreSQL.\n- Authored technical documentation and internal developer onboarding guides.\n\nEDUCATION\nBachelor of Science in Computer Science\nUniversity of California, Berkeley (2015 - 2019)\n- Honors: Dean's Honor List (3 Semesters), Magna Cum Laude\n- Relevant Coursework: Data Structures & Algorithms, Operating Systems, Database Systems, Computer Networks\n\nPROJECTS\n- DevSync (Open Source): Collaborative code review extension with over 3,500 active GitHub stars. Built using TypeScript, WebSockets, and WebAssembly.\n- CloudPulse: Serverless AWS health monitoring dashboard utilizing Next.js, Tailwind, and DynamoDB.\n\nCERTIFICATIONS\n- AWS Certified Solutions Architect - Associate (2023)\n- Certified Kubernetes Application Developer (CKAD) (2022)",
+      "fileSize": 3487,
+      "createdAt": "2026-08-20T19:50:00.123Z"
+    },
+    "res_xui35e60": {
+      "id": "res_xui35e60",
+      "userId": "demo-user-123",
+      "filename": "Jordan_Taylor_PM_Resume.docx",
+      "extractedText": "Jordan Taylor\njordan.taylor.pm@example.com | (555) 876-5432 | New York, NY\nlinkedin.com/in/jordantaylor-pm\n\nSUMMARY\nData-driven Product Manager with 4+ years of experience steering product strategy, PLG user onboarding, and enterprise SaaS feature delivery. Successfully launched 3 zero-to-one product initiatives resulting in $1.8M ARR growth. Expert at bridging technical roadmaps with user research, statistical A/B testing, and cross-functional leadership across engineering, UX, and sales.\n\nCORE SKILLS\n- Product Strategy: Product Roadmap, Agile/Scrum, OKR Alignment, User Journey Mapping, Feature Prioritization (RICE/MoSCoW)\n- Analytics & Testing: SQL, Amplitude, Mixpanel, Google Analytics 4, Optimizely, A/B Testing, Cohort Analysis\n- Technical & Tools: Jira, Confluence, Figma, Notion, Postman, Zapier, Python (Basic)\n- Leadership: Stakeholder Management, Customer Discovery, Sprint Planning, Go-To-Market (GTM)\n\nEXPERIENCE\nProduct Manager | Datastream SaaS, New York, NY\nJanuary 2021 - Present\n- Owned self-serve onboarding funnel and PLG activation flow, lifting free-to-paid user conversion rate from 3.2% to 5.8% within 9 months.\n- Led cross-functional team of 8 engineers and 2 product designers to launch enterprise SSO and role-based access control (RBAC), unblocking $650k in pipeline deals.\n- Conducted 60+ qualitative user interviews and analyzed event telemetry in Amplitude to discover key onboarding drop-offs, driving a redesign that reduced time-to-first-value by 35%.\n- Authored PRDs, user stories, and acceptance criteria in Jira with a 96% sprint delivery adherence rate.\n\nAssociate Product Manager | VentureLoop, Boston, MA\nJune 2019 - December 2020\n- Managed customer feedback portal and prioritized 45+ feature requests into quarterly roadmap milestones using RICE framework.\n- Partnered with product marketing to coordinate feature release communications, boosting monthly feature adoption by 22%.\n- Analyzed churn cohorts in SQL and designed in-app re-engagement workflows that curtailed quarterly account churn by 1.4%.\n\nEDUCATION\nBachelor of Business Administration, Information Systems\nBoston University (2015 - 2019)\n- Magna Cum Laude, President of Undergraduate Tech Club\n\nCERTIFICATIONS\n- Pragmatic Institute Certified (PMC-III) (2022)\n- Certified Scrum Product Owner (CSPO) (2021)",
+      "fileSize": 2320,
+      "createdAt": "2026-08-20T19:51:30.177Z"
+    },
+    "res_vifwsewt": {
+      "id": "res_vifwsewt",
+      "userId": "demo-user-123",
+      "filename": "230200143065_Resume.pdf",
+      "extractedText": "%PDF-1.4\n%     ReportLab Generated PDF document http://www.reportlab.com\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font\n>>\nendobj\n3 0 obj\n<<\n/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font\n>>\nendobj\n4 0 obj\n<<\n/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<\n/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]\n>> /Rotate 0 /Trans <<\n\n>> \n  /Type /Page\n>>\nendobj\n5 0 obj\n<<\n/PageMode /UseNone /Pages 7 0 R /Type /Catalog\n>>\nendobj\n6 0 obj\n<<\n/Author (\\(anonymous\\)) /CreationDate (D:20260227061620+00'00') /Creator (\\(unspecified\\)) /Keywords () /ModDate (D:20260227061620+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) \n  /Subject (\\(unspecified\\)) /Title (\\(anonymous\\)) /Trapped /False\n>>\nendobj\n7 0 obj\n<<\n/Count 1 /Kids [ 4 0 R ] /Type /Pages\n>>\nendobj\n8 0 obj\n<<\n/Filter [ /ASCII85Decode /FlateDecode ] /Length 1932\n>>\nstream\nGau0D>>sNP'RodXS>Rgk_O,uf^o'Uh`;t`KRGF;]?CI[@QDC#7FC_B)+2=]m%#bkZBWYhp`fpDIV9a?<3ah!7@t$lr^h!f7f+'bmKJRR0bCaa>rUAmgM6hQ8eV9CQ=RC:0N@.P1)hFNOi)ut._h0C)\\_shPPj<(Wg=>-DYJFN=3s8oFh>>NN;[=Hgr'P8pMI/S`E>u)rEOT,u@+uO2e^@5\"9.h?!o-a6&2OR)A?S]ZES3Q1?A47\\rIpou$S6eJ$G'r1kIFkI*`d-D'Ebc`;j&2g:guOMa&qu3uN%\\m-i\"rV(YH>`*0s7W>BDh\\\\m'E8=B<Kj\"3M+usSlZhD4-mQ9n:er%2%.edg\\p-G[TD?E[Z;NE>k`kYnE%AGK](Tue:%*uAVAsH%l?;N`p^O1`eU#sDLP0nCNM,:eb&ATJY3.cDcdIXg_Y;j3p')a0\"m&kN,h<#NIgR9;PDa,H+G9KJgNg9QpI@j)5gFh5)2hn1$&`ZLTXTm`Zdkb(iVp-KZts,VuaIRMEh_-rJ0Rge0[%[/Kg]8bnQG,;o\"=+&PlBs<'q_,l%p[ZF'=?9U0')b=[o_+#[/>S^+g9]O,7=tUFh1W'[9)Y819T?Ja*e^9CPUrWEdlQDTnU38TL+G&hP9(:[$t6>@9bsT,$YC7`X6#C!MlDS'rCJ`KEC3]csac,s$\"D5;SC(6kV7L.)p5Kn,j=]2c<$iF\"0H^d\"aNPBXH]B2M#\\dOsJKh8P*s2(,C^i=qL=scY9ghLA6nh9!W06.+$Y+7X.d0K*aB!$bS<D7VIrs<`Ln540I*bc_@<*(S\\An,4,&Amfu!MLX1V30W6hDG7M!mRgmW>B=7YX58n\\g3``i8]lQlPW_K!alR*MBn/_NVp`D07Rf^?9Q3i^_g9WE5*)b!,8Q20XT.m7i8&G_0BMZeiN&M)ZE#nB<FM+Tj(b_Lhg1Cq$13I1A]+-\"GR?6$W=Q:?i:rm<ILYI3:%%7uHF%qaUTd2ai$(4\\Z<SiZ$Iq[=Ai85BZ^ZcH-2;6LDC/<Gg6[,)_Cl*-;8&IC[JcOhaSScVrN.n&LKLgIRNX$EG/rui:0a(V(QoM$@G>t\\d=m1]a,r.MAXi\"eFP'r09Mk/JihAJEP2aV_ErhH:\"*flho_Gc&/o@HeB?SOsDNVU@39[QH;gC:2^c8MlZ.R\\3U)Z?^T]l&XCZr1to4b/$+\\aV`=EpZa0)X^r(1,Br_3l&eIjJ6s5oe#NL'A)o<2Teh1[`SI_R=+qGmYK=j0:*=/_M3SXl`ePN<.jj/'Db*.W@)_S;/A/6$Q/:-jfms8=-Tit+,ttCqp]1-R1%-d,\"3DY6(8MJ,u^:b6_EjjlpdCP;78Wk;\\4NiRZh?;4o0LIdTR0\\S*<J5M![N\\EU:Q%'_uKa=r*^7ojGTa?S32NZM=QkCd>7$`^F\\U@Ne-klm4.pY6f^6&\"Ad::!gZ)e95]<nVTbYRGsf\\A\\egVB%2bUPH\\j(,FkS#ZpLrn=#j&8S>PD5B;sYR'V[OIX*=MK=P8qp[Wd9$DO.i8QK<JTp:Hk^oR^Y6p+%D8T#*sMj!83gYg\"N>ZVcesWQOgBf.>-b>Eo&<aURf7j),7;RGqP;J\"/8?A6M8R$Qb7qcdl3Qf%A[Ki&hPoA>VG$k-UQC'MJ+,aI*[hd#-mVUt`.9Tnq!J.1t<[d`eYD*YCj:MXY;3IjN3+e&k@4kt5E-!-D#*@p!#U0P#nuS&uVqFkTm.r0eTF&)5rfdOYYGqY)r-D.T;!mFD=9]CX6\\+'n1P^Jfsfs&ON'rjIM>fPW9cB=K1^HB!@$WMah*q-&]1TJD,ODElL_\"8'(upGHSS)`+$o).$g&^f:iW-\"^!T*-pS'W_1UMk!sa[]tWnVq8^VK[Ulltgqsc[o>Hr9YhdOO2!6sk<dND3I&)N&k\\p's)j?OB];p*&V@&+@1SOPN/5Ru>Js637./2q.~>endstream\nendobj\nxref\n0 9\n0000000000 65535 f \n0000000073 00000 n \n0000000114 00000 n \n0000000221 00000 n \n0000000333 00000 n \n0000000536 00000 n \n0000000604 00000 n \n0000000887 00000 n \n0000000946 00000 n \ntrailer\n<<\n/ID \n[<c203e779030a2caa407fcaace833facb><c203e779030a2caa407fcaace833facb>]\n% ReportLab generated PDF document -- digest (http://www.reportlab.com)\n\n/Info 6 0 R\n/Root 5 0 R\n/Size 9\n>>\nstartxref\n2969\n%%EOF",
+      "fileSize": 3373,
+      "createdAt": "2026-08-20T19:54:53.687Z"
+    },
+    "res_oe0dfg1r": {
+      "id": "res_oe0dfg1r",
+      "userId": "demo-user-123",
+      "filename": "My_Resume.pdf",
+      "extractedText": "John Doe\nSenior Developer with 8 years experience building scalable React and Node.js microservices. Reduced latency by 40% and improved throughput.",
+      "fileSize": 148,
+      "createdAt": "2026-08-20T19:56:34.634Z"
+    },
+    "res_lbi6ffkj": {
+      "id": "res_lbi6ffkj",
+      "userId": "demo-user-123",
+      "filename": "My_Resume.pdf",
+      "extractedText": "Jane Doe\nPrincipal Engineer with 10 years experience building scalable web architectures with React, TypeScript, Node.js, and AWS. Managed team of 8 engineers and increased deployment velocity by 45%.",
+      "fileSize": 200,
+      "createdAt": "2026-08-20T19:58:19.185Z"
+    }
+  },
+  "analyses": {
+    "an_pvu5kwih": {
+      "id": "an_pvu5kwih",
+      "userId": "demo-user-123",
+      "resumeId": "res_fh544z3k",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "createdAt": "2026-08-20T19:50:30.295Z",
+      "atsScore": 94,
+      "scoreTier": "Elite",
+      "summary": "This is a high-performing resume that effectively bridges the gap between technical execution and business impact. The layout is clean, ATS-friendly, and heavily optimized with quantifiable metrics, making it a top-tier candidate profile.",
+      "strengths": [
+        "Strong use of quantifiable metrics throughout all professional experience entries.",
+        "Excellent categorization of technical skills, which is highly readable by ATS parsers.",
+        "Strategic inclusion of relevant certifications (AWS and Kubernetes) that signal senior-level proficiency.",
+        "Strong results-oriented narrative that emphasizes business impact rather than just daily duties.",
+        "Clear structure with logical sections that facilitate easy recruiter scanning."
+      ],
+      "weaknesses": [
+        "The internship section is slightly undersized compared to the senior roles; consider condensing it further or focusing more on outcomes.",
+        "Limited mention of specific agile methodologies beyond general mention of 'cross-functional teams'.",
+        "Missing specific mentions of soft skills like conflict resolution or cross-departmental stakeholder management.",
+        "Could benefit from an 'Awards' or 'Leadership' section to highlight the 'DevSync' project impact more prominently."
+      ],
+      "missingKeywords": [
+        "Agile/Scrum",
+        "System Design",
+        "Distributed Systems",
+        "Technical Leadership",
+        "Micro-Frontends",
+        "Security Best Practices",
+        "SOC2 Compliance",
+        "Mentorship"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Microservices",
+          "Serverless Architecture",
+          "CI/CD",
+          "Test-Driven Development",
+          "REST APIs",
+          "Cloud Infrastructure"
+        ],
+        "soft": [
+          "Mentorship",
+          "Cross-functional Leadership",
+          "Technical Documentation",
+          "A/B Testing",
+          "Stakeholder Collaboration"
+        ],
+        "tools": [
+          "AWS Lambda",
+          "Docker",
+          "Kubernetes",
+          "Terraform",
+          "Datadog",
+          "Jira",
+          "Stripe API",
+          "Jest",
+          "Cypress"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "Go",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 95,
+        "skillsMatch": 98,
+        "experienceImpact": 92,
+        "educationRelevance": 90,
+        "formattingAndLayout": 95,
+        "resumeStructure": 96,
+        "quantifiableMetrics": 94,
+        "actionVerbsAndTone": 93
+      },
+      "sectionScores": {
+        "summary": 95,
+        "skills": 98,
+        "experience": 94,
+        "education": 90,
+        "projects": 92,
+        "certifications": 95
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Summary",
+          "score": 95,
+          "status": "excellent",
+          "strengths": [
+            "Clearly states years of experience",
+            "Includes powerful metrics"
+          ],
+          "problems": [
+            "Slightly dense"
+          ],
+          "suggestions": [
+            "Consider making it slightly more punchy to highlight the 'Senior' value proposition."
+          ],
+          "detectedContentSnippet": "Results-driven Senior Full Stack Engineer with 6+ years of experience"
+        },
+        {
+          "sectionName": "Experience",
+          "score": 94,
+          "status": "excellent",
+          "strengths": [
+            "Strong action verbs",
+            "Excellent use of STAR method"
+          ],
+          "problems": [
+            "Internship bullets are weak compared to others"
+          ],
+          "suggestions": [
+            "Ensure the internship role lists more of the 'how' behind the technical tasks."
+          ],
+          "detectedContentSnippet": "Architected and deployed multi-tenant SaaS analytics platform"
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "1",
+          "original": "Authored technical documentation and internal developer onboarding guides.",
+          "problem": "Passive and lacks scope or impact.",
+          "whyItMatters": "Demonstrates impact on team efficiency/onboarding time.",
+          "improved": "Streamlined developer onboarding by authoring comprehensive technical documentation, reducing time-to-productivity for new hires by [X]% and decreasing support requests by [Y] per week.",
+          "category": "Impact",
+          "metricAddedSuggestion": "Include percentage reduction in onboarding time."
+        },
+        {
+          "id": "2",
+          "original": "Assisted in developing RESTful endpoints in Python/Django and refactored relational database queries.",
+          "problem": "Vague task description; doesn't quantify improvement.",
+          "whyItMatters": "Quantifying refactoring efforts highlights engineering discipline.",
+          "improved": "Engineered high-performance RESTful endpoints using Python/Django and refactored core PostgreSQL queries, resulting in a [X]% improvement in query execution speed across [Y] endpoints.",
+          "category": "Technical",
+          "metricAddedSuggestion": "Provide specific performance percentage gain."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Design",
+          "issue": "Consistency in date formatting between sections",
+          "fix": "Standardize all date ranges to (Month YYYY - Month YYYY)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Lead Full Stack Engineer",
+          "Full Stack Developer",
+          "Software Engineering Intern"
+        ],
+        "estimatedYearsExperience": "6.5 years",
+        "measurableResultsCount": 8,
+        "actionVerbStrength": "strong",
+        "summaryRemarks": "The career trajectory is logical and shows progressive responsibility, especially with the jump from Intern to Lead."
+      },
+      "educationInsight": {
+        "summaryRemarks": "Solid academic foundation from a top-tier university, relevant to the technical nature of the role.",
+        "courseworkOrHonorsDetected": "Dean's Honor List, Magna Cum Laude",
+        "degreeDetected": "Bachelor of Science in Computer Science",
+        "graduationYearDetected": "2019",
+        "institutionDetected": "University of California, Berkeley"
+      },
+      "extractedTextSnippet": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithi",
+      "targetRole": "Senior Full Stack Software Engineer"
+    },
+    "an_7k1njzbv": {
+      "id": "an_7k1njzbv",
+      "userId": "demo-user-123",
+      "resumeId": "res_xui35e60",
+      "filename": "Jordan_Taylor_PM_Resume.docx",
+      "createdAt": "2026-08-20T19:51:52.523Z",
+      "atsScore": 88,
+      "scoreTier": "Strong",
+      "summary": "This is a high-performing resume tailored effectively for a B2B SaaS Product Manager role. The candidate demonstrates strong quantitative achievements and clear alignment with product lifecycle management; minor refinements in keyword density and structural hierarchy could push this into the 'Elite' category.",
+      "strengths": [
+        "Strong use of data-driven metrics to validate impact (e.g., $1.8M ARR growth, 35% reduction in time-to-value).",
+        "Excellent application of industry-standard frameworks like RICE, PLG, and Agile.",
+        "Well-structured resume with clear sections and logical flow.",
+        "Strong technical breadth covering both analytical tools and core PM methodologies.",
+        "Clean, concise formatting that is highly ATS-compatible."
+      ],
+      "weaknesses": [
+        "Missing some advanced technical keywords that often trigger ATS filters for senior B2B roles.",
+        "Lack of an explicit 'Projects' section to showcase independent work or side-product initiatives.",
+        "The summary section could be more targeted by explicitly mentioning industry domains (e.g., FinTech, MarTech).",
+        "Certification section is slightly isolated; consider integrating these credentials into a professional profile summary or specific skill tags.",
+        "Needs more focus on strategic vision vs. tactical execution; some bullets are heavily focused on 'doing' rather than 'leading'."
+      ],
+      "missingKeywords": [
+        "Product Lifecycle Management",
+        "API Integrations",
+        "Competitive Analysis",
+        "User Persona Development",
+        "Product Vision",
+        "Retention Strategy",
+        "Market Research"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Product Strategy",
+          "Agile/Scrum",
+          "OKR Alignment",
+          "User Journey Mapping",
+          "Feature Prioritization",
+          "Cohort Analysis"
+        ],
+        "soft": [
+          "Stakeholder Management",
+          "Customer Discovery",
+          "Cross-functional Leadership",
+          "Go-To-Market Strategy"
+        ],
+        "tools": [
+          "Jira",
+          "Confluence",
+          "Figma",
+          "Notion",
+          "Postman",
+          "Zapier",
+          "Amplitude",
+          "Mixpanel",
+          "Google Analytics 4",
+          "Optimizely"
+        ],
+        "programmingLanguages": [
+          "SQL",
+          "Python (Basic)"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 85,
+        "skillsMatch": 90,
+        "experienceImpact": 92,
+        "educationRelevance": 85,
+        "formattingAndLayout": 95,
+        "resumeStructure": 90,
+        "quantifiableMetrics": 90,
+        "actionVerbsAndTone": 88
+      },
+      "sectionScores": {
+        "summary": 85,
+        "skills": 90,
+        "experience": 92,
+        "education": 85,
+        "projects": 0,
+        "certifications": 90
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Summary",
+          "score": 85,
+          "status": "good",
+          "strengths": [
+            "Concise",
+            "Result-oriented"
+          ],
+          "problems": [
+            "Lacks mention of specific industry domains"
+          ],
+          "suggestions": [
+            "Add one sentence mentioning your interest or experience in specific SaaS verticals."
+          ]
+        },
+        {
+          "sectionName": "Skills",
+          "score": 90,
+          "status": "excellent",
+          "strengths": [
+            "Well-categorized"
+          ],
+          "problems": [
+            "Could include more strategic high-level keywords"
+          ],
+          "suggestions": [
+            "Add 'Product Vision' and 'Competitive Analysis'"
+          ]
+        },
+        {
+          "sectionName": "Experience",
+          "score": 92,
+          "status": "excellent",
+          "strengths": [
+            "Strong impact metrics"
+          ],
+          "problems": [
+            "Could emphasize more cross-functional strategy vs execution"
+          ],
+          "suggestions": [
+            "Ensure all bullets follow the 'Action verb + Task + Result' format consistently."
+          ]
+        },
+        {
+          "sectionName": "Education",
+          "score": 85,
+          "status": "good",
+          "strengths": [
+            "Includes GPA/Honors"
+          ],
+          "problems": [
+            "Slightly standard format"
+          ],
+          "suggestions": [
+            "Include specific relevant coursework in 'Information Systems' if targeting data-heavy roles."
+          ]
+        },
+        {
+          "sectionName": "Projects",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "Missing section"
+          ],
+          "suggestions": [
+            "If any personal project or open source contribution exists, include it to differentiate."
+          ]
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "exp1",
+          "original": "Managed customer feedback portal and prioritized 45+ feature requests",
+          "problem": "Too operational",
+          "whyItMatters": "Needs to show the strategic outcome of prioritizing those features.",
+          "improved": "Transformed customer feedback pipeline by implementing a RICE-based prioritization system, resulting in [X%] increase in high-impact feature adoption.",
+          "category": "Impact",
+          "metricAddedSuggestion": "quantify the percentage of adoption or efficiency gain"
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Layout",
+          "issue": "Minimalist header spacing",
+          "fix": "Ensure contact info is clearly separated for ATS readability."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Product Manager",
+          "Associate Product Manager"
+        ],
+        "estimatedYearsExperience": "5.5 years",
+        "measurableResultsCount": 6,
+        "actionVerbStrength": "strong",
+        "summaryRemarks": "Strong progression from Associate to full PM role with demonstrable growth in ownership."
+      },
+      "educationInsight": {
+        "summaryRemarks": "Excellent academic background with honors."
+      },
+      "extractedTextSnippet": "Jordan Taylor\njordan.taylor.pm@example.com | (555) 876-5432 | New York, NY\nlinkedin.com/in/jordantaylor-pm\n\nSUMMARY\nData-driven Product Manager with 4+ years of experience steering product strategy, PLG user onboarding, and enterprise SaaS feature delivery. Successfully launched 3 zero-to-one product initiatives resulting in $1.8M ARR growth. Expert at bridging technical roadmaps with user research, statistical A/B testing, and cross-functional leadership across engineering, UX, and sales.\n\nCORE SKILLS\n- Product Strategy: Product Roadmap, Agile/Scrum, OKR Alignment, User Journey Mapping, Feature Prioritization (RICE/MoSCoW)\n- Analytics & Testing: SQL, Amplitude, Mixpanel, Google Analytics 4, Optimizely, A/B Testing, Cohort Analysis\n- Technical & Tools: Jira, Confluence, Figma, Notion, Postman, Zapier, Python (Basic)\n- Leadership: Stakeholder Management, Customer Discovery, Sprint Planning, Go-To-Market (GTM)\n\nEXPERIENCE\nProduct Manager | Datastream SaaS, New York, NY\nJanuary 2021 - Present\n- Owned self-serve onboarding funnel and PLG activation flow, lifting free-to-paid user conversion rate from 3.2% to 5.8% within 9 months.\n- Led cross-functional team of 8 engineers and 2 product designers to launch enterprise SSO and role-based access control (RBAC), unblocking $650k in pipeline deals.\n- Conducted 60+ qualitative user interviews and analyzed event telemetry in Amplitude to discover key onboarding drop-offs, driving a redesign that reduced time-to-first-value by 35%.\n- Auth",
+      "targetRole": "Product Manager (B2B SaaS)"
+    },
+    "an_clc1pag5": {
+      "id": "an_clc1pag5",
+      "userId": "demo-user-123",
+      "resumeId": "res_vifwsewt",
+      "filename": "230200143065_Resume.pdf",
+      "createdAt": "2026-08-20T19:55:01.920Z",
+      "atsScore": 12,
+      "scoreTier": "Needs Work (<60)",
+      "summary": "The provided file is a machine-encoded PDF blob without human-readable text content or professional structure. It is currently unparseable by any ATS and contains zero viable career information, rendering it 100% ineffective for job applications.",
+      "strengths": [
+        "Technical file integrity is intact (valid PDF structure)",
+        "Standardized encoding ensures the file can be opened by PDF readers",
+        "No prohibited characters or symbols are present within the data stream"
+      ],
+      "weaknesses": [
+        "Zero readable content present (the file is a binary stream dump)",
+        "Missing all essential sections including contact information and work history",
+        "Lack of professional formatting or document hierarchy for ATS parsing",
+        "Complete absence of keywords, skills, or professional experience metrics"
+      ],
+      "missingKeywords": [
+        "Professional Summary",
+        "Technical Skills",
+        "Professional Experience",
+        "Education",
+        "Project Portfolio",
+        "Certification"
+      ],
+      "detectedSkills": {
+        "technical": [],
+        "soft": [],
+        "tools": [],
+        "programmingLanguages": []
+      },
+      "categoryScores": {
+        "keywordOptimization": 0,
+        "skillsMatch": 0,
+        "experienceImpact": 0,
+        "educationRelevance": 0,
+        "formattingAndLayout": 5,
+        "resumeStructure": 0,
+        "quantifiableMetrics": 0,
+        "actionVerbsAndTone": 0
+      },
+      "sectionScores": {
+        "summary": 0,
+        "skills": 0,
+        "experience": 0,
+        "education": 0,
+        "projects": 0,
+        "certifications": 0
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Entire Document",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "The resume content is completely missing from the PDF.",
+            "The file appears to be a raw stream output instead of a rendered resume document."
+          ],
+          "suggestions": [
+            "Re-export your resume from your word processor (e.g., Word, Google Docs) as a standard 'Print to PDF' or 'Export as PDF' document.",
+            "Ensure you are not uploading a log file or raw code output."
+          ]
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "1",
+          "original": "N/A",
+          "problem": "No content exists.",
+          "whyItMatters": "ATS systems cannot index data that is not present.",
+          "improved": "Replace this file with a document containing your professional history, skills, and contact details using a clean, text-based layout.",
+          "category": "Content",
+          "metricAddedSuggestion": "Add metrics such as: 'Increased efficiency by X%' or 'Managed a budget of $Y'."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "high",
+          "category": "File Format",
+          "issue": "The document is an unparseable binary dump.",
+          "fix": "Re-generate the PDF using a standard 'Save As PDF' feature from a text editor."
+        },
+        {
+          "severity": "high",
+          "category": "Readability",
+          "issue": "No text detected by OCR or internal parsing.",
+          "fix": "Ensure all text is native (not an image-based scan) and properly encoded."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [],
+        "estimatedYearsExperience": "0",
+        "measurableResultsCount": 0,
+        "actionVerbStrength": "weak",
+        "summaryRemarks": "No professional experience detected."
+      },
+      "educationInsight": {
+        "summaryRemarks": "No educational background detected."
+      },
+      "extractedTextSnippet": "%PDF-1.4\n%     ReportLab Generated PDF document http://www.reportlab.com\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font\n>>\nendobj\n3 0 obj\n<<\n/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font\n>>\nendobj\n4 0 obj\n<<\n/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<\n/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]\n>> /Rotate 0 /Trans <<\n\n>> \n  /Type /Page\n>>\nendobj\n5 0 obj\n<<\n/PageMode /UseNone /Pages 7 0 R /Type /Catalog\n>>\nendobj\n6 0 obj\n<<\n/Author (\\(anonymous\\)) /CreationDate (D:20260227061620+00'00') /Creator (\\(unspecified\\)) /Keywords () /ModDate (D:20260227061620+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) \n  /Subject (\\(unspecified\\)) /Title (\\(anonymous\\)) /Trapped /False\n>>\nendobj\n7 0 obj\n<<\n/Count 1 /Kids [ 4 0 R ] /Type /Pages\n>>\nendobj\n8 0 obj\n<<\n/Filter [ /ASCII85Decode /FlateDecode ] /Length 1932\n>>\nstream\nGau0D>>sNP'RodXS>Rgk_O,uf^o'Uh`;t`KRGF;]?CI[@QDC#7FC_B)+2=]m%#bkZBWYhp`fpDIV9a?<3ah!7@t$lr^h!f7f+'bmKJRR0bCaa>rUAmgM6hQ8eV9CQ=RC:0N@.P1)hFNOi)ut._h0C)\\_shPPj<(Wg=>-DYJFN=3s8oFh>>NN;[=Hgr'P8pMI/S`E>u)rEOT,u@+uO2e^@5\"9.h?!o-a6&2OR)A?S]ZES3Q1?A47\\rIpou$S6eJ$G'r1kIFkI*`d-D'Ebc`;j&2g:guOMa&qu3uN%\\m-i\"rV(YH>`*0s7W>BDh\\\\m'E8=B<Kj\"3M+usSlZhD4-mQ9n:er%2%.edg\\p-G[TD?E[Z;NE>k`kYnE%AGK](Tue:%*uAVAsH%l?;N`p^O1`eU#sDLP0nCNM,:eb&ATJY3.cDcdIXg_Y;j3p')a0\"m&kN,h<#NIgR9;PDa,H+G9KJgNg9QpI@j)5gFh"
+    },
+    "an_mb3tltir": {
+      "id": "an_mb3tltir",
+      "userId": "demo-user-123",
+      "resumeId": "res_oe0dfg1r",
+      "filename": "My_Resume.pdf",
+      "createdAt": "2026-08-20T19:57:02.070Z",
+      "atsScore": 32,
+      "scoreTier": "Needs Work",
+      "summary": "This resume is severely underdeveloped and currently functions more as a brief bio than a professional document. It lacks the critical structural depth, professional history, and skill taxonomy required to pass any automated ATS filter or capture a recruiter's attention for a Senior level role.",
+      "strengths": [
+        "Contains a strong, quantifiable achievement regarding latency reduction.",
+        "Clearly identifies the target role as a Senior Developer.",
+        "Correctly highlights two high-demand technology stacks (React, Node.js)."
+      ],
+      "weaknesses": [
+        "Extremely sparse content; missing entire standard sections like Professional Experience, Education, and specific Skills lists.",
+        "Lack of professional contact information and location, which is non-negotiable for recruiters.",
+        "No evidence of career progression, project management, or leadership experience expected of a 'Senior' level engineer.",
+        "Fails to utilize industry-standard formatting, making it impossible to parse into any ATS database."
+      ],
+      "missingKeywords": [
+        "AWS",
+        "Docker",
+        "Kubernetes",
+        "CI/CD",
+        "RESTful APIs",
+        "System Design",
+        "TypeScript",
+        "PostgreSQL",
+        "Unit Testing",
+        "Agile/Scrum"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Microservices",
+          "Scalability",
+          "Performance Optimization"
+        ],
+        "soft": [
+          "Not applicable"
+        ],
+        "tools": [
+          "Not applicable"
+        ],
+        "programmingLanguages": [
+          "Node.js"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 30,
+        "skillsMatch": 20,
+        "experienceImpact": 20,
+        "educationRelevance": 0,
+        "formattingAndLayout": 10,
+        "resumeStructure": 10,
+        "quantifiableMetrics": 50,
+        "actionVerbsAndTone": 20
+      },
+      "sectionScores": {
+        "summary": 60,
+        "skills": 0,
+        "experience": 10,
+        "education": 0,
+        "projects": 0
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 10,
+          "status": "needs_work",
+          "strengths": [
+            "Includes one high-impact metric"
+          ],
+          "problems": [
+            "No employer details",
+            "No dates of employment",
+            "No evidence of specific responsibilities"
+          ],
+          "suggestions": [
+            "Include company names, job titles, and dates",
+            "Expand with specific job functions using the STAR method"
+          ]
+        },
+        {
+          "sectionName": "Skills",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "No dedicated skills section provided"
+          ],
+          "suggestions": [
+            "Create a bulleted grid categorizing skills by language, framework, cloud, and tools"
+          ]
+        },
+        {
+          "sectionName": "Education",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "No academic credentials listed"
+          ],
+          "suggestions": [
+            "Add degree, institution name, and graduation year to establish baseline qualification"
+          ]
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "1",
+          "original": "Reduced latency by 40% and improved throughput.",
+          "problem": "Passive phrasing and lacks technical context.",
+          "whyItMatters": "Recruiters need to know how the reduction was achieved (e.g., caching, DB tuning).",
+          "improved": "Architected and optimized Node.js microservices, reducing end-to-end latency by 40% and increasing system throughput by [X] requests/second.",
+          "category": "Experience",
+          "metricAddedSuggestion": "Specify the database or caching mechanism used."
+        },
+        {
+          "id": "2",
+          "original": "Senior Developer experience.",
+          "problem": "Vague statement without context.",
+          "whyItMatters": "Seniority implies leadership; needs to show mentorship or architecture.",
+          "improved": "Spearheaded the development of scalable web applications using React, leading a team of [Number] engineers through full-cycle SDLC.",
+          "category": "Experience",
+          "metricAddedSuggestion": "Include team size or project budget managed."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "high",
+          "category": "Structure",
+          "issue": "Missing standard headers (Contact, Experience, Education).",
+          "fix": "Structure document with clear, parsed headings: Contact, Summary, Experience, Skills, Education."
+        },
+        {
+          "severity": "high",
+          "category": "ATS Compliance",
+          "issue": "Content insufficient for parsing.",
+          "fix": "Expand the document to reach the 1-1.5 page range with descriptive bullet points."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Senior Developer"
+        ],
+        "estimatedYearsExperience": "8",
+        "measurableResultsCount": 1,
+        "actionVerbStrength": "weak",
+        "summaryRemarks": "The experience section is non-existent beyond a single bullet point. It lacks depth regarding stack, team size, and complex problem-solving."
+      },
+      "educationInsight": {
+        "summaryRemarks": "Education section is entirely missing, which creates a red flag for senior-level roles."
+      },
+      "extractedTextSnippet": "John Doe\nSenior Developer with 8 years experience building scalable React and Node.js microservices. Reduced latency by 40% and improved throughput.",
+      "targetRole": "Senior Full Stack Engineer"
+    },
+    "an_z8ro7kaf": {
+      "id": "an_z8ro7kaf",
+      "userId": "demo-user-123",
+      "resumeId": "res_lbi6ffkj",
+      "filename": "My_Resume.pdf",
+      "createdAt": "2026-08-20T19:58:51.577Z",
+      "atsScore": 75,
+      "scoreTier": "Strong (75-89)",
+      "summary": "Your resume demonstrates solid professional experience with 4 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including TypeScript, React, Node.js.",
+        "Healthy content volume (29 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "TypeScript",
+          "React",
+          "Node.js",
+          "AWS"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 70,
+        "skillsMatch": 79,
+        "experienceImpact": 67,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 62,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 75,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 75,
+          "status": "needs_work",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "Jane Doe\nPrincipal Engineer with 10 years experience building scalable web architectures with React, TypeScript, Node.js, and AWS. Managed team of 8 engineers and increased deployment velocity by 45%."
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "TypeScript, React, Node.js, AWS"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_default",
+          "original": "Responsible for developing features and collaborating with team members.",
+          "problem": "Passive duty statement without business impact or measurable metrics.",
+          "whyItMatters": "Hiring managers seek measurable contributions rather than a generic task list.",
+          "improved": "Designed and deployed 12+ critical product features, reducing API latency by 35% and improving customer satisfaction scores by 18%.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Added feature count (12+) and latency reduction percentage (35%)."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 3,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "Jane Doe\nPrincipal Engineer with 10 years experience building scalable web architectures with React, TypeScript, Node.js, and AWS. Managed team of 8 engineers and increased deployment velocity by 45%.",
+      "targetRole": "Staff Software Engineer"
+    }
+  },
+  "jobMatches": {
+    "jm_vmoa74ek": {
+      "id": "jm_vmoa74ek",
+      "userId": "demo-user-123",
+      "resumeId": "res_active",
+      "jobTitle": "Senior Cloud Engineer",
+      "jobDescriptionSnippet": "Looking for a Senior Cloud Engineer with Kubernetes, AWS, Terraform, Docker, and Microservices experience.",
+      "matchScore": 65,
+      "matchingKeywords": [
+        "AWS",
+        "Kubernetes"
+      ],
+      "missingKeywords": [
+        "Terraform",
+        "Docker",
+        "Microservices",
+        "Cloud Engineer"
+      ],
+      "matchingSkills": [
+        "AWS",
+        "Kubernetes"
+      ],
+      "missingSkills": [
+        "Terraform",
+        "Docker",
+        "Microservices"
+      ],
+      "recommendedChanges": [
+        "Rebrand your professional title from 'Senior Developer' to 'Senior Cloud Engineer'.",
+        "Explicitly list 'Terraform' and 'Docker' if you have experience with infrastructure as code and containerization.",
+        "Add a dedicated 'Cloud Infrastructure' or 'DevOps' section to highlight your cloud-specific expertise.",
+        "Include a bullet point detailing a microservices architecture migration or development project.",
+        "Quantify your AWS experience with specific services used (e.g., EKS, Lambda, RDS) to align with Cloud Engineer expectations."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Shift focus from generic 'Developer' skills to your cloud-native infrastructure experience, emphasizing scalability and automation."
+        },
+        {
+          "section": "Technical Skills",
+          "advice": "Categorize skills to highlight Cloud and DevOps tools first, as these are the primary drivers for this job profile."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "Senior Developer with React, Node.js, AWS, Kubernetes",
+          "tailoredForJob": "Senior Cloud Engineer experienced in deploying and scaling microservices on Kubernetes using AWS infrastructure.",
+          "reason": "Aligns the candidate's existing stack with the specific 'Microservices' and 'Cloud Engineer' requirements of the JD."
+        },
+        {
+          "original": "Senior Developer with AWS, Kubernetes",
+          "tailoredForJob": "Architected and maintained containerized cloud environments using Docker and automated infrastructure provisioning with Terraform.",
+          "reason": "Directly addresses the missing critical keywords 'Terraform' and 'Docker' while showing active project usage."
+        }
+      ],
+      "createdAt": "2026-08-20T19:57:08.809Z"
+    },
+    "jm_q5q7pvju": {
+      "id": "jm_q5q7pvju",
+      "userId": "demo-user-123",
+      "resumeId": "res_active",
+      "jobTitle": "Senior Full Stack Developer",
+      "jobDescriptionSnippet": "Seeking Senior Full Stack Developer proficient in React, TypeScript, Node.js, GraphQL, Docker, and CI/CD.",
+      "matchScore": 60,
+      "matchingKeywords": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "GraphQL"
+      ],
+      "missingKeywords": [
+        "Senior Full Stack Developer",
+        "Docker",
+        "CI/CD"
+      ],
+      "matchingSkills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "GraphQL"
+      ],
+      "missingSkills": [
+        "Docker",
+        "CI/CD pipelines",
+        "Containerization"
+      ],
+      "recommendedChanges": [
+        "Incorporate containerization experience specifically detailing Docker usage.",
+        "Add accomplishments involving CI/CD pipelines to demonstrate DevOps capabilities.",
+        "Include a professional summary highlighting seniority as a Full Stack Developer.",
+        "Detail quantifiable achievements and metrics showing the impact of React and Node.js projects.",
+        "Expand AWS experience into production deployment and infrastructure context."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Add a dedicated summary section targeting the Senior Full Stack Developer role emphasizing full lifecycle development."
+        },
+        {
+          "section": "Work Experience",
+          "advice": "Create detailed bullet points demonstrating hands-on implementation of React, Node.js, Docker, and CI/CD pipelines."
+        },
+        {
+          "section": "Technical Skills",
+          "advice": "Organize skills into categories such as Frontend, Backend, and DevOps to prominently feature Docker and CI/CD."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "React, TypeScript, Node.js, AWS, GraphQL",
+          "tailoredForJob": "Architected full-stack enterprise applications using React, TypeScript, and Node.js, integrating GraphQL APIs with AWS infrastructure.",
+          "reason": "Transforms static skill listing into an impactful senior-level achievement demonstrating core stack proficiency."
+        },
+        {
+          "original": "Node.js, AWS",
+          "tailoredForJob": "Containerized Node.js microservices using Docker and implemented automated CI/CD deployment pipelines on AWS.",
+          "reason": "Directly addresses the missing job requirements for Docker and CI/CD."
+        }
+      ],
+      "createdAt": "2026-08-20T19:58:56.435Z"
+    }
+  }
+}

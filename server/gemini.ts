@@ -23,12 +23,24 @@ export interface AIAnalysisPromptInput {
   filename?: string;
 }
 
-// Fallback models if primary model is experiencing temporary high demand (503/429)
+// Supported models in priority order for rapid failover during demand spikes
 const SUPPORTED_MODELS = [
   "gemini-3.7-flash",
   "gemini-flash-latest",
   "gemini-3.1-flash-lite",
 ];
+
+async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 12000): Promise<T> {
+  let timer: NodeJS.Timeout;
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`API request timed out after ${timeoutMs}ms`)), timeoutMs);
+  });
+  try {
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    clearTimeout(timer!);
+  }
+}
 
 async function callWithRetryAndFallback<T>(
   actionName: string,
@@ -36,36 +48,22 @@ async function callWithRetryAndFallback<T>(
 ): Promise<T> {
   let lastError: any = null;
 
+  // Pass 1: Try each available model with a fast timeout (8s) for sub-second failover
   for (const model of SUPPORTED_MODELS) {
-    // Try up to 2 attempts per model with exponential backoff
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      try {
-        return await fn(model);
-      } catch (err: any) {
-        lastError = err;
-        const errMsg = (err?.message || JSON.stringify(err)).toLowerCase();
-        const isTransient =
-          errMsg.includes("503") ||
-          errMsg.includes("unavailable") ||
-          errMsg.includes("high demand") ||
-          errMsg.includes("429") ||
-          errMsg.includes("resource_exhausted") ||
-          errMsg.includes("overloaded") ||
-          errMsg.includes("fetch failed") ||
-          errMsg.includes("econnreset") ||
-          errMsg.includes("timeout");
+    try {
+      return await callWithTimeout(fn(model), 9000);
+    } catch (err: any) {
+      lastError = err;
+      console.warn(`[Gemini API] ${actionName} on ${model} failed/timed out: ${err.message || err}. Trying next model...`);
+    }
+  }
 
-        if (isTransient) {
-          const delay = attempt * 600 + Math.random() * 200;
-          console.warn(
-            `[Gemini API] ${actionName} on ${model} (attempt ${attempt}/2) failed: ${err.message || errMsg}. Retrying in ${Math.round(delay)}ms...`
-          );
-          await new Promise((resolve) => setTimeout(resolve, delay));
-        } else {
-          // If non-transient error, move to next model or fail
-          break;
-        }
-      }
+  // Pass 2: Quick fallback attempt
+  for (const model of ["gemini-flash-latest", "gemini-3.7-flash"]) {
+    try {
+      return await callWithTimeout(fn(model), 8000);
+    } catch (err: any) {
+      lastError = err;
     }
   }
 
@@ -106,6 +104,7 @@ Ensure your score (atsScore 0-100) is authentic and calculated fairly:
         model,
         contents: prompt,
         config: {
+          thinkingConfig: { thinkingBudget: 0 },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,
@@ -293,6 +292,7 @@ Evaluate the alignment precisely. Output a structured JSON matching the followin
         model,
         contents: prompt,
         config: {
+          thinkingConfig: { thinkingBudget: 0 },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,
@@ -367,6 +367,7 @@ Return JSON with 3 distinct rewritten alternatives:
         model,
         contents: prompt,
         config: {
+          thinkingConfig: { thinkingBudget: 0 },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,

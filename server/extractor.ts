@@ -1,23 +1,45 @@
 import mammoth from "mammoth";
-import { createRequire } from "module";
+// @ts-ignore
+import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import { ExtractedResumeData } from "../src/types.js";
-
-const require = createRequire(import.meta.url);
 
 async function parsePdfBuffer(fileBuffer: Buffer): Promise<{ text: string; numpages?: number }> {
   try {
-    const pdfParse = require("pdf-parse/lib/pdf-parse.js");
-    if (typeof pdfParse === "function") {
-      const data = await pdfParse(fileBuffer);
-      return { text: data.text || "", numpages: data.numpages };
+    let fn: any = pdfParse;
+    if (typeof fn !== "function" && fn?.default) {
+      fn = fn.default;
+    }
+    if (typeof fn === "function") {
+      const data = await fn(fileBuffer, { max: 10 });
+      if (data?.text && data.text.trim().length > 10) {
+        return { text: data.text, numpages: data.numpages };
+      }
     }
   } catch (pdfErr) {
-    console.warn("Primary PDF parsing failed, attempting fallback text extraction:", pdfErr);
+    console.warn("Primary PDF parsing encountered non-fatal issue, attempting fallback text extraction:", pdfErr);
   }
 
-  // Fallback: extract ASCII / UTF-8 readable text chunks from buffer
-  const rawString = fileBuffer.toString("utf-8").replace(/[^\x20-\x7E\n\r\t]/g, " ");
-  return { text: rawString };
+  // Fallback: extract legible printable text tokens from PDF buffer
+  const rawString = fileBuffer.toString("latin1");
+  const extractedChunks: string[] = [];
+  
+  // Extract text within PDF parentheses e.g. (Text chunk) Tj or [(Text chunk)] TJ
+  const textPattern = /\(([^)]+)\)\s*(?:Tj|'|")/g;
+  let match;
+  while ((match = textPattern.exec(rawString)) !== null) {
+    const chunk = match[1].replace(/\\([()\\])/g, "$1").trim();
+    if (chunk.length > 1) {
+      extractedChunks.push(chunk);
+    }
+  }
+
+  if (extractedChunks.length > 5) {
+    return { text: extractedChunks.join(" ") };
+  }
+
+  // Final fallback: extract UTF-8 readable words
+  const utf8String = fileBuffer.toString("utf-8").replace(/[^\x20-\x7E\n\r\t]/g, " ");
+  return { text: utf8String };
 }
 
 export async function extractResumeText(

@@ -15,10 +15,12 @@ import {
   GraduationCap,
   Eye,
   FileCheck,
+  X,
 } from "lucide-react";
 import { formatFileSize } from "../lib/utils.js";
 import { ExtractedResumeData, ResumeAnalysisResult } from "../types.js";
 import { SAMPLE_RESUMES, SampleResumePreset } from "../data/sampleResumes.js";
+import { apiExtractResume, apiAnalyzeResume } from "../lib/api.js";
 
 interface ResumeUploadProps {
   onAnalysisComplete: (result: ResumeAnalysisResult) => void;
@@ -66,34 +68,15 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
     setFile(selectedFile);
     setIsExtracting(true);
-    setUploadProgress(25);
+    setUploadProgress(35);
 
     try {
-      // Convert to base64
-      const base64Data = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(selectedFile);
-      });
-
-      setUploadProgress(60);
-
-      const res = await fetch("/api/extract", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          base64Data,
-          filename: selectedFile.name,
-          mimeType: selectedFile.type,
-        }),
-      });
-
+      setUploadProgress(65);
+      const data = await apiExtractResume(selectedFile);
       setUploadProgress(100);
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to parse text from resume file.");
+      if (!data || !data.extractedText || data.extractedText.trim().length === 0) {
+        throw new Error("No readable text found in document. Please paste your resume text directly.");
       }
 
       setExtractedData(data);
@@ -142,18 +125,22 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  const handleTabSwitch = (mode: "file" | "paste" | "samples") => {
+    setActiveInputMode(mode);
+    setError(null);
+  };
+
   const handleSelectPreset = (preset: SampleResumePreset) => {
     setFile(null);
     setPastedText(preset.text);
     setTargetRole(preset.role);
     setExtractedData({
       filename: preset.filename,
-      fileSize: Buffer.byteLength(preset.text, "utf8"),
+      fileSize: 1024,
       extractedText: preset.text,
-      wordCount: preset.text.split(/\s+/).length,
+      wordCount: preset.text.split(/\s+/).filter(Boolean).length,
       detectedSections: {},
     });
-    setActiveInputMode("paste");
     setError(null);
   };
 
@@ -168,21 +155,12 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     setIsAnalyzing(true);
 
     try {
-      const res = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          resumeText: textToAnalyze,
-          filename: file?.name || extractedData?.filename || "My_Resume.pdf",
-          userId: userId || "demo-user-123",
-          targetRole: targetRole.trim() || undefined,
-        }),
+      const data = await apiAnalyzeResume({
+        resumeText: textToAnalyze,
+        filename: file?.name || extractedData?.filename || "My_Resume.pdf",
+        userId: userId || "demo-user-123",
+        targetRole: targetRole.trim() || undefined,
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Resume analysis failed. Please try again.");
-      }
 
       onAnalysisComplete(data);
     } catch (err: any) {
@@ -214,8 +192,8 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
         <div className="inline-flex p-1 bg-slate-200/70 dark:bg-slate-800/80 rounded-xl">
           <button
             type="button"
-            onClick={() => setActiveInputMode("file")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+            onClick={() => handleTabSwitch("file")}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
               activeInputMode === "file"
                 ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -227,8 +205,8 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
           <button
             type="button"
-            onClick={() => setActiveInputMode("paste")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+            onClick={() => handleTabSwitch("paste")}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
               activeInputMode === "paste"
                 ? "bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400 shadow-xs"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -240,8 +218,8 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
           <button
             type="button"
-            onClick={() => setActiveInputMode("samples")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all ${
+            onClick={() => handleTabSwitch("samples")}
+            className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer ${
               activeInputMode === "samples"
                 ? "bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 shadow-xs"
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -408,36 +386,69 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
         {/* Mode 3: Pre-loaded Benchmark Samples */}
         {activeInputMode === "samples" && (
-          <div className="space-y-3">
+          <div className="space-y-4">
             <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">
               Select a pre-loaded professional profile to test instant ATS analysis:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {SAMPLE_RESUMES.map((preset) => (
-                <div
-                  key={preset.id}
-                  onClick={() => handleSelectPreset(preset)}
-                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-indigo-400 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/20 cursor-pointer transition-all space-y-2 group"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">
-                      {preset.experienceLevel}
-                    </span>
-                    <Zap className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
+              {SAMPLE_RESUMES.map((preset) => {
+                const isSelected = pastedText === preset.text;
+                return (
+                  <div
+                    key={preset.id}
+                    onClick={() => handleSelectPreset(preset)}
+                    className={`p-4 rounded-xl border transition-all space-y-2 group cursor-pointer ${
+                      isSelected
+                        ? "border-indigo-500 bg-indigo-50/70 dark:bg-indigo-950/40 ring-2 ring-indigo-500/20"
+                        : "border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-indigo-400 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/20"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded ${
+                        isSelected
+                          ? "bg-indigo-600 text-white"
+                          : "bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300"
+                      }`}>
+                        {preset.experienceLevel}
+                      </span>
+                      {isSelected ? (
+                        <CheckCircle2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                      ) : (
+                        <Zap className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
+                      )}
+                    </div>
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                      {preset.role}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2">
+                      {preset.description}
+                    </p>
+                    <div className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 pt-1 flex items-center gap-1">
+                      <span>{isSelected ? "Resume Loaded" : "Load This Resume"}</span>
+                      {isSelected ? <CheckCircle2 className="w-3.5 h-3.5" /> : <ArrowRight className="w-3 h-3" />}
+                    </div>
                   </div>
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                    {preset.role}
-                  </h4>
-                  <p className="text-[11px] text-slate-500 leading-relaxed line-clamp-2">
-                    {preset.description}
-                  </p>
-                  <div className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 pt-1 flex items-center gap-1">
-                    <span>Load This Resume</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
+            {pastedText && (
+              <div className="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>
+                    Loaded <strong>{targetRole || "Sample Resume"}</strong> ({pastedText.split(/\s+/).filter(Boolean).length} words ready for ATS scoring).
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveInputMode("paste")}
+                  className="text-emerald-700 dark:text-emerald-300 font-bold underline hover:text-emerald-900"
+                >
+                  View / Edit Text
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -455,12 +466,22 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
         {/* Error Notice */}
         {error && (
-          <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-xs text-rose-700 dark:text-rose-300 flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <span className="font-bold block">Upload / Extraction Notice:</span>
-              <p className="mt-0.5">{error}</p>
+          <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 text-xs text-rose-700 dark:text-rose-300 flex items-start justify-between gap-2.5">
+            <div className="flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <span className="font-bold block">Upload / Extraction Notice:</span>
+                <p className="mt-0.5">{error}</p>
+              </div>
             </div>
+            <button
+              type="button"
+              onClick={() => setError(null)}
+              className="text-rose-500 hover:text-rose-700 p-1 rounded-md hover:bg-rose-100 dark:hover:bg-rose-900/40 cursor-pointer"
+              title="Dismiss error"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
         )}
 

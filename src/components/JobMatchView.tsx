@@ -15,6 +15,7 @@ import {
 import { ScoreGauge } from "./ScoreGauge.js";
 import { JobMatchResult } from "../types.js";
 import { SAMPLE_RESUMES } from "../data/sampleResumes.js";
+import { apiJobMatch } from "../lib/api.js";
 
 interface JobMatchViewProps {
   initialResumeText?: string;
@@ -52,22 +53,13 @@ export const JobMatchView: React.FC<JobMatchViewProps> = ({
     setIsMatching(true);
 
     try {
-      const res = await fetch("/api/job-match", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          resumeText,
-          jobDescription,
-          jobTitle,
-          userId: userId || "demo-user-123",
-          resumeId: initialResumeId || "active_res",
-        }),
+      const data = await apiJobMatch({
+        resumeText,
+        jobDescription,
+        jobTitle,
+        userId: userId || "demo-user-123",
+        resumeId: initialResumeId || "active_res",
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Job match analysis failed.");
-      }
 
       setMatchResult(data);
       onShowToast("Job Match Complete", `Calculated ${data.matchScore}% alignment!`, "success");

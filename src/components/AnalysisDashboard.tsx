@@ -28,6 +28,7 @@ import confetti from "canvas-confetti";
 import { ScoreGauge } from "./ScoreGauge.js";
 import { ResumeAnalysisResult, SectionAnalysisDetail, BulletPointImprovement } from "../types.js";
 import { formatDate, getScoreColor } from "../lib/utils.js";
+import { apiRewriteBullet } from "../lib/api.js";
 
 interface AnalysisDashboardProps {
   analysis: ResumeAnalysisResult;
@@ -113,21 +114,12 @@ export const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({
     setCustomRewriteResult(null);
 
     try {
-      const res = await fetch("/api/rewrite-bullet", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          bullet: customBulletInput,
-          context: analysis.targetRole || "Professional Resume Experience",
-        }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setCustomRewriteResult(data);
-        onShowToast("Rewrite Generated", "AI produced 3 high-impact versions.", "success");
-      } else {
-        throw new Error(data.error || "Failed to generate rewrite.");
-      }
+      const data = await apiRewriteBullet(
+        customBulletInput,
+        analysis.targetRole || "Professional Resume Experience"
+      );
+      setCustomRewriteResult(data);
+      onShowToast("Rewrite Generated", "Produced 3 high-impact versions.", "success");
     } catch (err: any) {
       onShowToast("Rewrite Error", err.message || "Failed to rewrite bullet.", "error");
     } finally {

@@ -1,15 +1,12 @@
 import React from "react";
-import { Sparkles, ArrowRight, FileText, CheckCircle2, Lock } from "lucide-react";
-import { SAMPLE_RESUMES } from "../data/sampleResumes.js";
+import { Sparkles, ArrowRight, CheckCircle2, Lock } from "lucide-react";
 
 interface LandingPageProps {
   onStartUpload: () => void;
-  onSelectSample: (sampleId: string) => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
   onStartUpload,
-  onSelectSample,
 }) => {
   return (
     <div id="landing-page-container" className="flex flex-col min-h-screen">
@@ -35,6 +32,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <button
+              id="landing-analyze-resume-btn"
               onClick={onStartUpload}
               className="w-full sm:w-auto px-8 py-3 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-[14px] font-medium transition-colors flex items-center justify-center gap-2 group cursor-pointer"
             >
@@ -52,25 +50,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <Lock className="w-3.5 h-3.5 text-[#6366F1]" />
               <span>100% Private</span>
             </div>
-          </div>
-        </div>
-
-        {/* Sample Resumes */}
-        <div className="max-w-2xl w-full mx-auto mt-24 text-center z-10">
-          <p className="text-[11px] font-semibold text-[#8B93A1] uppercase tracking-wider mb-4">
-            Or test instantly with a sample resume:
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {SAMPLE_RESUMES.map((sample) => (
-              <button
-                key={sample.id}
-                onClick={() => onSelectSample(sample.id)}
-                className="px-4 py-2 text-[12px] font-medium rounded-lg bg-[#151922] border border-[#242A35] text-[#F5F7FA] hover:border-[#6366F1] hover:text-[#6366F1] transition-colors flex items-center gap-2"
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>{sample.role}</span>
-              </button>
-            ))}
           </div>
         </div>
       </section>

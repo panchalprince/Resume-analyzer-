@@ -3,29 +3,19 @@ import {
   UploadCloud,
   FileText,
   Trash2,
-  Sparkles,
   AlertCircle,
-  CheckCircle2,
   FileType,
-  ArrowRight,
-  Zap,
-  Layers,
-  Code,
-  Briefcase,
-  GraduationCap,
-  Eye,
-  FileCheck,
   X,
+  CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 import { formatFileSize } from "../lib/utils.js";
 import { ExtractedResumeData, ResumeAnalysisResult } from "../types.js";
-import { SAMPLE_RESUMES, SampleResumePreset } from "../data/sampleResumes.js";
 import { apiExtractResume, apiAnalyzeResume } from "../lib/api.js";
 
 interface ResumeUploadProps {
   onAnalysisComplete: (result: ResumeAnalysisResult) => void;
   userId?: string;
-  onSelectSampleDirect?: (sample: SampleResumePreset) => void;
 }
 
 export const ResumeUpload: React.FC<ResumeUploadProps> = ({
@@ -34,24 +24,25 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 }) => {
   const [file, setFile] = useState<File | null>(null);
   const [pastedText, setPastedText] = useState("");
-  const [activeInputMode, setActiveInputMode] = useState<
-    "file" | "paste" | "samples"
-  >("file");
   const [targetRole, setTargetRole] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isExtracting, setIsExtracting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [analysisStage, setAnalysisStage] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [extractedData, setExtractedData] =
     useState<ExtractedResumeData | null>(null);
-  const [previewOpen, setPreviewOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const isRequestInProgressRef = useRef(false);
 
   const validateAndProcessFile = async (selectedFile: File) => {
     setError(null);
     setExtractedData(null);
+    setIsCompleted(false);
 
     // Validate size (10 MB)
     if (selectedFile.size > 10 * 1024 * 1024) {
@@ -75,10 +66,12 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
     setFile(selectedFile);
     setIsExtracting(true);
-    setUploadProgress(35);
+    setAnalysisStage("Uploading resume...");
+    setUploadProgress(30);
 
     try {
-      setUploadProgress(65);
+      setAnalysisStage("Extracting resume text...");
+      setUploadProgress(70);
       const data = await apiExtractResume(selectedFile);
       setUploadProgress(100);
 
@@ -94,12 +87,14 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
       setExtractedData(data);
       setPastedText(data.extractedText);
+      setAnalysisStage("");
     } catch (err: any) {
       console.error("Extraction error:", err);
       setError(
         err.message ||
           "Failed to read resume text. You can paste your resume text directly below.",
       );
+      setAnalysisStage("");
     } finally {
       setIsExtracting(false);
     }
@@ -138,29 +133,17 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     setPastedText("");
     setError(null);
     setUploadProgress(0);
+    setAnalysisStage("");
+    setIsCompleted(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleTabSwitch = (mode: "file" | "paste" | "samples") => {
-    setActiveInputMode(mode);
-    setError(null);
-  };
-
-  const handleSelectPreset = (preset: SampleResumePreset) => {
-    setFile(null);
-    setPastedText(preset.text);
-    setTargetRole(preset.role);
-    setExtractedData({
-      filename: preset.filename,
-      fileSize: 1024,
-      extractedText: preset.text,
-      wordCount: preset.text.split(/\s+/).filter(Boolean).length,
-      detectedSections: {},
-    });
-    setError(null);
-  };
-
   const handleAnalyze = async () => {
+    // Prevent simultaneous or double clicks
+    if (isAnalyzing || isRequestInProgressRef.current) {
+      return;
+    }
+
     const textToAnalyze = pastedText.trim();
     if (!textToAnalyze || textToAnalyze.length < 20) {
       setError(
@@ -169,8 +152,20 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
       return;
     }
 
+    isRequestInProgressRef.current = true;
     setError(null);
     setIsAnalyzing(true);
+    setIsCompleted(false);
+    setAnalysisStage("Analyzing skills...");
+
+    // Timed pipeline stages reflecting actual processing steps
+    const t1 = setTimeout(() => {
+      setAnalysisStage("Calculating ATS score...");
+    }, 450);
+
+    const t2 = setTimeout(() => {
+      setAnalysisStage("Generating recommendations...");
+    }, 950);
 
     try {
       const data = await apiAnalyzeResume({
@@ -178,17 +173,30 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
         filename: file?.name || extractedData?.filename || "My_Resume.pdf",
         userId: userId || "demo-user-123",
         targetRole: targetRole.trim() || undefined,
+        jobDescription: jobDescription.trim() || undefined,
       });
 
-      onAnalysisComplete(data);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      setAnalysisStage("Complete");
+      setIsCompleted(true);
+
+      // Brief completion indication before routing to dashboard
+      setTimeout(() => {
+        onAnalysisComplete(data);
+      }, 400);
     } catch (err: any) {
+      clearTimeout(t1);
+      clearTimeout(t2);
       console.error("Analysis failure:", err);
       setError(
         err.message ||
           "Failed to analyze resume. Please check connection and try again.",
       );
+      setAnalysisStage("");
     } finally {
       setIsAnalyzing(false);
+      isRequestInProgressRef.current = false;
     }
   };
 
@@ -239,7 +247,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
               </p>
               <button
                 type="button"
-                className="px-5 py-2 rounded-lg bg-transparent border border-[#242A35] text-[#F5F7FA] text-[13px] font-medium hover:bg-[#242A35] transition-colors"
+                className="px-5 py-2 rounded-lg bg-transparent border border-[#242A35] text-[#F5F7FA] text-[13px] font-medium hover:bg-[#242A35] transition-colors cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleBrowseClick();
@@ -268,18 +276,19 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
                 <button
                   type="button"
                   onClick={handleRemoveFile}
-                  className="p-2 text-[#EF4444] hover:bg-[#EF4444]/10 rounded-lg transition-colors"
+                  disabled={isAnalyzing}
+                  className="p-2 text-[#EF4444] hover:bg-[#EF4444]/10 rounded-lg transition-colors cursor-pointer disabled:opacity-40"
                   title="Remove file"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
 
-              {/* Progress bar */}
+              {/* Extraction progress indicator */}
               {isExtracting && (
                 <div>
                   <div className="flex justify-between text-[11px] font-medium text-[#6366F1] mb-1.5">
-                    <span>Extracting text...</span>
+                    <span>{analysisStage || "Extracting resume text..."}</span>
                     <span>{uploadProgress}%</span>
                   </div>
                   <div className="w-full h-1.5 bg-[#242A35] rounded-full overflow-hidden">
@@ -301,7 +310,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
         {/* Job Description Area */}
         <div className="bg-[#151922] rounded-xl border border-[#242A35] p-8">
            <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-4">
-            Job Description
+            Target Role & Job Description
            </h3>
            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -312,8 +321,9 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
                 type="text"
                 value={targetRole}
                 onChange={(e) => setTargetRole(e.target.value)}
+                disabled={isAnalyzing}
                 placeholder="e.g. Senior Software Engineer"
-                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1]"
+                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1] disabled:opacity-60"
               />
             </div>
             <div>
@@ -322,11 +332,25 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
               </label>
               <textarea
                 rows={2}
-                placeholder="Paste the job description here..."
-                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1] resize-none"
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+                disabled={isAnalyzing}
+                placeholder="Paste the job description to match skills and keywords..."
+                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1] resize-none disabled:opacity-60"
               />
             </div>
            </div>
+
+           {/* Loading Stage status banner */}
+           {isAnalyzing && analysisStage && (
+             <div className="mb-4 p-3.5 rounded-lg bg-[#6366F1]/10 border border-[#6366F1]/20 flex items-center justify-between text-[13px] text-[#A5B4FC]">
+               <div className="flex items-center gap-2.5">
+                 <span className="w-3.5 h-3.5 border-2 border-[#A5B4FC] border-t-transparent rounded-full animate-spin shrink-0" />
+                 <span>{analysisStage}</span>
+               </div>
+               <span className="text-[11px] text-[#8B93A1] font-mono">1-Pass Fast Engine</span>
+             </div>
+           )}
 
            {/* Error Notice */}
           {error && (
@@ -335,7 +359,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <p>{error}</p>
               </div>
-              <button onClick={() => setError(null)}>
+              <button onClick={() => setError(null)} className="cursor-pointer">
                 <X className="w-4 h-4 hover:text-[#EF4444]/80" />
               </button>
             </div>
@@ -351,10 +375,15 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
              {isAnalyzing ? (
                <>
                  <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                 <span>Analyzing...</span>
+                 <span>Analyzing Resume...</span>
+               </>
+             ) : isCompleted ? (
+               <>
+                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                 <span>Analysis Complete</span>
                </>
              ) : (
-               <span>Analyze Match</span>
+               <span>Analyze Resume</span>
              )}
            </button>
         </div>

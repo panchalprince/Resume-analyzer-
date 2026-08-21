@@ -81,6 +81,12 @@ export interface EducationInsight {
   summaryRemarks: string;
 }
 
+export interface CandidateInfo {
+  name?: string;
+  email?: string;
+  phone?: string;
+}
+
 export interface ResumeAnalysisResult {
   id: string;
   userId: string;
@@ -90,9 +96,14 @@ export interface ResumeAnalysisResult {
   atsScore: number;
   scoreTier:
     "Elite (90-100)" | "Strong (75-89)" | "Fair (60-74)" | "Needs Work (<60)";
+  candidate?: CandidateInfo;
   summary: string;
   strengths: string[];
   weaknesses: string[];
+  recommendations?: string[];
+  hiringRecommendation?: string;
+  skills?: string[];
+  missingSkills?: string[];
   missingKeywords: string[];
   detectedSkills: DetectedSkills;
   categoryScores: DetailedCategoryScores;
@@ -104,6 +115,8 @@ export interface ResumeAnalysisResult {
   educationInsight: EducationInsight;
   extractedTextSnippet?: string;
   targetRole?: string;
+  jobDescriptionSnippet?: string;
+  analysisHash?: string;
 }
 
 export interface JobMatchResult {

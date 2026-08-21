@@ -26,7 +26,6 @@ interface SidebarProps {
   user: UserProfile | null;
   onOpenAuth: (mode?: "login" | "signup") => void;
   onLogout: () => void;
-  onLoadDemo?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -35,7 +34,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   user,
   onOpenAuth,
   onLogout,
-  onLoadDemo,
 }) => {
   const navItems = [
     { id: "upload" as const, label: "Resume Analyzer", icon: FileText },

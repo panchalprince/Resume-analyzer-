@@ -107,8 +107,40 @@ export function saveResumeRecord(record: {
   return record;
 }
 
+// In-memory quick lookup cache (fast O(1) response without disk scan)
+const analysisHashCache = new Map<string, ResumeAnalysisResult>();
+
+export function getCachedAnalysisByHash(userId: string, hash: string): ResumeAnalysisResult | null {
+  const cacheKey = `${userId}:${hash}`;
+  if (analysisHashCache.has(cacheKey)) {
+    return analysisHashCache.get(cacheKey)!;
+  }
+
+  // If user is not demo, search persisted database
+  if (!userId.startsWith("demo")) {
+    const db = ensureDbLoaded();
+    const found = Object.values(db.analyses).find(
+      (a) => a.userId === userId && a.analysisHash === hash
+    );
+    if (found) {
+      analysisHashCache.set(cacheKey, found);
+      return found;
+    }
+  }
+
+  return null;
+}
+
 export function saveAnalysis(analysis: ResumeAnalysisResult): ResumeAnalysisResult {
-  if (analysis.userId.startsWith("demo")) return analysis;
+  if (analysis.analysisHash) {
+    analysisHashCache.set(`${analysis.userId}:${analysis.analysisHash}`, analysis);
+  }
+
+  // Demo users do not permanently persist to database file
+  if (analysis.userId.startsWith("demo")) {
+    return analysis;
+  }
+
   const db = ensureDbLoaded();
   db.analyses[analysis.id] = analysis;
   persistDb();

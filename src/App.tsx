@@ -7,7 +7,6 @@ import { HistoryView } from "./components/HistoryView.js";
 import { AuthModal } from "./components/AuthModal.js";
 import { ToastContainer, ToastMessage } from "./components/ToastContainer.js";
 import { UserProfile, ResumeAnalysisResult } from "./types.js";
-import { SAMPLE_RESUMES, SampleResumePreset } from "./data/sampleResumes.js";
 
 type ViewMode =
   "landing" | "upload" | "analysis" | "history";
@@ -85,17 +84,6 @@ export default function App() {
     );
   };
 
-  const handleLoadSamplePreset = async (presetId: string) => {
-    const preset =
-      SAMPLE_RESUMES.find((s) => s.id === presetId) || SAMPLE_RESUMES[0];
-    showToast(
-      "Loading Sample Resume",
-      `Analyzing ${preset.role} profile...`,
-      "info",
-    );
-    setCurrentView("upload");
-  };
-
   return (
     <div
       id="sp-resumai-root"
@@ -108,7 +96,6 @@ export default function App() {
         user={user}
         onOpenAuth={handleOpenAuth}
         onLogout={handleLogout}
-        onLoadDemo={() => handleLoadSamplePreset("sample-1")}
       />
 
       {/* Main App Content View Switcher */}
@@ -116,7 +103,6 @@ export default function App() {
         {currentView === "landing" && (
           <LandingPage
             onStartUpload={() => setCurrentView("upload")}
-            onSelectSample={(presetId) => handleLoadSamplePreset(presetId)}
           />
         )}
 

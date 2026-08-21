@@ -73,6 +73,22 @@
       "extractedText": "Alex Rivera\nSenior Cloud Architect with 8 years experience leading distributed systems. Architected multi-region AWS cloud infrastructure supporting 10M DAU, cutting downtime by 99.9% and saving 50k annually in compute costs.",
       "fileSize": 225,
       "createdAt": "2026-08-21T05:29:50.978Z"
+    },
+    "res_igeqilsq": {
+      "id": "res_igeqilsq",
+      "userId": "demo-user-123",
+      "filename": "Sam_Patel_Data_Analyst_Resume.pdf",
+      "extractedText": "Sam Patel\nsam.patel.data@example.com | (555) 345-6789 | Chicago, IL\nlinkedin.com/in/sampatel-analytics | github.com/sampatel-data\n\nOBJECTIVE\nMotivated Data Analyst with strong technical background in SQL, Python, and Tableau. Experienced in transforming complex datasets into intuitive BI dashboards and predictive models that improve operational decision-making.\n\nSKILLS\n- Data Analysis: SQL (PostgreSQL, MySQL), Python (Pandas, NumPy, Scikit-learn), Excel (VLOOKUP, Pivot Tables, Power Query)\n- Visualization: Tableau Desktop, Power BI, Looker Studio, Seaborn, Matplotlib\n- Databases & Tools: Snowflake, BigQuery, Git, Jupyter Notebooks, Jira\n\nWORK EXPERIENCE\nData Analyst Intern | Apex Retail Group, Chicago, IL\nJune 2023 - December 2023\n- Built automated SQL ETL pipelines in PostgreSQL to consolidate daily sales records across 42 store locations.\n- Designed executive Tableau dashboards tracking weekly inventory turnover and gross margins, reducing manual reporting hours by 12 hours/week.\n- Performed customer segmentation analysis using K-Means clustering in Python, identifying high-value buyer personas responsible for 38% of holiday revenue.\n\nJunior Research Assistant | University Data Lab, Urbana-Champaign, IL\nSeptember 2022 - May 2023\n- Cleaned and normalized messy survey datasets containing over 85,000 responses using Python Pandas.\n- Created interactive visualization charts for academic faculty publications.\n\nEDUCATION\nBachelor of Science in Statistics & Data Science\nUniversity of Illinois Urbana-Champaign (2019 - 2023)\n- GPA: 3.82/4.0\n- Coursework: Applied Regression Analysis, Relational Database Modeling, Statistical Computing, Machine Learning Fundamentals\n\nPROJECTS\n- E-Commerce Churn Predictor: Built logistic regression and random forest models in Python achieving 84% accuracy in predicting customer subscription cancellations.\n- Real Estate Market Dashboard: Interactive Power BI dashboard visualizing price trends across 50 US metropolitan regions.",
+      "fileSize": 1983,
+      "createdAt": "2026-08-21T05:31:31.875Z"
+    },
+    "res_kc05bd5s": {
+      "id": "res_kc05bd5s",
+      "userId": "demo-user-123",
+      "filename": "My_Resume.pdf",
+      "extractedText": "Sarah Jenkins\nSenior Backend Engineer\n10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.\nReduced API latency by 45% and scaled infrastructure to support 15M monthly active users.",
+      "fileSize": 223,
+      "createdAt": "2026-08-21T05:32:27.826Z"
     }
   },
   "analyses": {
@@ -1413,6 +1429,374 @@
       },
       "extractedTextSnippet": "Alex Rivera\nSenior Cloud Architect with 8 years experience leading distributed systems. Architected multi-region AWS cloud infrastructure supporting 10M DAU, cutting downtime by 99.9% and saving 50k annually in compute costs.",
       "targetRole": "Principal Cloud Architect"
+    },
+    "an_9j9mcs5p": {
+      "id": "an_9j9mcs5p",
+      "userId": "demo-user-123",
+      "resumeId": "res_igeqilsq",
+      "filename": "Sam_Patel_Data_Analyst_Resume.pdf",
+      "createdAt": "2026-08-21T05:31:39.363Z",
+      "atsScore": 82,
+      "scoreTier": "Strong (75-89)",
+      "summary": "Your resume demonstrates solid professional experience with 4 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including Python, SQL, PostgreSQL.",
+        "Healthy content volume (258 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Python",
+          "SQL",
+          "PostgreSQL",
+          "Git"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 77,
+        "skillsMatch": 86,
+        "experienceImpact": 74,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 82,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 82,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "Sam Patel\nsam.patel.data@example.com | (555) 345-6789 | Chicago, IL\nlinkedin.com/in/sampatel-analytics | github.com/sampatel-data\n\nOBJECTIVE\nMotivated Data Analyst with strong technical background in "
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "Python, SQL, PostgreSQL, Git"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_1",
+          "original": "sam.patel.data@example.com | (555) 345-6789 | Chicago, IL",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded sam.patel.data@example.com | (555) 345-6789 | chicago, il, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_2",
+          "original": "linkedin.com/in/sampatel-analytics | github.com/sampatel-data",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded linkedin.com/in/sampatel-analytics | github.com/sampatel-data, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_3",
+          "original": "Data Analysis: SQL (PostgreSQL, MySQL), Python (Pandas, NumPy, Scikit-learn), Excel (VLOOKUP, Pivot Tables, Power Query)",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded data analysis: sql (postgresql, mysql), python (pandas, numpy, scikit-learn), excel (vlookup, pivot tables, power query), optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_4",
+          "original": "Visualization: Tableau Desktop, Power BI, Looker Studio, Seaborn, Matplotlib",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded visualization: tableau desktop, power bi, looker studio, seaborn, matplotlib, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 20,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "Sam Patel\nsam.patel.data@example.com | (555) 345-6789 | Chicago, IL\nlinkedin.com/in/sampatel-analytics | github.com/sampatel-data\n\nOBJECTIVE\nMotivated Data Analyst with strong technical background in SQL, Python, and Tableau. Experienced in transforming complex datasets into intuitive BI dashboards and predictive models that improve operational decision-making.\n\nSKILLS\n- Data Analysis: SQL (PostgreSQL, MySQL), Python (Pandas, NumPy, Scikit-learn), Excel (VLOOKUP, Pivot Tables, Power Query)\n- Visualization: Tableau Desktop, Power BI, Looker Studio, Seaborn, Matplotlib\n- Databases & Tools: Snowflake, BigQuery, Git, Jupyter Notebooks, Jira\n\nWORK EXPERIENCE\nData Analyst Intern | Apex Retail Group, Chicago, IL\nJune 2023 - December 2023\n- Built automated SQL ETL pipelines in PostgreSQL to consolidate daily sales records across 42 store locations.\n- Designed executive Tableau dashboards tracking weekly inventory turnover and gross margins, reducing manual reporting hours by 12 hours/week.\n- Performed customer segmentation analysis using K-Means clustering in Python, identifying high-value buyer personas responsible for 38% of holiday revenue.\n\nJunior Research Assistant | University Data Lab, Urbana-Champaign, IL\nSeptember 2022 - May 2023\n- Cleaned and normalized messy survey datasets containing over 85,000 responses using Python Pandas.\n- Created interactive visualization charts for academic faculty publications.\n\nEDUCATION\nBachelor of Science in Statistics & Data Science\nUniversity",
+      "targetRole": "Junior Data Analyst / BI Specialist"
+    },
+    "an_3qi9wm20": {
+      "id": "an_3qi9wm20",
+      "userId": "demo-user-123",
+      "resumeId": "res_kc05bd5s",
+      "filename": "My_Resume.pdf",
+      "createdAt": "2026-08-21T05:32:35.164Z",
+      "atsScore": 75,
+      "scoreTier": "Strong (75-89)",
+      "summary": "Your resume demonstrates solid professional experience with 4 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including PostgreSQL, Kubernetes, Redis.",
+        "Healthy content volume (31 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "PostgreSQL",
+          "Kubernetes",
+          "Redis",
+          "Microservices"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 70,
+        "skillsMatch": 79,
+        "experienceImpact": 67,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 62,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 75,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 75,
+          "status": "needs_work",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "Sarah Jenkins\nSenior Backend Engineer\n10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.\nReduced API latency by 45% and scaled infrastructure to support 15"
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "PostgreSQL, Kubernetes, Redis, Microservices"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_1",
+          "original": "10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded 10 years experience building scalable microservices with go, postgresql, redis, and kubernetes., optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_2",
+          "original": "Reduced API latency by 45% and scaled infrastructure to support 15M monthly active users.",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded reduced api latency by 45% and scaled infrastructure to support 15m monthly active users., optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 3,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "Sarah Jenkins\nSenior Backend Engineer\n10 years experience building scalable microservices with Go, PostgreSQL, Redis, and Kubernetes.\nReduced API latency by 45% and scaled infrastructure to support 15M monthly active users.",
+      "targetRole": "Lead Backend Engineer"
     }
   },
   "jobMatches": {
@@ -1652,6 +2036,71 @@
         }
       ],
       "createdAt": "2026-08-21T05:30:14.523Z"
+    },
+    "jm_qq1nov5r": {
+      "id": "jm_qq1nov5r",
+      "userId": "demo-user-123",
+      "resumeId": "res_active",
+      "jobTitle": "Lead Backend Engineer",
+      "jobDescriptionSnippet": "Looking for a Lead Backend Engineer proficient in Go, PostgreSQL, Redis, Kubernetes, and Cloud Architecture.",
+      "matchScore": 75,
+      "matchingKeywords": [
+        "Go",
+        "PostgreSQL",
+        "Redis",
+        "Kubernetes"
+      ],
+      "missingKeywords": [
+        "Lead",
+        "Backend Engineer",
+        "Cloud Architecture",
+        "System Design",
+        "Mentorship",
+        "Scalability"
+      ],
+      "matchingSkills": [
+        "Go",
+        "PostgreSQL",
+        "Redis",
+        "Kubernetes"
+      ],
+      "missingSkills": [
+        "Cloud Architecture",
+        "System Design",
+        "Team Leadership",
+        "Software Architecture"
+      ],
+      "recommendedChanges": [
+        "Add a professional summary highlighting experience in Lead Backend Engineering roles.",
+        "Explicitly state experience with Cloud Architecture and cloud providers like AWS or GCP.",
+        "Include specific achievements related to distributed systems scaling.",
+        "Detail a history of team mentorship or architectural decision-making to satisfy the Lead requirement.",
+        "Expand on project-specific outcomes to show business impact.",
+        "Add an 'Education' or 'Certifications' section to bolster professional credibility."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Add a summary block that positions you as a Lead Engineer with a focus on high-scale distributed systems and architecture."
+        },
+        {
+          "section": "Experience",
+          "advice": "The resume lacks job history. You must include past roles with bullet points that prove your ability to lead backend initiatives."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "Distributed Systems",
+          "tailoredForJob": "Architected and led the development of high-throughput distributed systems using Go, ensuring scalability and reliability in a cloud environment.",
+          "reason": "Incorporates 'Led', 'Go', and 'Cloud' to align with seniority requirements and job keywords."
+        },
+        {
+          "original": "Kubernetes",
+          "tailoredForJob": "Managed container orchestration via Kubernetes on cloud infrastructure, optimizing deployment workflows and system availability.",
+          "reason": "Directly links the skill to the 'Cloud Architecture' and deployment responsibilities requested in the JD."
+        }
+      ],
+      "createdAt": "2026-08-21T05:32:38.471Z"
     }
   }
 }

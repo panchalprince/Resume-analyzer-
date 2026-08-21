@@ -7,32 +7,45 @@ import { HistoryView } from "./components/HistoryView.js";
 import { AuthModal } from "./components/AuthModal.js";
 import { ToastContainer, ToastMessage } from "./components/ToastContainer.js";
 import { UserProfile, ResumeAnalysisResult } from "./types.js";
+import {
+  getStoredUser,
+  verifySession,
+  logoutUser,
+  getAuthToken,
+} from "./lib/auth.js";
 
-type ViewMode =
-  "landing" | "upload" | "analysis" | "history";
+type ViewMode = "landing" | "upload" | "analysis" | "history";
 
 export default function App() {
   // Navigation & View state
   const [currentView, setCurrentView] = useState<ViewMode>("landing");
 
-  // Auth state (starts with a friendly demo user for immediate instant usability)
-  const [user, setUser] = useState<UserProfile | null>({
-    id: "demo-user-123",
-    email: "alex.morgan@example.com",
-    fullName: "Alex Morgan",
-    targetJobTitle: "Senior Full Stack Engineer",
-    experienceLevel: "senior",
-    savedSkills: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "PostgreSQL",
-      "Tailwind CSS",
-      "AWS",
-    ],
+  // Auth state initialized from stored session if available
+  const [user, setUser] = useState<UserProfile | null>(() => {
+    return getStoredUser();
   });
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authModalTab, setAuthModalTab] = useState<"login" | "signup">("login");
+
+  // Session verification on mount
+  useEffect(() => {
+    const checkSession = async () => {
+      const token = getAuthToken();
+      if (token) {
+        try {
+          const verifiedUser = await verifySession();
+          if (verifiedUser) {
+            setUser(verifiedUser);
+          } else {
+            setUser(null);
+          }
+        } catch {
+          // Keep current stored user if network transiently drops
+        }
+      }
+    };
+    checkSession();
+  }, []);
 
   // Active Analysis state
   const [currentAnalysis, setCurrentAnalysis] =
@@ -64,7 +77,8 @@ export default function App() {
     setAuthModalOpen(true);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await logoutUser();
     setUser(null);
     setCurrentView("landing");
     showToast(
@@ -130,6 +144,7 @@ export default function App() {
             }}
             onStartNewAnalysis={() => setCurrentView("upload")}
             onShowToast={showToast}
+            onOpenAuth={handleOpenAuth}
           />
         )}
       </main>

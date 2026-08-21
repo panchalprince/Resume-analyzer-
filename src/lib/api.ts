@@ -5,22 +5,42 @@ import {
   UserProfile,
 } from "../types.js";
 import { extractResumeFileClient } from "./extractorClient.js";
-import { runClientATSAnalysis, runClientJobMatch } from "./atsEngine.js";
-
-const LOCAL_STORAGE_ANALYSES_KEY = "sp_resumai_saved_analyses";
-const LOCAL_STORAGE_MATCHES_KEY = "sp_resumai_saved_matches";
+import { buildApiUrl, getAuthToken } from "./auth.js";
 
 /**
  * Safely parse JSON from a fetch response, preventing `Unexpected token '<'` syntax crashes
  * when a static hosting provider (e.g. AWS Amplify, SPA server) returns index.html.
  */
 async function safeFetchJson<T = any>(
-  url: string,
+  path: string,
   options?: RequestInit,
 ): Promise<T> {
-  const res = await fetch(url, options);
-  const text = await res.text();
+  const fullUrl = path.startsWith("http://") || path.startsWith("https://") ? path : buildApiUrl(path);
+  const token = getAuthToken();
 
+  const headers: Record<string, string> = {
+    Accept: "application/json",
+    ...((options?.headers as Record<string, string>) || {}),
+  };
+
+  if (token && !headers["Authorization"]) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  let res: Response;
+  try {
+    res = await fetch(fullUrl, {
+      ...options,
+      headers,
+    });
+  } catch (netErr: any) {
+    console.error(`[API] Network error requesting ${fullUrl}:`, netErr);
+    throw new Error(
+      `Unable to connect to backend server at ${fullUrl}. Please verify backend service is running.`
+    );
+  }
+
+  const text = await res.text();
   const trimmed = text.trim();
   const isHtml =
     trimmed.startsWith("<!DOCTYPE") ||
@@ -30,7 +50,7 @@ async function safeFetchJson<T = any>(
 
   if (isHtml) {
     throw new Error(
-      `Server returned an HTML response for ${url}. Switching to client-side processing mode.`,
+      `Server returned an HTML response for ${path}. If hosted on AWS Amplify, check VITE_API_URL.`,
     );
   }
 

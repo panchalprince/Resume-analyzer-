@@ -10,6 +10,10 @@ import {
   getUserProfile,
   saveUserProfile,
   findUserByEmail,
+  registerUser,
+  authenticateUser,
+  verifySessionToken,
+  revokeSessionToken,
   saveResumeRecord,
   saveAnalysis,
   getCachedAnalysisByHash,
@@ -33,11 +37,18 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  // CORS & Security Headers
+  // CORS & Security Headers (Optimized for AWS Amplify & Cloud Deployments)
   app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    const origin = req.headers.origin;
+    if (origin) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+    } else {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+    }
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept");
+    
     if (req.method === "OPTIONS") {
       return res.status(204).end();
     }
@@ -59,68 +70,94 @@ async function startServer() {
 
   // Auth Endpoints
   app.post("/api/auth/demo-login", (req, res) => {
-    const demoUser: UserProfile = {
-      id: "demo-user-123",
-      email: "alex.demo@spresumai.com",
-      fullName: "Alex Morgan",
-      createdAt: new Date().toISOString(),
-      targetRole: "Senior Software Engineer",
-      isDemo: true,
-    };
-    saveUserProfile(demoUser);
-    res.json({ user: demoUser, token: "demo-token-123" });
+    try {
+      const demoUser: UserProfile = {
+        id: "demo-user-123",
+        email: "alex.demo@spresumai.com",
+        fullName: "Alex Morgan",
+        createdAt: new Date().toISOString(),
+        targetRole: "Senior Software Engineer",
+        isDemo: true,
+      };
+      saveUserProfile(demoUser);
+      console.log("[Auth] Demo login successful:", demoUser.id);
+      res.json({ user: demoUser, token: "demo-token-123" });
+    } catch (err: any) {
+      console.error("[Auth] Demo login error:", err);
+      res.status(500).json({ error: "Failed to initialize demo session." });
+    }
   });
 
   app.post("/api/auth/signup", (req, res) => {
     try {
       const { email, fullName, password } = req.body;
-      if (!email || !fullName) {
-        return res.status(400).json({ error: "Email and Full Name are required" });
+      if (!email || typeof email !== "string" || !email.includes("@")) {
+        return res.status(400).json({ error: "A valid email address is required." });
+      }
+      if (!fullName || typeof fullName !== "string" || !fullName.trim()) {
+        return res.status(400).json({ error: "Full Name is required." });
       }
 
-      const existing = findUserByEmail(email);
-      if (existing) {
-        return res.status(409).json({ error: "An account with this email already exists" });
-      }
-
-      const newUser: UserProfile = {
-        id: "user_" + Math.random().toString(36).substring(2, 10),
-        email: email.trim().toLowerCase(),
-        fullName: fullName.trim(),
-        createdAt: new Date().toISOString(),
-        isDemo: false,
-      };
-
-      saveUserProfile(newUser);
-      res.json({ user: newUser, token: "auth-token-" + newUser.id });
+      console.log(`[Auth] Signup attempt for email: ${email.trim().toLowerCase()}`);
+      const result = registerUser(email, fullName, password);
+      console.log(`[Auth] Signup success for user: ${result.user.id}`);
+      res.status(201).json(result);
     } catch (err: any) {
-      res.status(500).json({ error: err.message || "Failed to create account" });
+      console.warn(`[Auth] Signup failed: ${err.message}`);
+      const statusCode = err.message?.includes("already exists") ? 409 : 400;
+      res.status(statusCode).json({ error: err.message || "Failed to create account" });
     }
   });
 
   app.post("/api/auth/login", (req, res) => {
     try {
-      const { email } = req.body;
-      if (!email) {
-        return res.status(400).json({ error: "Email is required" });
+      const { email, password } = req.body;
+      if (!email || typeof email !== "string" || !email.trim()) {
+        return res.status(400).json({ error: "Email is required." });
       }
 
-      let user = findUserByEmail(email);
-      if (!user) {
-        // Auto-provision if demo-friendly or create seamless session
-        user = {
-          id: "user_" + Math.random().toString(36).substring(2, 10),
-          email: email.trim().toLowerCase(),
-          fullName: email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-          createdAt: new Date().toISOString(),
-          isDemo: false,
-        };
-        saveUserProfile(user);
-      }
-
-      res.json({ user, token: "auth-token-" + user.id });
+      console.log(`[Auth] Login attempt for email: ${email.trim().toLowerCase()}`);
+      const result = authenticateUser(email, password);
+      console.log(`[Auth] Login success for user: ${result.user.id}`);
+      res.json(result);
     } catch (err: any) {
-      res.status(500).json({ error: err.message || "Login failed" });
+      console.warn(`[Auth] Login failed for ${req.body?.email}: ${err.message}`);
+      const statusCode = err.statusCode || (err.message?.includes("Invalid") ? 401 : 400);
+      res.status(statusCode).json({ error: err.message || "Invalid email or password." });
+    }
+  });
+
+  // Verify Session Token Endpoint
+  app.get("/api/auth/me", (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      const token = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
+      if (!token) {
+        return res.status(401).json({ error: "No authorization token provided." });
+      }
+
+      const user = verifySessionToken(token);
+      if (!user) {
+        return res.status(401).json({ error: "Session expired or invalid." });
+      }
+
+      res.json({ user });
+    } catch (err: any) {
+      res.status(500).json({ error: "Failed to verify session." });
+    }
+  });
+
+  // Logout Endpoint
+  app.post("/api/auth/logout", (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      const token = authHeader?.startsWith("Bearer ") ? authHeader.substring(7) : null;
+      if (token) {
+        revokeSessionToken(token);
+      }
+      res.json({ success: true, message: "Logged out successfully" });
+    } catch {
+      res.json({ success: true });
     }
   });
 

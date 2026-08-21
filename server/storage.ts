@@ -1,12 +1,19 @@
 import fs from "fs";
 import path from "path";
+import crypto from "crypto";
 import { ResumeAnalysisResult, JobMatchResult, UserProfile } from "../src/types.js";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 const DB_FILE = path.join(DATA_DIR, "database.json");
 
+export interface UserAccountRecord extends UserProfile {
+  passwordHash?: string;
+  salt?: string;
+}
+
 interface DatabaseSchema {
-  profiles: Record<string, UserProfile>;
+  profiles: Record<string, UserAccountRecord>;
+  sessions: Record<string, { userId: string; createdAt: string; expiresAt: string }>;
   resumes: Record<string, {
     id: string;
     userId: string;
@@ -31,6 +38,7 @@ function getInitialDatabase(): DatabaseSchema {
         isDemo: true,
       },
     },
+    sessions: {},
     resumes: {},
     analyses: {},
     jobMatches: {},
@@ -49,6 +57,9 @@ function ensureDbLoaded(): DatabaseSchema {
     if (fs.existsSync(DB_FILE)) {
       const data = fs.readFileSync(DB_FILE, "utf-8");
       dbCache = JSON.parse(data);
+      if (!dbCache?.sessions) {
+        dbCache!.sessions = {};
+      }
     } else {
       dbCache = getInitialDatabase();
       fs.writeFileSync(DB_FILE, JSON.stringify(dbCache, null, 2), "utf-8");
@@ -73,22 +84,159 @@ function persistDb() {
   }
 }
 
-// User Profile Operations
-export function getUserProfile(userId: string): UserProfile | null {
-  const db = ensureDbLoaded();
-  return db.profiles[userId] || null;
+// Password hashing utility
+export function hashPassword(password: string, salt: string): string {
+  return crypto.pbkdf2Sync(password, salt, 1000, 64, "sha512").toString("hex");
 }
 
-export function saveUserProfile(profile: UserProfile): UserProfile {
-  const db = ensureDbLoaded();
-  db.profiles[profile.id] = profile;
-  persistDb();
+export function sanitizeUserProfile(account: UserAccountRecord): UserProfile {
+  const { passwordHash, salt, ...profile } = account;
   return profile;
 }
 
-export function findUserByEmail(email: string): UserProfile | null {
+// User Profile Operations
+export function getUserProfile(userId: string): UserProfile | null {
   const db = ensureDbLoaded();
-  return Object.values(db.profiles).find((p) => p.email.toLowerCase() === email.toLowerCase()) || null;
+  const account = db.profiles[userId];
+  if (!account) return null;
+  return sanitizeUserProfile(account);
+}
+
+export function saveUserProfile(profile: UserProfile | UserAccountRecord): UserProfile {
+  const db = ensureDbLoaded();
+  db.profiles[profile.id] = profile;
+  persistDb();
+  return sanitizeUserProfile(profile);
+}
+
+export function findUserRecordByEmail(email: string): UserAccountRecord | null {
+  const db = ensureDbLoaded();
+  const normalized = email.trim().toLowerCase();
+  return Object.values(db.profiles).find((p) => p.email.toLowerCase() === normalized) || null;
+}
+
+export function findUserByEmail(email: string): UserProfile | null {
+  const account = findUserRecordByEmail(email);
+  return account ? sanitizeUserProfile(account) : null;
+}
+
+export function registerUser(email: string, fullName: string, password?: string): { user: UserProfile; token: string } {
+  const normalizedEmail = email.trim().toLowerCase();
+  const existing = findUserRecordByEmail(normalizedEmail);
+  if (existing) {
+    throw new Error("An account with this email already exists.");
+  }
+
+  const userId = "user_" + crypto.randomBytes(6).toString("hex");
+  let passwordHash: string | undefined;
+  let salt: string | undefined;
+
+  if (password && password.trim().length > 0) {
+    salt = crypto.randomBytes(16).toString("hex");
+    passwordHash = hashPassword(password, salt);
+  }
+
+  const newAccount: UserAccountRecord = {
+    id: userId,
+    email: normalizedEmail,
+    fullName: fullName.trim(),
+    createdAt: new Date().toISOString(),
+    isDemo: false,
+    passwordHash,
+    salt,
+  };
+
+  const db = ensureDbLoaded();
+  db.profiles[userId] = newAccount;
+
+  const token = "auth-token-" + crypto.randomBytes(16).toString("hex");
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+  db.sessions[token] = { userId, createdAt: new Date().toISOString(), expiresAt };
+  persistDb();
+
+  return { user: sanitizeUserProfile(newAccount), token };
+}
+
+export function authenticateUser(email: string, password?: string): { user: UserProfile; token: string } {
+  const normalizedEmail = email.trim().toLowerCase();
+  const account = findUserRecordByEmail(normalizedEmail);
+
+  if (!account) {
+    const err: any = new Error("Invalid email or password.");
+    err.statusCode = 401;
+    throw err;
+  }
+
+  // If the account has a password set, verify it
+  if (account.passwordHash && account.salt) {
+    if (!password) {
+      const err: any = new Error("Password is required.");
+      err.statusCode = 401;
+      throw err;
+    }
+    const computedHash = hashPassword(password, account.salt);
+    if (computedHash !== account.passwordHash) {
+      const err: any = new Error("Invalid email or password.");
+      err.statusCode = 401;
+      throw err;
+    }
+  } else if (password && password.trim().length > 0) {
+    // If account was created without password previously, attach password on first login
+    const salt = crypto.randomBytes(16).toString("hex");
+    account.salt = salt;
+    account.passwordHash = hashPassword(password, salt);
+    saveUserProfile(account);
+  }
+
+  const token = "auth-token-" + crypto.randomBytes(16).toString("hex");
+  const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+  const db = ensureDbLoaded();
+  db.sessions[token] = { userId: account.id, createdAt: new Date().toISOString(), expiresAt };
+  persistDb();
+
+  return { user: sanitizeUserProfile(account), token };
+}
+
+export function verifySessionToken(token: string): UserProfile | null {
+  if (!token) return null;
+  if (token === "demo-token-123") {
+    return {
+      id: "demo-user-123",
+      email: "alex.demo@spresumai.com",
+      fullName: "Alex Morgan",
+      createdAt: new Date().toISOString(),
+      targetRole: "Senior Full Stack Engineer",
+      isDemo: true,
+    };
+  }
+
+  const db = ensureDbLoaded();
+  const session = db.sessions[token];
+  if (!session) {
+    // Fallback if token follows format auth-token-user_*
+    if (token.startsWith("auth-token-user_")) {
+      const uId = token.replace("auth-token-", "");
+      return getUserProfile(uId);
+    }
+    return null;
+  }
+
+  if (new Date(session.expiresAt).getTime() < Date.now()) {
+    delete db.sessions[token];
+    persistDb();
+    return null;
+  }
+
+  return getUserProfile(session.userId);
+}
+
+export function revokeSessionToken(token: string): void {
+  if (!token) return;
+  const db = ensureDbLoaded();
+  if (db.sessions[token]) {
+    delete db.sessions[token];
+    persistDb();
+  }
 }
 
 // Resume & Analysis Operations

@@ -22,6 +22,7 @@ interface HistoryViewProps {
     message?: string,
     type?: "success" | "error" | "info" | "warning",
   ) => void;
+  onOpenAuth?: (tab?: "login" | "signup") => void;
 }
 
 export const HistoryView: React.FC<HistoryViewProps> = ({
@@ -29,6 +30,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
   onSelectAnalysis,
   onStartNewAnalysis,
   onShowToast,
+  onOpenAuth,
 }) => {
   const [analyses, setAnalyses] = useState<ResumeAnalysisResult[]>([]);
   const [loading, setLoading] = useState(true);
@@ -125,11 +127,20 @@ export const HistoryView: React.FC<HistoryViewProps> = ({
             <History className="w-5 h-5" />
           </div>
           <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-1">
-            Demo History Unavailable
+            History Requires an Account
           </h3>
           <p className="text-[13px] text-[#8B93A1] mb-6">
-            History is disabled in Demo Mode. Sign in to save your resume analyses.
+            Resume history is disabled in Demo Mode. Sign in with a permanent account to automatically save and track your resume optimization reports.
           </p>
+          {onOpenAuth && (
+            <button
+              onClick={() => onOpenAuth("signup")}
+              className="px-5 py-2.5 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] text-white text-[13px] font-medium transition-colors inline-flex items-center gap-2"
+            >
+              <span>Create Free Account / Sign In</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          )}
         </div>
       ) : loading ? (
         <div className="py-16 text-center space-y-3">

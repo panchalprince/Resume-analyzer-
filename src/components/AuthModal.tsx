@@ -10,6 +10,11 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { UserProfile } from "../types.js";
+import {
+  loginWithEmail,
+  signupWithEmail,
+  loginAsDemo,
+} from "../lib/auth.js";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -38,16 +43,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/auth/demo-login", { method: "POST" });
-      const data = await res.json();
-      if (res.ok && data.user) {
-        onSuccess(data.user);
-        onClose();
-      } else {
-        setError(data.error || "Failed to log in as demo user.");
-      }
-    } catch {
-      setError("Network error while connecting to authentication service.");
+      const { user } = await loginAsDemo();
+      onSuccess(user);
+      onClose();
+    } catch (err: any) {
+      console.error("[AuthModal] Demo login failure:", err);
+      setError(err.message || "Failed to initialize demo session.");
     } finally {
       setLoading(false);
     }
@@ -74,25 +75,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
 
     setLoading(true);
-    const endpoint = tab === "signup" ? "/api/auth/signup" : "/api/auth/login";
 
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, fullName, password }),
-      });
-      const data = await res.json();
-      if (res.ok && data.user) {
-        onSuccess(data.user);
+      if (tab === "signup") {
+        const { user } = await signupWithEmail(email, fullName, password);
+        onSuccess(user);
         onClose();
       } else {
-        setError(
-          data.error || "Authentication failed. Please check credentials.",
-        );
+        const { user } = await loginWithEmail(email, password);
+        onSuccess(user);
+        onClose();
       }
-    } catch {
-      setError("Network error during authentication.");
+    } catch (err: any) {
+      console.warn("[AuthModal] Auth error:", err);
+      setError(err.message || "Authentication failed. Please check credentials.");
     } finally {
       setLoading(false);
     }

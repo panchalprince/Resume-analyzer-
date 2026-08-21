@@ -91,7 +91,7 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
           >
             {clampedScore}
           </span>
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-600">
             / 100
           </span>
         </div>
@@ -100,12 +100,12 @@ export const ScoreGauge: React.FC<ScoreGaugeProps> = ({
       {showLabel && (
         <div className="mt-2.5 flex flex-col items-center">
           <span
-            className={`font-semibold text-slate-800 dark:text-slate-200 ${currentSize.labelSize}`}
+            className={`font-semibold text-slate-800 dark:text-slate-800 ${currentSize.labelSize}`}
           >
             {label}
           </span>
           {sublabel && (
-            <span className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 max-w-[180px]">
+            <span className="text-xs text-slate-600 dark:text-slate-600 mt-0.5 max-w-[180px]">
               {sublabel}
             </span>
           )}

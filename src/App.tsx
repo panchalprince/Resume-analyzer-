@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Navbar } from "./components/Navbar.js";
+import { Sidebar } from "./components/Sidebar.js";
 import { LandingPage } from "./components/LandingPage.js";
 import { ResumeUpload } from "./components/ResumeUpload.js";
 import { AnalysisDashboard } from "./components/AnalysisDashboard.js";
 import { HistoryView } from "./components/HistoryView.js";
-import { DashboardOverview } from "./components/DashboardOverview.js";
-import { ProfileView } from "./components/ProfileView.js";
 import { AuthModal } from "./components/AuthModal.js";
 import { ToastContainer, ToastMessage } from "./components/ToastContainer.js";
 import { UserProfile, ResumeAnalysisResult } from "./types.js";
 import { SAMPLE_RESUMES, SampleResumePreset } from "./data/sampleResumes.js";
 
 type ViewMode =
-  "landing" | "upload" | "analysis" | "history" | "dashboard" | "profile";
+  "landing" | "upload" | "analysis" | "history";
 
 export default function App() {
   // Navigation & View state
@@ -101,37 +99,24 @@ export default function App() {
   return (
     <div
       id="sp-resumai-root"
-      className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans"
+      className="min-h-screen bg-[#0B0D10] text-[#F5F7FA] flex font-sans overflow-hidden"
     >
-      {/* Navigation Header */}
-      <Navbar
-        currentView={currentView}
+      {/* Navigation Sidebar */}
+      <Sidebar
+        currentView={currentView as any}
         onNavigate={(view) => setCurrentView(view as ViewMode)}
         user={user}
         onOpenAuth={handleOpenAuth}
         onLogout={handleLogout}
-        onOpenProfile={() => setCurrentView("profile")}
         onLoadDemo={() => handleLoadSamplePreset("sample-1")}
       />
 
       {/* Main App Content View Switcher */}
-      <main className="flex-1">
+      <main className="flex-1 h-screen overflow-y-auto">
         {currentView === "landing" && (
           <LandingPage
             onStartUpload={() => setCurrentView("upload")}
             onSelectSample={(presetId) => handleLoadSamplePreset(presetId)}
-          />
-        )}
-
-        {currentView === "dashboard" && (
-          <DashboardOverview
-            user={user}
-            onNavigate={(view) => setCurrentView(view)}
-            onSelectAnalysis={(analysis) => {
-              setCurrentAnalysis(analysis);
-              setCurrentView("analysis");
-            }}
-            onLoadPreset={handleLoadSamplePreset}
           />
         )}
 
@@ -161,30 +146,7 @@ export default function App() {
             onShowToast={showToast}
           />
         )}
-
-        {currentView === "profile" && (
-          <ProfileView
-            user={user}
-            onUpdateUser={(updated) => {
-              setUser(updated);
-            }}
-            onShowToast={showToast}
-          />
-        )}
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white/70 backdrop-blur-md py-8 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-slate-900">SP ResumAI</span>
-            <span>— Professional ATS Resume Optimizer</span>
-          </div>
-          <p className="text-slate-400">
-            Powered by Advanced AI ATS Architecture
-          </p>
-        </div>
-      </footer>
 
       {/* Authentication Modal */}
       <AuthModal

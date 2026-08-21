@@ -47,7 +47,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
           const borderColors = {
             success: "border-emerald-200 bg-white shadow-emerald-500/10",
             error: "border-rose-200 bg-white shadow-rose-500/10",
-            warning: "border-amber-200 bg-white shadow-amber-500/10",
+            warning: "border-amber-100 bg-white shadow-amber-500/10",
             info: "border-indigo-200 bg-white shadow-indigo-500/10",
           };
 
@@ -75,7 +75,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
               </div>
               <button
                 onClick={() => onDismiss(t.id)}
-                className="text-slate-400 hover:text-slate-600 :text-slate-200 p-1 rounded-md transition-colors"
+                className="text-slate-600 hover:text-slate-600 :text-slate-800 p-1 rounded-md transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>

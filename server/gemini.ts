@@ -25,9 +25,9 @@ export interface AIAnalysisPromptInput {
 
 // Supported models in priority order for rapid failover during demand spikes
 const SUPPORTED_MODELS = [
-  "gemini-3.7-flash",
-  "gemini-flash-latest",
-  "gemini-3.1-flash-lite",
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
 ];
 
 async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 16000): Promise<T> {

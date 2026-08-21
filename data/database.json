@@ -49,6 +49,30 @@
       "extractedText": "Jane Doe\nPrincipal Engineer with 10 years experience building scalable web architectures with React, TypeScript, Node.js, and AWS. Managed team of 8 engineers and increased deployment velocity by 45%.",
       "fileSize": 200,
       "createdAt": "2026-08-20T19:58:19.185Z"
+    },
+    "res_v17893sk": {
+      "id": "res_v17893sk",
+      "userId": "demo-user-123",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "extractedText": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithic services into containerized microservices orchestrated via Docker and AWS ECS, boosting system uptime to 99.98%.\n- Mentored cohort of 5 junior and mid-level software engineers; instituted automated code review guidelines and PR workflows that reduced deployment rollbacks by 40%.\n- Integrated comprehensive Jest and Playwright end-to-end automated test suites, expanding code coverage from 52% to 89%.\n\nFull Stack Developer | Veloce Systems Inc., Austin, TX\nAugust 2019 - May 2022\n- Developed responsive client dashboard in React/TypeScript with real-time WebSocket telemetry charts, driving 28% increase in user session duration.\n- Built scalable payment processing pipeline using Stripe API and Express.js, successfully processing over $4.2M in monthly transaction volume.\n- Configured CI/CD automation pipelines via GitHub Actions, decreasing standard release deployment cycle time from 4 hours to 18 minutes.\n- Collaborated closely with Product and UX teams to execute A/B conversion experiments, generating a 14% lift in checkout conversions.\n\nSoftware Engineering Intern | NextGen Software, Seattle, WA\nJune 2018 - August 2019\n- Assisted in developing RESTful endpoints in Python/Django and refactored relational database queries in PostgreSQL.\n- Authored technical documentation and internal developer onboarding guides.\n\nEDUCATION\nBachelor of Science in Computer Science\nUniversity of California, Berkeley (2015 - 2019)\n- Honors: Dean's Honor List (3 Semesters), Magna Cum Laude\n- Relevant Coursework: Data Structures & Algorithms, Operating Systems, Database Systems, Computer Networks\n\nPROJECTS\n- DevSync (Open Source): Collaborative code review extension with over 3,500 active GitHub stars. Built using TypeScript, WebSockets, and WebAssembly.\n- CloudPulse: Serverless AWS health monitoring dashboard utilizing Next.js, Tailwind, and DynamoDB.\n\nCERTIFICATIONS\n- AWS Certified Solutions Architect - Associate (2023)\n- Certified Kubernetes Application Developer (CKAD) (2022)",
+      "fileSize": 3487,
+      "createdAt": "2026-08-21T04:15:48.448Z"
+    },
+    "res_mhrjkjrh": {
+      "id": "res_mhrjkjrh",
+      "userId": "demo-user-123",
+      "filename": "230200143065_Resume (1).pdf",
+      "extractedText": "%PDF-1.4\n%     ReportLab Generated PDF document http://www.reportlab.com\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font\n>>\nendobj\n3 0 obj\n<<\n/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font\n>>\nendobj\n4 0 obj\n<<\n/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<\n/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]\n>> /Rotate 0 /Trans <<\n\n>> \n  /Type /Page\n>>\nendobj\n5 0 obj\n<<\n/PageMode /UseNone /Pages 7 0 R /Type /Catalog\n>>\nendobj\n6 0 obj\n<<\n/Author (\\(anonymous\\)) /CreationDate (D:20260227061620+00'00') /Creator (\\(unspecified\\)) /Keywords () /ModDate (D:20260227061620+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) \n  /Subject (\\(unspecified\\)) /Title (\\(anonymous\\)) /Trapped /False\n>>\nendobj\n7 0 obj\n<<\n/Count 1 /Kids [ 4 0 R ] /Type /Pages\n>>\nendobj\n8 0 obj\n<<\n/Filter [ /ASCII85Decode /FlateDecode ] /Length 1932\n>>\nstream\nGau0D>>sNP'RodXS>Rgk_O,uf^o'Uh`;t`KRGF;]?CI[@QDC#7FC_B)+2=]m%#bkZBWYhp`fpDIV9a?<3ah!7@t$lr^h!f7f+'bmKJRR0bCaa>rUAmgM6hQ8eV9CQ=RC:0N@.P1)hFNOi)ut._h0C)\\_shPPj<(Wg=>-DYJFN=3s8oFh>>NN;[=Hgr'P8pMI/S`E>u)rEOT,u@+uO2e^@5\"9.h?!o-a6&2OR)A?S]ZES3Q1?A47\\rIpou$S6eJ$G'r1kIFkI*`d-D'Ebc`;j&2g:guOMa&qu3uN%\\m-i\"rV(YH>`*0s7W>BDh\\\\m'E8=B<Kj\"3M+usSlZhD4-mQ9n:er%2%.edg\\p-G[TD?E[Z;NE>k`kYnE%AGK](Tue:%*uAVAsH%l?;N`p^O1`eU#sDLP0nCNM,:eb&ATJY3.cDcdIXg_Y;j3p')a0\"m&kN,h<#NIgR9;PDa,H+G9KJgNg9QpI@j)5gFh5)2hn1$&`ZLTXTm`Zdkb(iVp-KZts,VuaIRMEh_-rJ0Rge0[%[/Kg]8bnQG,;o\"=+&PlBs<'q_,l%p[ZF'=?9U0')b=[o_+#[/>S^+g9]O,7=tUFh1W'[9)Y819T?Ja*e^9CPUrWEdlQDTnU38TL+G&hP9(:[$t6>@9bsT,$YC7`X6#C!MlDS'rCJ`KEC3]csac,s$\"D5;SC(6kV7L.)p5Kn,j=]2c<$iF\"0H^d\"aNPBXH]B2M#\\dOsJKh8P*s2(,C^i=qL=scY9ghLA6nh9!W06.+$Y+7X.d0K*aB!$bS<D7VIrs<`Ln540I*bc_@<*(S\\An,4,&Amfu!MLX1V30W6hDG7M!mRgmW>B=7YX58n\\g3``i8]lQlPW_K!alR*MBn/_NVp`D07Rf^?9Q3i^_g9WE5*)b!,8Q20XT.m7i8&G_0BMZeiN&M)ZE#nB<FM+Tj(b_Lhg1Cq$13I1A]+-\"GR?6$W=Q:?i:rm<ILYI3:%%7uHF%qaUTd2ai$(4\\Z<SiZ$Iq[=Ai85BZ^ZcH-2;6LDC/<Gg6[,)_Cl*-;8&IC[JcOhaSScVrN.n&LKLgIRNX$EG/rui:0a(V(QoM$@G>t\\d=m1]a,r.MAXi\"eFP'r09Mk/JihAJEP2aV_ErhH:\"*flho_Gc&/o@HeB?SOsDNVU@39[QH;gC:2^c8MlZ.R\\3U)Z?^T]l&XCZr1to4b/$+\\aV`=EpZa0)X^r(1,Br_3l&eIjJ6s5oe#NL'A)o<2Teh1[`SI_R=+qGmYK=j0:*=/_M3SXl`ePN<.jj/'Db*.W@)_S;/A/6$Q/:-jfms8=-Tit+,ttCqp]1-R1%-d,\"3DY6(8MJ,u^:b6_EjjlpdCP;78Wk;\\4NiRZh?;4o0LIdTR0\\S*<J5M![N\\EU:Q%'_uKa=r*^7ojGTa?S32NZM=QkCd>7$`^F\\U@Ne-klm4.pY6f^6&\"Ad::!gZ)e95]<nVTbYRGsf\\A\\egVB%2bUPH\\j(,FkS#ZpLrn=#j&8S>PD5B;sYR'V[OIX*=MK=P8qp[Wd9$DO.i8QK<JTp:Hk^oR^Y6p+%D8T#*sMj!83gYg\"N>ZVcesWQOgBf.>-b>Eo&<aURf7j),7;RGqP;J\"/8?A6M8R$Qb7qcdl3Qf%A[Ki&hPoA>VG$k-UQC'MJ+,aI*[hd#-mVUt`.9Tnq!J.1t<[d`eYD*YCj:MXY;3IjN3+e&k@4kt5E-!-D#*@p!#U0P#nuS&uVqFkTm.r0eTF&)5rfdOYYGqY)r-D.T;!mFD=9]CX6\\+'n1P^Jfsfs&ON'rjIM>fPW9cB=K1^HB!@$WMah*q-&]1TJD,ODElL_\"8'(upGHSS)`+$o).$g&^f:iW-\"^!T*-pS'W_1UMk!sa[]tWnVq8^VK[Ulltgqsc[o>Hr9YhdOO2!6sk<dND3I&)N&k\\p's)j?OB];p*&V@&+@1SOPN/5Ru>Js637./2q.~>endstream\nendobj\nxref\n0 9\n0000000000 65535 f \n0000000073 00000 n \n0000000114 00000 n \n0000000221 00000 n \n0000000333 00000 n \n0000000536 00000 n \n0000000604 00000 n \n0000000887 00000 n \n0000000946 00000 n \ntrailer\n<<\n/ID \n[<c203e779030a2caa407fcaace833facb><c203e779030a2caa407fcaace833facb>]\n% ReportLab generated PDF document -- digest (http://www.reportlab.com)\n\n/Info 6 0 R\n/Root 5 0 R\n/Size 9\n>>\nstartxref\n2969\n%%EOF",
+      "fileSize": 3373,
+      "createdAt": "2026-08-21T05:26:25.571Z"
+    },
+    "res_o60xgzb5": {
+      "id": "res_o60xgzb5",
+      "userId": "demo-user-123",
+      "filename": "My_Resume.pdf",
+      "extractedText": "Alex Rivera\nSenior Cloud Architect with 8 years experience leading distributed systems. Architected multi-region AWS cloud infrastructure supporting 10M DAU, cutting downtime by 99.9% and saving 50k annually in compute costs.",
+      "fileSize": 225,
+      "createdAt": "2026-08-21T05:29:50.978Z"
     }
   },
   "analyses": {
@@ -835,6 +859,560 @@
       },
       "extractedTextSnippet": "Jane Doe\nPrincipal Engineer with 10 years experience building scalable web architectures with React, TypeScript, Node.js, and AWS. Managed team of 8 engineers and increased deployment velocity by 45%.",
       "targetRole": "Staff Software Engineer"
+    },
+    "an_lfqjlpsb": {
+      "id": "an_lfqjlpsb",
+      "userId": "demo-user-123",
+      "resumeId": "res_v17893sk",
+      "filename": "Alex_Morgan_Senior_SWE_Resume.pdf",
+      "createdAt": "2026-08-21T04:16:26.085Z",
+      "atsScore": 92,
+      "scoreTier": "Elite (90-100)",
+      "summary": "Your resume demonstrates solid professional experience with 19 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including JavaScript, TypeScript, React.",
+        "Healthy content volume (466 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Node.js",
+          "Python",
+          "SQL",
+          "PostgreSQL",
+          "MongoDB",
+          "AWS",
+          "Docker",
+          "Kubernetes",
+          "GraphQL",
+          "REST APIs",
+          "CI/CD",
+          "Git",
+          "Redis",
+          "Next.js",
+          "Tailwind CSS",
+          "Microservices"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 87,
+        "skillsMatch": 95,
+        "experienceImpact": 84,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 82,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 92,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 92,
+          "status": "good",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Fu"
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": "JavaScript, TypeScript, React, Node.js, Python, SQL, PostgreSQL, MongoDB, AWS, Docker, Kubernetes, GraphQL, REST APIs, CI/CD, Git, Redis, Next.js, Tailwind CSS, Microservices"
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_1",
+          "original": "alex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded alex.morgan.tech@example.com | (555) 234-5678 | san francisco, ca, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_2",
+          "original": "LinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded linkedin: linkedin.com/in/alexmorgandev | github: github.com/alexmorgan-dev, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_3",
+          "original": "Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded programming languages: typescript, javascript (es6+), python, go, sql, html5/css3, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_4",
+          "original": "Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded frontend: react 18, next.js, redux toolkit, tailwind css, vue.js, webpack, vite, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 42,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "Alex Morgan\nalex.morgan.tech@example.com | (555) 234-5678 | San Francisco, CA\nLinkedIn: linkedin.com/in/alexmorgandev | GitHub: github.com/alexmorgan-dev\n\nPROFESSIONAL SUMMARY\nResults-driven Senior Full Stack Engineer with 6+ years of experience architecting high-availability web applications and microservices. Proven track record in migrating monolithic architectures to serverless cloud infrastructure on AWS, reducing operational costs by 32%, and accelerating page load speeds by 45%. Adept at leading cross-functional engineering teams, establishing automated CI/CD workflows, and championing test-driven development.\n\nTECHNICAL SKILLS\n- Programming Languages: TypeScript, JavaScript (ES6+), Python, Go, SQL, HTML5/CSS3\n- Frontend: React 18, Next.js, Redux Toolkit, Tailwind CSS, Vue.js, Webpack, Vite\n- Backend & Cloud: Node.js, Express.js, GraphQL, REST APIs, AWS (Lambda, ECS, S3, RDS, CloudFront), Docker, Kubernetes\n- Databases & Caching: PostgreSQL, MongoDB, Redis, Elasticsearch\n- DevOps & Tools: Git, GitHub Actions, Terraform, Jest, Cypress, Datadog, Jira\n\nPROFESSIONAL EXPERIENCE\nLead Full Stack Engineer | Apex Cloud Solutions, San Francisco, CA\nJune 2022 - Present\n- Architected and deployed multi-tenant SaaS analytics platform using React, Node.js, and PostgreSQL serving 120,000+ daily active users.\n- Redesigned core query engine and integrated Redis caching layer, decreasing p95 API response latency from 680ms to 95ms (86% reduction).\n- Spearheaded migration of 14 monolithi",
+      "targetRole": "Senior Full Stack Software Engineer"
+    },
+    "an_6jxx5ykh": {
+      "id": "an_6jxx5ykh",
+      "userId": "demo-user-123",
+      "resumeId": "res_mhrjkjrh",
+      "filename": "230200143065_Resume (1).pdf",
+      "createdAt": "2026-08-21T05:27:03.431Z",
+      "atsScore": 70,
+      "scoreTier": "Fair (60-74)",
+      "summary": "Your resume demonstrates solid professional experience with 0 detected core technical competencies. Enhancing quantifiable business outcomes and keyword density will increase your top-tier ATS ranking.",
+      "strengths": [
+        "Identified strong foundation in core technologies including software development.",
+        "Healthy content volume (225 words) suitable for single or dual page format.",
+        "Clean section structure compatible with modern applicant tracking systems.",
+        "Clear chronological progression across highlighted roles."
+      ],
+      "weaknesses": [
+        "Several bullet points lack quantifiable STAR metrics (%, $, time saved).",
+        "Action verbs can be sharpened from passive duties ('worked on', 'assisted') to executive impact terms.",
+        "Skill section could be more structured by category (Languages, Frameworks, Cloud/DevOps)."
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Architecture",
+        "Automated Testing",
+        "Cloud Infrastructure",
+        "Performance Optimization",
+        "Data Modeling"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Web Development",
+          "Software Engineering",
+          "API Integration"
+        ],
+        "soft": [
+          "Problem Solving",
+          "Cross-functional Collaboration",
+          "Communication"
+        ],
+        "tools": [
+          "Git",
+          "VS Code",
+          "Jira",
+          "Postman",
+          "Docker"
+        ],
+        "programmingLanguages": [
+          "TypeScript",
+          "JavaScript",
+          "Python",
+          "SQL"
+        ]
+      },
+      "categoryScores": {
+        "keywordOptimization": 65,
+        "skillsMatch": 74,
+        "experienceImpact": 62,
+        "educationRelevance": 85,
+        "formattingAndLayout": 88,
+        "resumeStructure": 85,
+        "quantifiableMetrics": 82,
+        "actionVerbsAndTone": 76
+      },
+      "sectionScores": {
+        "summary": 75,
+        "skills": 82,
+        "experience": 70,
+        "education": 85,
+        "projects": 78,
+        "certifications": 70
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Professional Experience",
+          "score": 70,
+          "status": "needs_work",
+          "strengths": [
+            "Clear timeline of professional milestones",
+            "Relevant technical stack mentioned in context"
+          ],
+          "problems": [
+            "Missing percentage improvements on key achievements",
+            "Occasional passive phrasing"
+          ],
+          "suggestions": [
+            "Adopt Google XYZ structure: Accomplished X, measured by Y, by doing Z",
+            "Highlight business impact alongside technical stack"
+          ],
+          "detectedContentSnippet": "%PDF-1.4\n%     ReportLab Generated PDF document http://www.reportlab.com\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /"
+        },
+        {
+          "sectionName": "Skills & Technical Stack",
+          "score": 82,
+          "status": "good",
+          "strengths": [
+            "Comprehensive skill set detected",
+            "High alignment with modern tech roles"
+          ],
+          "problems": [
+            "Uncategorized list can be hard for human recruiters to skim in 6 seconds"
+          ],
+          "suggestions": [
+            "Group skills into: Languages, Frameworks & Libraries, Cloud & Tools, Methodologies"
+          ],
+          "detectedContentSnippet": ""
+        },
+        {
+          "sectionName": "Education & Credentials",
+          "score": 85,
+          "status": "excellent",
+          "strengths": [
+            "Clear institutional credential provided",
+            "Standard format easily parsed by ATS"
+          ],
+          "problems": [],
+          "suggestions": [
+            "Add notable coursework or capstone achievements if applicable"
+          ],
+          "detectedContentSnippet": "Education section parsed successfully."
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "bp_h_1",
+          "original": "%     ReportLab Generated PDF document http://www.reportlab.com",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded %     reportlab generated pdf document http://www.reportlab.com, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_2",
+          "original": "/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded /basefont /helvetica /encoding /winansiencoding /name /f1 /subtype /type1 /type /font, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_3",
+          "original": "/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded /basefont /helvetica-bold /encoding /winansiencoding /name /f2 /subtype /type1 /type /font, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        },
+        {
+          "id": "bp_h_4",
+          "original": "/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<",
+          "problem": "Lacks quantifiable baseline numbers and active leadership verbs.",
+          "whyItMatters": "ATS algorithms and hiring managers favor Google XYZ format ('Accomplished [X] as measured by [Y] by doing [Z]').",
+          "improved": "Spearheaded /contents 8 0 r /mediabox [ 0 0 595.2756 841.8898 ] /parent 7 0 r /resources <<, optimizing cycle times by 32% and enhancing team throughput across key release deliverables.",
+          "category": "Impact & Quantifiable Metrics",
+          "metricAddedSuggestion": "Quantified efficiency gain by 32% and specified leadership scope."
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "low",
+          "category": "Spacing & Readability",
+          "issue": "Dense text blocks can reduce recruiter scan speed during initial 6-second review.",
+          "fix": "Ensure 1-2 line bullet points with bullet markers rather than continuous multi-line paragraphs."
+        },
+        {
+          "severity": "medium",
+          "category": "Metrics Density",
+          "issue": "Quantifiable numbers appear in fewer than 40% of bullet points.",
+          "fix": "Incorporate baseline metrics (e.g. latency, user count, test coverage, revenue saved)."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Software Engineer",
+          "Developer",
+          "Consultant"
+        ],
+        "estimatedYearsExperience": "3-5+ Years",
+        "measurableResultsCount": 287,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "Consistent experience profile with strong technical baseline."
+      },
+      "educationInsight": {
+        "degreeDetected": "Degree / Technical Background",
+        "institutionDetected": "Accredited University / Institution",
+        "summaryRemarks": "Academic credentials confirmed and ATS verified."
+      },
+      "extractedTextSnippet": "%PDF-1.4\n%     ReportLab Generated PDF document http://www.reportlab.com\n1 0 obj\n<<\n/F1 2 0 R /F2 3 0 R\n>>\nendobj\n2 0 obj\n<<\n/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font\n>>\nendobj\n3 0 obj\n<<\n/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font\n>>\nendobj\n4 0 obj\n<<\n/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<\n/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]\n>> /Rotate 0 /Trans <<\n\n>> \n  /Type /Page\n>>\nendobj\n5 0 obj\n<<\n/PageMode /UseNone /Pages 7 0 R /Type /Catalog\n>>\nendobj\n6 0 obj\n<<\n/Author (\\(anonymous\\)) /CreationDate (D:20260227061620+00'00') /Creator (\\(unspecified\\)) /Keywords () /ModDate (D:20260227061620+00'00') /Producer (ReportLab PDF Library - www.reportlab.com) \n  /Subject (\\(unspecified\\)) /Title (\\(anonymous\\)) /Trapped /False\n>>\nendobj\n7 0 obj\n<<\n/Count 1 /Kids [ 4 0 R ] /Type /Pages\n>>\nendobj\n8 0 obj\n<<\n/Filter [ /ASCII85Decode /FlateDecode ] /Length 1932\n>>\nstream\nGau0D>>sNP'RodXS>Rgk_O,uf^o'Uh`;t`KRGF;]?CI[@QDC#7FC_B)+2=]m%#bkZBWYhp`fpDIV9a?<3ah!7@t$lr^h!f7f+'bmKJRR0bCaa>rUAmgM6hQ8eV9CQ=RC:0N@.P1)hFNOi)ut._h0C)\\_shPPj<(Wg=>-DYJFN=3s8oFh>>NN;[=Hgr'P8pMI/S`E>u)rEOT,u@+uO2e^@5\"9.h?!o-a6&2OR)A?S]ZES3Q1?A47\\rIpou$S6eJ$G'r1kIFkI*`d-D'Ebc`;j&2g:guOMa&qu3uN%\\m-i\"rV(YH>`*0s7W>BDh\\\\m'E8=B<Kj\"3M+usSlZhD4-mQ9n:er%2%.edg\\p-G[TD?E[Z;NE>k`kYnE%AGK](Tue:%*uAVAsH%l?;N`p^O1`eU#sDLP0nCNM,:eb&ATJY3.cDcdIXg_Y;j3p')a0\"m&kN,h<#NIgR9;PDa,H+G9KJgNg9QpI@j)5gFh"
+    },
+    "an_bj0bstsk": {
+      "id": "an_bj0bstsk",
+      "userId": "demo-user-123",
+      "resumeId": "res_o60xgzb5",
+      "filename": "My_Resume.pdf",
+      "createdAt": "2026-08-21T05:30:05.278Z",
+      "atsScore": 45,
+      "scoreTier": "Needs Work",
+      "summary": "The resume is severely underdeveloped for a Principal Cloud Architect role, consisting only of a summary header. It lacks the depth, professional history, education, and technical breadth required to pass ATS parsers or manual review by hiring managers.",
+      "strengths": [
+        "Strong initial quantifiable metrics (10M DAU, 99.9% uptime).",
+        "Clear professional branding as a Senior Cloud Architect.",
+        "Concise value proposition regarding cost savings."
+      ],
+      "weaknesses": [
+        "Missing entire sections: Experience, Education, Skills, and Certifications.",
+        "Lacks depth in architectural methodology or specific cloud governance.",
+        "No evidence of leadership, mentorship, or team management scale.",
+        "Insufficient technical depth for a Principal-level role."
+      ],
+      "missingKeywords": [
+        "Kubernetes",
+        "Terraform",
+        "CI/CD Pipelines",
+        "Microservices",
+        "Infrastructure as Code (IaC)",
+        "Cloud Governance",
+        "Security Compliance",
+        "Disaster Recovery",
+        "System Design"
+      ],
+      "detectedSkills": {
+        "technical": [
+          "Distributed Systems",
+          "Cloud Infrastructure"
+        ],
+        "soft": [
+          "Leadership"
+        ],
+        "tools": [
+          "AWS"
+        ],
+        "programmingLanguages": []
+      },
+      "categoryScores": {
+        "keywordOptimization": 30,
+        "skillsMatch": 20,
+        "experienceImpact": 40,
+        "educationRelevance": 0,
+        "formattingAndLayout": 50,
+        "resumeStructure": 20,
+        "quantifiableMetrics": 60,
+        "actionVerbsAndTone": 40
+      },
+      "sectionScores": {
+        "summary": 65,
+        "skills": 0,
+        "experience": 20,
+        "education": 0,
+        "projects": 0,
+        "certifications": 0
+      },
+      "sectionDetails": [
+        {
+          "sectionName": "Summary",
+          "score": 65,
+          "status": "good",
+          "strengths": [
+            "High-impact data points included"
+          ],
+          "problems": [
+            "Lacks mention of soft skills or leadership approach",
+            "Too brief for a Principal-level candidate"
+          ],
+          "suggestions": [
+            "Expand to include specific domain expertise and leadership philosophy"
+          ],
+          "detectedContentSnippet": "Senior Cloud Architect with 8 years experience leading distributed systems."
+        },
+        {
+          "sectionName": "Experience",
+          "score": 20,
+          "status": "needs_work",
+          "strengths": [
+            "Clear metrics provided in the header"
+          ],
+          "problems": [
+            "Missing job titles, company names, dates, and detailed bullet points"
+          ],
+          "suggestions": [
+            "Break out the header metrics into formal Experience entries under specific companies"
+          ],
+          "detectedContentSnippet": "Architected multi-region AWS cloud infrastructure supporting 10M DAU"
+        },
+        {
+          "sectionName": "Education",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "No educational background provided"
+          ],
+          "suggestions": [
+            "Add a section for University/Degree information to satisfy ATS degree filters"
+          ],
+          "detectedContentSnippet": "N/A"
+        },
+        {
+          "sectionName": "Skills",
+          "score": 0,
+          "status": "missing",
+          "strengths": [],
+          "problems": [
+            "No dedicated skills matrix"
+          ],
+          "suggestions": [
+            "Add a skills section categorized by Cloud, IaC, DevOps, and Programming"
+          ],
+          "detectedContentSnippet": "N/A"
+        }
+      ],
+      "bulletPointImprovements": [
+        {
+          "id": "exp_01",
+          "original": "Architected multi-region AWS cloud infrastructure supporting 10M DAU.",
+          "problem": "Too passive; lacks context on technologies used.",
+          "whyItMatters": "Principal roles require demonstrating the 'how' behind the scale.",
+          "improved": "Spearheaded the migration to a multi-region AWS architecture using Terraform and Kubernetes, supporting 10M DAU and ensuring high availability.",
+          "category": "Architecture",
+          "metricAddedSuggestion": "Specify latency reduction, e.g., [reduced p99 latency by X%]"
+        }
+      ],
+      "formattingIssues": [
+        {
+          "severity": "high",
+          "category": "Structure",
+          "issue": "Missing essential sections",
+          "fix": "Add Experience, Education, and Skills sections immediately."
+        }
+      ],
+      "experienceInsight": {
+        "jobTitlesDetected": [
+          "Senior Cloud Architect"
+        ],
+        "estimatedYearsExperience": "8 years",
+        "measurableResultsCount": 3,
+        "actionVerbStrength": "moderate",
+        "summaryRemarks": "The experience is severely underdeveloped; it reads like a biography snippet rather than a professional career history."
+      },
+      "educationInsight": {
+        "summaryRemarks": "No education information detected. This is a critical failure for high-level roles often requiring Bachelor's or Master's degrees."
+      },
+      "extractedTextSnippet": "Alex Rivera\nSenior Cloud Architect with 8 years experience leading distributed systems. Architected multi-region AWS cloud infrastructure supporting 10M DAU, cutting downtime by 99.9% and saving 50k annually in compute costs.",
+      "targetRole": "Principal Cloud Architect"
     }
   },
   "jobMatches": {
@@ -958,6 +1536,122 @@
         }
       ],
       "createdAt": "2026-08-20T19:58:56.435Z"
+    },
+    "jm_5200ckya": {
+      "id": "jm_5200ckya",
+      "userId": "demo-user-123",
+      "resumeId": "res_mhrjkjrh",
+      "jobTitle": "Senior Full Stack Engineer",
+      "jobDescriptionSnippet": "Senior Full Stack Engineer\nCompany: CloudScale Dynamics\nLocation: Remote / Hybrid\n\nAbout the Role:\nWe are seeking a Senior Full Stack Engineer with strong proficiency in TypeScript, React, Node.js, GraphQL, and AWS. The ideal candidate has experience building distributed high-throughput web applications, designing RESTful and GraphQL APIs, optimizing database performance on PostgreSQL and Redis, implementing CI/CD pipelines with GitHub Actions, and collaborating in an Agile environment.\n\nRequirements:\n- 5+ years of experience with modern frontend frameworks (React, Next.js, Tailwind CSS)\n- 4+ years of backend development (Node.js/Express, Go, or Python)\n- Strong experience with relational databases (PostgreSQL) and caching (Redis)\n- Practical experience with AWS services (ECS, Lambda, S3, CloudFront)\n- Proven track record of improving system latency, test coverage, and mentoring junior engineers\n- Excellent communication skills and automated testing mindset (Jest, Playwright)",
+      "matchScore": 0,
+      "matchingKeywords": [],
+      "missingKeywords": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "GraphQL",
+        "AWS",
+        "PostgreSQL",
+        "Redis",
+        "CI/CD",
+        "Full Stack",
+        "System Latency"
+      ],
+      "matchingSkills": [],
+      "missingSkills": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "GraphQL",
+        "PostgreSQL",
+        "Redis",
+        "AWS",
+        "Jest",
+        "Playwright"
+      ],
+      "recommendedChanges": [
+        "Replace the placeholder PDF/raw data content with a professional resume structure.",
+        "Include a professional summary highlighting your years of experience as a Full Stack Engineer.",
+        "Add a dedicated 'Skills' section listing the required technologies: React, TypeScript, Node.js, and AWS.",
+        "Quantify your experience in a 'Professional Experience' section using bullet points focused on impact.",
+        "Include an 'Education' and 'Projects' section to validate your engineering background.",
+        "Ensure the resume reflects a 5+ year career trajectory to meet seniority requirements."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "General Content",
+          "advice": "The resume appears to be a corrupt file or placeholder text. You must provide a full document containing contact info, experience, and skills."
+        },
+        {
+          "section": "Professional Experience",
+          "advice": "List your roles chronologically, focusing on achievements rather than just duties. Use metrics (e.g., improved latency by X%) to demonstrate impact."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "N/A",
+          "tailoredForJob": "Architected and scaled high-throughput web applications using React and Node.js, resulting in a 20% reduction in system latency.",
+          "reason": "Addresses the requirement for high-throughput experience and system optimization."
+        },
+        {
+          "original": "N/A",
+          "tailoredForJob": "Designed and maintained complex GraphQL and RESTful APIs with PostgreSQL backends, ensuring robust data integrity and performance.",
+          "reason": "Directly maps to the job's focus on API design and relational database management."
+        },
+        {
+          "original": "N/A",
+          "tailoredForJob": "Implemented automated CI/CD pipelines using GitHub Actions and AWS, increasing deployment frequency and test coverage across the stack.",
+          "reason": "Highlights proficiency with CI/CD tools and AWS mentioned in the job description."
+        }
+      ],
+      "createdAt": "2026-08-21T05:27:25.789Z"
+    },
+    "jm_jcwk6b6m": {
+      "id": "jm_jcwk6b6m",
+      "userId": "demo-user-123",
+      "resumeId": "res_active",
+      "jobTitle": "Principal Cloud Architect",
+      "jobDescriptionSnippet": "Looking for a Principal Cloud Architect with AWS, Kubernetes, Terraform, and Distributed Systems expertise.",
+      "matchScore": 95,
+      "matchingKeywords": [
+        "AWS",
+        "Kubernetes"
+      ],
+      "missingKeywords": [
+        "CI/CD Pipelines",
+        "System Design",
+        "Cloud Infrastructure"
+      ],
+      "matchingSkills": [
+        "AWS",
+        "Kubernetes"
+      ],
+      "missingSkills": [],
+      "recommendedChanges": [
+        "Add explicit mentions of target tech stack in your skills and experience summary.",
+        "Tailor your professional headline to match \"Principal Cloud Architect\".",
+        "Highlight specific projects that mirror the core domain described in the job posting.",
+        "Incorporate key action verbs from the job description directly into your bullet points."
+      ],
+      "sectionsToImprove": [
+        {
+          "section": "Professional Summary",
+          "advice": "Align the top 2 lines of your summary with the exact role title: \"Principal Cloud Architect\"."
+        },
+        {
+          "section": "Technical Skills",
+          "advice": "Place AWS, Kubernetes prominently at the top of your skills section."
+        }
+      ],
+      "tailoredBulletSuggestions": [
+        {
+          "original": "Developed application features and integrated APIs.",
+          "tailoredForJob": "Engineered scalable features using AWS and optimized RESTful microservices for high throughput.",
+          "reason": "Incorporates AWS and addresses performance scalability requested in the job post."
+        }
+      ],
+      "createdAt": "2026-08-21T05:30:14.523Z"
     }
   }
 }

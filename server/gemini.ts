@@ -25,12 +25,13 @@ export interface AIAnalysisPromptInput {
 
 // Supported models in priority order for rapid failover during demand spikes
 const SUPPORTED_MODELS = [
-  "gemini-3.7-flash",
-  "gemini-flash-latest",
   "gemini-3.1-flash-lite",
+  "gemini-flash-latest",
+  "gemini-3.7-flash",
+  "gemini-3.1-pro-preview",
 ];
 
-async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 12000): Promise<T> {
+async function callWithTimeout<T>(promise: Promise<T>, timeoutMs = 8000): Promise<T> {
   let timer: NodeJS.Timeout;
   const timeoutPromise = new Promise<never>((_, reject) => {
     timer = setTimeout(() => reject(new Error(`API request timed out after ${timeoutMs}ms`)), timeoutMs);
@@ -48,26 +49,21 @@ async function callWithRetryAndFallback<T>(
 ): Promise<T> {
   let lastError: any = null;
 
-  // Pass 1: Try each available model with a fast timeout (8s) for sub-second failover
+  // Try each available model with rapid failover
   for (const model of SUPPORTED_MODELS) {
     try {
-      return await callWithTimeout(fn(model), 9000);
+      return await callWithTimeout(fn(model), 7000);
     } catch (err: any) {
       lastError = err;
-      console.warn(`[Gemini API] ${actionName} on ${model} failed/timed out: ${err.message || err}. Trying next model...`);
+      const isQuota = err?.status === "RESOURCE_EXHAUSTED" || err?.message?.includes("quota") || err?.message?.includes("429");
+      const isUnavailable = err?.status === "UNAVAILABLE" || err?.message?.includes("503");
+      console.warn(
+        `[Gemini API] ${actionName} on ${model} (${isQuota ? "Quota 429" : isUnavailable ? "Unavailable 503" : "Error/Timeout"}). Trying next model...`
+      );
     }
   }
 
-  // Pass 2: Quick fallback attempt
-  for (const model of ["gemini-flash-latest", "gemini-3.7-flash"]) {
-    try {
-      return await callWithTimeout(fn(model), 8000);
-    } catch (err: any) {
-      lastError = err;
-    }
-  }
-
-  throw lastError;
+  throw lastError || new Error(`All Gemini models were temporarily unavailable for ${actionName}`);
 }
 
 export async function generateResumeAnalysis(input: AIAnalysisPromptInput) {

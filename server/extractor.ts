@@ -1,9 +1,11 @@
 import mammoth from "mammoth";
+import zlib from "zlib";
 // @ts-ignore
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
 import { ExtractedResumeData } from "../src/types.js";
 
 async function parsePdfBuffer(fileBuffer: Buffer): Promise<{ text: string; numpages?: number }> {
+  // Layer 1: pdf-parse library
   try {
     let fn: any = pdfParse;
     if (typeof fn !== "function" && fn?.default) {
@@ -11,15 +13,25 @@ async function parsePdfBuffer(fileBuffer: Buffer): Promise<{ text: string; numpa
     }
     if (typeof fn === "function") {
       const data = await fn(fileBuffer, { max: 10 });
-      if (data?.text && data.text.trim().length > 10) {
+      if (data?.text && data.text.trim().length > 20) {
         return { text: data.text, numpages: data.numpages };
       }
     }
-  } catch (pdfErr) {
-    console.warn("Primary PDF parsing encountered non-fatal issue, attempting fallback text extraction:", pdfErr);
+  } catch (pdfErr: any) {
+    // Non-fatal, proceed silently to decompressed stream parsing
   }
 
-  // Fallback: extract legible printable text tokens from PDF buffer
+  // Layer 2: Decompress PDF FlateDecode streams with zlib to extract text operators (Tj / TJ)
+  try {
+    const streamExtracted = extractFromPdfStreams(fileBuffer);
+    if (streamExtracted.trim().length > 30) {
+      return { text: streamExtracted };
+    }
+  } catch {
+    // Non-fatal, proceed to raw token scanning
+  }
+
+  // Layer 3: Extract legible printable text tokens from raw latin1 buffer
   const rawString = fileBuffer.toString("latin1");
   const extractedChunks: string[] = [];
   
@@ -37,9 +49,48 @@ async function parsePdfBuffer(fileBuffer: Buffer): Promise<{ text: string; numpa
     return { text: extractedChunks.join(" ") };
   }
 
-  // Final fallback: extract UTF-8 readable words
+  // Layer 4: Extract UTF-8 readable words
   const utf8String = fileBuffer.toString("utf-8").replace(/[^\x20-\x7E\n\r\t]/g, " ");
   return { text: utf8String };
+}
+
+function extractFromPdfStreams(buffer: Buffer): string {
+  const resultText: string[] = [];
+  const latin1 = buffer.toString("latin1");
+  const streamRegex = /stream\r?\n([\s\S]*?)\r?\nendstream/g;
+  let match;
+  while ((match = streamRegex.exec(latin1)) !== null) {
+    const rawStream = Buffer.from(match[1], "latin1");
+    let decompressed: Buffer | null = null;
+    try {
+      decompressed = zlib.inflateSync(rawStream);
+    } catch {
+      try {
+        decompressed = zlib.inflateRawSync(rawStream);
+      } catch {}
+    }
+    if (decompressed) {
+      const streamText = decompressed.toString("latin1");
+      const textPattern = /\(([^)]+)\)\s*(?:Tj|'|")/g;
+      let tm;
+      while ((tm = textPattern.exec(streamText)) !== null) {
+        const str = tm[1].replace(/\\([()\\])/g, "$1").trim();
+        if (str.length > 0) resultText.push(str);
+      }
+      const tjPattern = /\[([^\]]+)\]\s*TJ/g;
+      let tjm;
+      while ((tjm = tjPattern.exec(streamText)) !== null) {
+        const inner = tjm[1];
+        const parenPattern = /\(([^)]+)\)/g;
+        let pm;
+        while ((pm = parenPattern.exec(inner)) !== null) {
+          const str = pm[1].replace(/\\([()\\])/g, "$1").trim();
+          if (str.length > 0) resultText.push(str);
+        }
+      }
+    }
+  }
+  return resultText.join(" ");
 }
 
 export async function extractResumeText(

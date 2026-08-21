@@ -2,521 +2,538 @@ import {
   ResumeAnalysisResult,
   JobMatchResult,
   DetailedCategoryScores,
-  SectionScores,
-  SectionAnalysisDetail,
-  BulletPointImprovement,
   FormattingIssue,
-  ExperienceInsight,
-  EducationInsight,
   DetectedSkills,
 } from "../types.js";
 
-const COMMON_TECH_SKILLS = [
-  "JavaScript",
-  "TypeScript",
-  "React",
-  "Node.js",
-  "Python",
-  "Java",
-  "C++",
-  "C#",
-  "Go",
-  "Rust",
-  "HTML",
-  "CSS",
-  "Tailwind CSS",
-  "Next.js",
-  "Vue.js",
-  "Angular",
-  "Express",
-  "FastAPI",
-  "Django",
-  "PostgreSQL",
-  "MySQL",
-  "MongoDB",
-  "Redis",
-  "SQLite",
-  "GraphQL",
-  "REST API",
-  "Docker",
-  "Kubernetes",
-  "AWS",
-  "GCP",
-  "Azure",
-  "Git",
-  "GitHub",
-  "CI/CD",
-  "Linux",
-  "Jest",
-  "Pytest",
-  "Agile",
-  "Scrum",
-  "Machine Learning",
-  "Data Analysis",
-  "Pandas",
-  "NumPy",
-  "TensorFlow",
-  "PyTorch",
-  "Tableau",
-  "Figma",
-  "Jira",
-  "Terraform",
-  "Microservices",
-  "System Design",
-  "SQL",
-  "DevOps",
+// Role-specific skill dictionaries for deep matching
+export const ROLE_SKILL_PROFILES: Record<
+  string,
+  {
+    keywords: string[];
+    coreSkills: string[];
+    recommendedSkills: string[];
+    tools: string[];
+  }
+> = {
+  "embedded systems engineer": {
+    keywords: [
+      "embedded c",
+      "c++",
+      "c",
+      "rtos",
+      "freertos",
+      "microcontroller",
+      "microcontrollers",
+      "arm cortex",
+      "stm32",
+      "arduino",
+      "uart",
+      "spi",
+      "i2c",
+      "can bus",
+      "firmware",
+      "device driver",
+      "device drivers",
+      "dsp",
+      "assembly",
+      "jtag",
+      "oscilloscope",
+      "logic analyzer",
+      "zephyr",
+      "pcb",
+      "fpga",
+      "ble",
+      "bluetooth",
+      "gpio",
+      "timer",
+      "interrupts",
+      "dma",
+      "embedded linux",
+    ],
+    coreSkills: ["C", "C++", "Microcontrollers", "Embedded C", "UART", "SPI", "I2C", "ARM Cortex"],
+    recommendedSkills: ["FreeRTOS", "STM32", "CAN Bus", "Oscilloscope", "Device Drivers", "JTAG"],
+    tools: ["Keil uVision", "STM32CubeIDE", "PlatformIO", "Oscilloscope", "Logic Analyzer", "Git"],
+  },
+  "vlsi engineer": {
+    keywords: [
+      "verilog",
+      "systemverilog",
+      "vhdl",
+      "fpga",
+      "asic",
+      "rtl design",
+      "rtl",
+      "synopsys",
+      "cadence",
+      "vivado",
+      "modelsim",
+      "sta",
+      "static timing analysis",
+      "synthesis",
+      "uvm",
+      "place and route",
+      "pnr",
+      "cmos",
+      "dft",
+      "physical design",
+      "clock domain crossing",
+      "cdc",
+      "linting",
+      "innovus",
+      "primetime",
+      "tcl",
+    ],
+    coreSkills: ["Verilog", "SystemVerilog", "RTL Design", "FPGA", "VHDL", "Static Timing Analysis"],
+    recommendedSkills: ["UVM", "ASIC", "Synopsys Design Compiler", "Vivado", "DFT", "ModelSim"],
+    tools: ["Cadence Virtuoso", "Synopsys PrimeTime", "Xilinx Vivado", "ModelSim", "Tcl"],
+  },
+  "automotive engineer": {
+    keywords: [
+      "autosar",
+      "can",
+      "can bus",
+      "lin",
+      "flexray",
+      "iso 26262",
+      "functional safety",
+      "matlab",
+      "simulink",
+      "ecu",
+      "embedded c",
+      "vector canoe",
+      "canalyzer",
+      "hil",
+      "sil",
+      "hil testing",
+      "adas",
+      "telematics",
+      "powertrain",
+      "uds",
+      "diagnostic",
+      "diagnostics",
+      "ev",
+      "bms",
+      "battery management",
+    ],
+    coreSkills: ["Embedded C", "CAN Bus", "MATLAB / Simulink", "ECU", "ISO 26262", "AUTOSAR"],
+    recommendedSkills: ["Vector CANoe", "HIL Testing", "UDS Diagnostics", "LIN", "Functional Safety"],
+    tools: ["CANoe", "CANalyzer", "Simulink", "dSPACE HIL", "INCA", "Git"],
+  },
+  "software engineer": {
+    keywords: [
+      "javascript",
+      "typescript",
+      "python",
+      "java",
+      "c++",
+      "c#",
+      "react",
+      "node.js",
+      "express",
+      "next.js",
+      "rest api",
+      "graphql",
+      "sql",
+      "postgresql",
+      "mongodb",
+      "redis",
+      "docker",
+      "kubernetes",
+      "aws",
+      "git",
+      "ci/cd",
+      "microservices",
+      "system design",
+      "agile",
+      "unit testing",
+      "linux",
+    ],
+    coreSkills: ["TypeScript", "Python", "React", "Node.js", "SQL", "Git", "REST APIs"],
+    recommendedSkills: ["Docker", "Kubernetes", "AWS", "CI/CD", "Microservices", "System Design"],
+    tools: ["VS Code", "Docker", "Git", "Postman", "GitHub Actions", "Jira"],
+  },
+  "data analyst": {
+    keywords: [
+      "sql",
+      "python",
+      "r",
+      "pandas",
+      "numpy",
+      "tableau",
+      "power bi",
+      "excel",
+      "advanced excel",
+      "statistics",
+      "data visualization",
+      "data cleaning",
+      "etl",
+      "data warehousing",
+      "bigquery",
+      "snowflake",
+      "looker",
+      "a/b testing",
+      "dashboards",
+      "business intelligence",
+      "eda",
+    ],
+    coreSkills: ["SQL", "Python", "Tableau", "Power BI", "Excel", "Data Visualization", "Pandas"],
+    recommendedSkills: ["ETL Pipelines", "Snowflake", "BigQuery", "A/B Testing", "Statistical Modeling"],
+    tools: ["Tableau Desktop", "Power BI", "Jupyter Notebook", "PostgreSQL", "Excel", "Git"],
+  },
+};
+
+const COMMON_ACTION_VERBS = [
+  "Spearheaded", "Engineered", "Architected", "Orchestrated", "Optimized", "Designed",
+  "Implemented", "Pioneered", "Automated", "Delivered", "Transformed", "Maximized",
+  "Reduced", "Increased", "Accelerated", "Built", "Developed", "Deployed", "Led",
 ];
 
-const SOFT_SKILLS = [
-  "Leadership",
-  "Communication",
-  "Problem Solving",
-  "Collaboration",
-  "Teamwork",
-  "Cross-functional",
-  "Time Management",
-  "Critical Thinking",
-  "Mentorship",
-  "Adaptability",
-  "Conflict Resolution",
-  "Project Management",
-  "Stakeholder Management",
-  "Strategic Planning",
-];
+/**
+ * Match best role profile based on target role string
+ */
+function findClosestRoleProfile(roleStr: string) {
+  const clean = (roleStr || "").toLowerCase();
+  for (const [key, profile] of Object.entries(ROLE_SKILL_PROFILES)) {
+    if (clean.includes(key) || key.includes(clean)) {
+      return { roleName: key, profile };
+    }
+  }
+  // Check word intersections
+  if (clean.includes("embedded") || clean.includes("firmware") || clean.includes("iot") || clean.includes("hardware")) {
+    return { roleName: "embedded systems engineer", profile: ROLE_SKILL_PROFILES["embedded systems engineer"] };
+  }
+  if (clean.includes("vlsi") || clean.includes("chip") || clean.includes("rtl") || clean.includes("asic") || clean.includes("fpga") || clean.includes("semiconductor")) {
+    return { roleName: "vlsi engineer", profile: ROLE_SKILL_PROFILES["vlsi engineer"] };
+  }
+  if (clean.includes("automotive") || clean.includes("auto") || clean.includes("vehicle") || clean.includes("ecu") || clean.includes("autosar")) {
+    return { roleName: "automotive engineer", profile: ROLE_SKILL_PROFILES["automotive engineer"] };
+  }
+  if (clean.includes("data") || clean.includes("analyst") || clean.includes("analytics") || clean.includes("bi")) {
+    return { roleName: "data analyst", profile: ROLE_SKILL_PROFILES["data analyst"] };
+  }
+  return { roleName: "software engineer", profile: ROLE_SKILL_PROFILES["software engineer"] };
+}
 
-const STRONG_ACTION_VERBS = [
-  "Spearheaded",
-  "Engineered",
-  "Orchestrated",
-  "Architected",
-  "Accelerated",
-  "Optimized",
-  "Pioneered",
-  "Automated",
-  "Delivered",
-  "Transformed",
-  "Maximized",
-  "Reduced",
-  "Increased",
-  "Led",
-  "Designed",
-  "Implemented",
-  "Developed",
-  "Established",
-  "Launched",
-  "Revamped",
-];
+/**
+ * Extract contact information from resume
+ */
+function extractCandidateContact(text: string) {
+  const emailMatch = text.match(/[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}/);
+  const phoneMatch = text.match(/(?:\+?\d{1,3}[-.\s]?)?(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}/);
+  
+  // Extract likely name from first 2 non-empty lines
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter((l) => l.length > 2 && l.length < 50);
+  let name = "";
+  if (lines.length > 0) {
+    const firstLine = lines[0];
+    if (!firstLine.includes("@") && !firstLine.match(/\d{3}/) && !firstLine.toLowerCase().includes("resume") && !firstLine.toLowerCase().includes("curriculum")) {
+      name = firstLine;
+    }
+  }
 
-const WEAK_ACTION_VERBS = [
-  "worked on",
-  "helped with",
-  "responsible for",
-  "assisted in",
-  "handled",
-  "participated in",
-  "did",
-  "made",
-  "tasked with",
-  "was involved in",
-];
+  return {
+    name: name || "Candidate",
+    email: emailMatch ? emailMatch[0] : "",
+    phone: phoneMatch ? phoneMatch[0] : "",
+  };
+}
 
+/**
+ * Client-Side ATS & Role Analysis Engine
+ * Performs deep deterministic parsing when server/AI is offline or busy.
+ */
 export function runClientATSAnalysis(
   resumeText: string,
   filename = "Resume.pdf",
-  userId = "demo-user-123",
-  targetRole?: string,
+  targetRole = "Embedded Systems Engineer",
+  jobDescription?: string,
 ): ResumeAnalysisResult {
   const clean = resumeText.trim();
   const lower = clean.toLowerCase();
   const words = clean.split(/\s+/).filter(Boolean);
   const wordCount = words.length;
 
-  // 1. Skill Detection
-  const techFound: string[] = [];
-  COMMON_TECH_SKILLS.forEach((skill) => {
-    const reg = new RegExp(
-      `\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
-      "i",
-    );
-    if (reg.test(clean)) techFound.push(skill);
+  const candidate = extractCandidateContact(clean);
+  const { roleName, profile } = findClosestRoleProfile(targetRole);
+
+  // 1. Skill Extraction
+  const matchedSkills: string[] = [];
+  const partialSkills: string[] = [];
+  const missingSkills: string[] = [];
+
+  profile.keywords.forEach((keyword) => {
+    const reg = new RegExp(`\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+    if (reg.test(lower)) {
+      // Capitalize nicely
+      const pretty = keyword
+        .split(" ")
+        .map((w) => (w.length <= 4 ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+        .join(" ");
+      if (!matchedSkills.includes(pretty)) {
+        matchedSkills.push(pretty);
+      }
+    }
   });
 
-  const softFound: string[] = [];
-  SOFT_SKILLS.forEach((skill) => {
-    const reg = new RegExp(
-      `\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
-      "i",
-    );
-    if (reg.test(clean)) softFound.push(skill);
+  // Check core vs recommended
+  profile.recommendedSkills.forEach((skill) => {
+    const reg = new RegExp(`\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+    if (!reg.test(lower)) {
+      if (!missingSkills.includes(skill)) {
+        missingSkills.push(skill);
+      }
+    } else if (!matchedSkills.includes(skill)) {
+      partialSkills.push(skill);
+    }
   });
 
-  const detectedSkills: DetectedSkills = {
-    technical:
-      techFound.length > 0
-        ? techFound
-        : ["JavaScript", "HTML/CSS", "Problem Solving"],
-    soft: softFound.length > 0 ? softFound : ["Collaboration", "Communication"],
-    tools: ["Git", "VS Code", "Jira"].filter((t) =>
-      lower.includes(t.toLowerCase()),
-    ),
-    programmingLanguages: techFound.filter((t) =>
-      [
-        "JavaScript",
-        "TypeScript",
-        "Python",
-        "Java",
-        "C++",
-        "C#",
-        "Go",
-        "Rust",
-        "SQL",
-      ].includes(t),
-    ),
-  };
+  // Also check if other known tools or skills are present
+  profile.tools.forEach((tool) => {
+    const reg = new RegExp(`\\b${tool.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+    if (reg.test(lower) && !matchedSkills.includes(tool)) {
+      partialSkills.push(tool);
+    }
+  });
 
-  // 2. Metrics & Numbers Check
-  const metricMatches =
-    clean.match(
-      /(\d+[\d,.]*%\s*|\$\s*\d+[\d,.]*|\b\d+\s*(?:users|clients|engineers|teams|projects|x|fold|k|m|ms|hours|days|weeks|months|years))/gi,
-    ) || [];
+  // 2. Metrics & Action Verbs
+  const metricMatches = clean.match(/(\d+[\d,.]*\s*(%|k|m|ms|us|ghz|mhz|kb|mb|gb|users|clients|x|\+))/gi) || [];
   const metricsCount = metricMatches.length;
 
-  // 3. Action Verb Check
   let strongVerbCount = 0;
-  STRONG_ACTION_VERBS.forEach((v) => {
-    const reg = new RegExp(`\\b${v}\\b`, "gi");
-    const m = clean.match(reg);
-    if (m) strongVerbCount += m.length;
+  COMMON_ACTION_VERBS.forEach((verb) => {
+    const reg = new RegExp(`\\b${verb}\\b`, "i");
+    if (reg.test(clean)) strongVerbCount++;
   });
 
-  // 4. Section Presence Checks
-  const hasExperience = /(experience|employment|work history|career)/i.test(
-    clean,
-  );
-  const hasEducation =
-    /(education|university|college|bachelor|master|degree|gpa)/i.test(clean);
-  const hasSkills = /(skills|technologies|proficiencies|competencies)/i.test(
-    clean,
-  );
-  const hasSummary = /(summary|profile|about me|objective)/i.test(clean);
-  const hasProjects = /(projects|portfolio)/i.test(clean);
-  const hasCertifications = /(certifications|certificates|licenses)/i.test(
-    clean,
+  // 3. Section Checks
+  const hasSummary = /summary|profile|about me|objective/i.test(clean);
+  const hasExperience = /experience|work history|employment|internship/i.test(clean);
+  const hasProjects = /projects|portfolio|academic projects/i.test(clean);
+  const hasEducation = /education|university|college|bachelor|master|b\.tech|degree/i.test(clean);
+  const hasSkillsSec = /skills|technical skills|technologies|proficiencies/i.test(clean);
+
+  // 4. Calculate Scores
+  // Skills Match (0-100)
+  const skillsRatio = profile.coreSkills.length > 0
+    ? Math.min(1, (matchedSkills.length + partialSkills.length * 0.5) / Math.max(4, profile.coreSkills.length))
+    : 0.7;
+  const skillsMatch = Math.min(100, Math.round(skillsRatio * 55 + 40));
+
+  // Experience Relevance
+  const experienceRelevance = Math.min(
+    100,
+    Math.round((hasExperience ? 40 : 15) + (metricsCount > 2 ? 30 : metricsCount * 10) + (strongVerbCount > 3 ? 25 : strongVerbCount * 6)),
   );
 
-  // 5. Calculate Category Scores
-  const keywordScore = Math.min(
-    95,
-    Math.max(40, techFound.length * 6 + softFound.length * 4 + 30),
+  // Education Relevance
+  const educationRelevance = hasEducation ? 90 : 60;
+
+  // Projects Relevance
+  const projectsRelevance = hasProjects ? Math.min(100, 75 + Math.min(25, matchedSkills.length * 4)) : 65;
+
+  // Keyword Match
+  const keywordMatch = Math.min(100, Math.round(skillsRatio * 50 + (wordCount > 300 ? 35 : 20) + (hasSkillsSec ? 15 : 5)));
+
+  // Structure Score
+  let structureScore = 50;
+  if (hasSummary) structureScore += 10;
+  if (hasExperience) structureScore += 12;
+  if (hasProjects) structureScore += 10;
+  if (hasEducation) structureScore += 10;
+  if (hasSkillsSec) structureScore += 8;
+  structureScore = Math.min(100, structureScore);
+
+  // Target Role Fit
+  const targetRoleFit = Math.round(
+    skillsMatch * 0.35 +
+    experienceRelevance * 0.25 +
+    projectsRelevance * 0.2 +
+    keywordMatch * 0.2
   );
-  const skillsScore = Math.min(96, Math.max(45, techFound.length * 7 + 25));
-  const metricsScore = Math.min(98, Math.max(30, metricsCount * 12 + 30));
-  const verbsScore = Math.min(94, Math.max(40, strongVerbCount * 8 + 35));
-  const experienceScore = hasExperience
-    ? Math.round((metricsScore + verbsScore) / 2)
-    : 35;
-  const educationScore = hasEducation ? 88 : 45;
-  const layoutScore =
-    wordCount >= 250 && wordCount <= 800 ? 92 : wordCount < 200 ? 55 : 75;
-  const structureScore =
-    (hasExperience ? 25 : 0) +
-    (hasEducation ? 25 : 0) +
-    (hasSkills ? 25 : 0) +
-    (hasSummary ? 15 : 5) +
-    (hasProjects ? 10 : 0);
+
+  // ATS Compatibility
+  const atsScore = Math.round(
+    structureScore * 0.35 +
+    keywordMatch * 0.35 +
+    (candidate.email && candidate.phone ? 20 : 10) +
+    (wordCount >= 350 && wordCount <= 900 ? 10 : 5)
+  );
+
+  // Overall Score (Weighted)
+  const overallScore = Math.round(
+    targetRoleFit * 0.4 +
+    atsScore * 0.3 +
+    skillsMatch * 0.2 +
+    experienceRelevance * 0.1
+  );
+
+  const scoreTier =
+    overallScore >= 85
+      ? "Excellent"
+      : overallScore >= 75
+      ? "Strong"
+      : overallScore >= 60
+      ? "Good"
+      : overallScore >= 45
+      ? "Needs Improvement"
+      : "Weak";
+
+  // 5. Strengths & Weaknesses specifically for target role
+  const strengths: string[] = [];
+  if (matchedSkills.length >= 3) {
+    strengths.push(`Demonstrated proficiency in key ${targetRole} technologies: ${matchedSkills.slice(0, 4).join(", ")}.`);
+  } else {
+    strengths.push(`Core technical foundations present with relevant academic or engineering terminology.`);
+  }
+
+  if (metricsCount >= 3) {
+    strengths.push(`Effective use of quantifiable metrics (${metricsCount} measurable outcomes found) proving project impact.`);
+  } else if (hasProjects) {
+    strengths.push(`Hands-on project work explicitly listed showcasing practical application.`);
+  }
+
+  if (hasExperience) {
+    strengths.push(`Structured professional experience aligned with technical problem-solving standards.`);
+  }
+  if (hasEducation) {
+    strengths.push(`Clear educational credentials and engineering foundation detected.`);
+  }
+
+  const weaknesses: string[] = [];
+  if (missingSkills.length > 0) {
+    weaknesses.push(`Missing high-demand ${targetRole} skills: ${missingSkills.slice(0, 4).join(", ")}.`);
+  }
+  if (metricsCount < 3) {
+    weaknesses.push("Bullet points lack quantifiable performance metrics (throughput, latency, error reduction, user scale).");
+  }
+  if (!hasSummary) {
+    weaknesses.push(`No targeted professional summary at the top explicitly positioning you for ${targetRole}.`);
+  }
+  if (wordCount < 300) {
+    weaknesses.push("Resume content is relatively brief; expanding on technical responsibilities will boost ATS keyword density.");
+  }
+
+  // 6. Practical Recommended Improvements
+  const recommendedImprovements: string[] = [
+    `Integrate missing industry keywords: ${missingSkills.slice(0, 3).join(", ") || "domain protocols and frameworks"} into project descriptions.`,
+    "Add measurable results (percentages, throughput, user count, or speedups) to your bullet points.",
+    `Include a concise 2-line target summary tailored specifically to "${targetRole}".`,
+    "Highlight version control (Git/GitHub) and industry-standard testing methodologies.",
+  ];
+
+  // 7. ATS Formatting Issues
+  const atsIssues: FormattingIssue[] = [];
+  if (!candidate.email) {
+    atsIssues.push({
+      severity: "high",
+      category: "Contact Information",
+      issue: "No professional email address was detected in the header.",
+      fix: "Place a clean email address at the very top of your resume.",
+    });
+  }
+  if (!candidate.phone) {
+    atsIssues.push({
+      severity: "medium",
+      category: "Contact Information",
+      issue: "No direct contact phone number was recognized.",
+      fix: "Include a formatted telephone number with country/area code in the header.",
+    });
+  }
+  if (!hasSummary) {
+    atsIssues.push({
+      severity: "medium",
+      category: "Section Hierarchy",
+      issue: "Missing target professional profile summary.",
+      fix: "Add a 2-3 line Summary section under your contact info to hook recruiters and ATS parsers.",
+    });
+  }
+  if (wordCount < 350) {
+    atsIssues.push({
+      severity: "medium",
+      category: "Content Density",
+      issue: "Resume is shorter than the standard 400-600 word benchmark for technical roles.",
+      fix: "Expand each project with technical tools, challenges overcome, and concrete outcomes.",
+    });
+  }
+  if (atsIssues.length === 0) {
+    atsIssues.push({
+      severity: "low",
+      category: "Layout & Spacing",
+      issue: "Formatting is clean. Ensure standard 1-inch margins and uniform bullet spacing.",
+      fix: "Maintain single-column hierarchy for flawless ATS text stream extraction.",
+    });
+  }
+
+  // 8. Priority Suggestions
+  const highPrioritySuggestions = [
+    `Add missing core keywords: ${missingSkills.slice(0, 3).join(", ") || "specialized domain tools"} to relevant project bullet points.`,
+    "Quantify your work with concrete metrics (e.g., 'reduced latency by 25%', 'tested across 10+ hardware revisions').",
+  ];
+
+  const mediumPrioritySuggestions = [
+    `Add a target role title '${targetRole}' directly under your name to establish immediate role alignment.`,
+    "Group technical skills into clear categories (Languages, Tools, Protocols/Frameworks, Platforms).",
+  ];
+
+  const lowPrioritySuggestions = [
+    "Ensure consistent past-tense action verbs across all previous work experiences.",
+    "Include direct links to GitHub repositories or online demonstration portfolios.",
+  ];
+
+  // Summary tailored specifically to role
+  const summary = `Your resume demonstrates a ${scoreTier.toLowerCase()} match for a ${targetRole} position, highlighted by experience with ${matchedSkills.slice(0, 3).join(", ") || "core technical concepts"}. Targeting key missing skills (${missingSkills.slice(0, 3).join(", ") || "specialized tooling"}) and adding quantifiable metrics will optimize your ATS visibility.`;
+
+  const detectedSkills: DetectedSkills = {
+    technical: matchedSkills.slice(0, 6),
+    programmingLanguages: matchedSkills.filter((s) => ["C", "C++", "Python", "Java", "JavaScript", "TypeScript", "Verilog", "VHDL"].includes(s)),
+    tools: partialSkills.slice(0, 5),
+    soft: ["Problem Solving", "Collaboration", "Technical Communication"],
+  };
 
   const categoryScores: DetailedCategoryScores = {
-    keywordOptimization: keywordScore,
-    skillsMatch: skillsScore,
-    experienceImpact: experienceScore,
-    educationRelevance: educationScore,
-    formattingAndLayout: layoutScore,
+    atsCompatibility: atsScore,
+    skillsMatch,
+    experienceRelevance,
+    educationRelevance,
+    projectsRelevance,
+    keywordMatch,
     resumeStructure: structureScore,
-    quantifiableMetrics: metricsScore,
-    actionVerbsAndTone: verbsScore,
-  };
-
-  // 6. Section Scores
-  const sectionScores: SectionScores = {
-    summary: hasSummary ? 82 : 45,
-    skills: Math.min(95, techFound.length * 8 + 30),
-    experience: experienceScore,
-    education: educationScore,
-    projects: hasProjects ? 84 : 50,
-    certifications: hasCertifications ? 85 : 50,
-  };
-
-  // 7. Overall ATS Score
-  const rawScore = Math.round(
-    keywordScore * 0.2 +
-      skillsScore * 0.2 +
-      experienceScore * 0.25 +
-      metricsScore * 0.15 +
-      structureScore * 0.1 +
-      layoutScore * 0.1,
-  );
-  const atsScore = Math.max(25, Math.min(98, rawScore));
-
-  let scoreTier: ResumeAnalysisResult["scoreTier"] = "Needs Work (<60)";
-  if (atsScore >= 90) scoreTier = "Elite (90-100)";
-  else if (atsScore >= 75) scoreTier = "Strong (75-89)";
-  else if (atsScore >= 60) scoreTier = "Fair (60-74)";
-
-  // 8. Missing Keywords
-  const missingPool = [
-    "Cloud Computing",
-    "CI/CD Pipelines",
-    "System Architecture",
-    "Unit Testing",
-    "Agile/Scrum",
-    "RESTful APIs",
-    "Microservices",
-    "Performance Optimization",
-    "Data Modeling",
-    "Scalability",
-  ];
-  const missingKeywords = missingPool
-    .filter((k) => !lower.includes(k.toLowerCase()))
-    .slice(0, 5);
-
-  // 9. Strengths & Weaknesses
-  const strengths: string[] = [];
-  const weaknesses: string[] = [];
-
-  if (techFound.length >= 5)
-    strengths.push(
-      `Strong technology stack identified with ${techFound.length}+ core technical proficiencies.`,
-    );
-  if (metricsCount >= 3)
-    strengths.push(
-      `Effective usage of quantifiable metrics and measurable outcomes (${metricsCount} data points detected).`,
-    );
-  if (hasExperience && hasEducation && hasSkills)
-    strengths.push(
-      "Well-structured traditional resume flow matching standard ATS hierarchy expectations.",
-    );
-  if (strongVerbCount >= 3)
-    strengths.push(
-      "Engaging action-oriented vocabulary demonstrating clear ownership and initiative.",
-    );
-  if (strengths.length < 2)
-    strengths.push(
-      "Clean resume format easily parseable by enterprise Applicant Tracking Systems.",
-    );
-
-  if (metricsCount < 3)
-    weaknesses.push(
-      "Low density of quantifiable business results (percentages, revenue, time savings, or volume metrics).",
-    );
-  if (techFound.length < 6)
-    weaknesses.push(
-      "Technical skills section could be expanded with more target role frameworks and libraries.",
-    );
-  if (!hasSummary)
-    weaknesses.push(
-      "Missing a concise 2-3 line Professional Executive Summary highlighting key achievements.",
-    );
-  if (wordCount < 250)
-    weaknesses.push(
-      "Resume length is slightly sparse; aim for 350-650 words with expanded impact bullet points.",
-    );
-  if (weaknesses.length === 0)
-    weaknesses.push(
-      "Tailor keywords even more closely to specific target job postings to reach 95+ alignment.",
-    );
-
-  // 10. Section details
-  const sectionDetails: SectionAnalysisDetail[] = [
-    {
-      sectionName: "Professional Summary",
-      score: sectionScores.summary,
-      status: hasSummary ? "good" : "needs_work",
-      strengths: hasSummary
-        ? ["Contains career intent and focus"]
-        : ["Clear candidate name identified"],
-      problems: hasSummary
-        ? []
-        : ["Missing an overarching professional summary at the top"],
-      suggestions: [
-        "Include your target role title, years of experience, and top 2 career achievements.",
-      ],
-    },
-    {
-      sectionName: "Work Experience",
-      score: sectionScores.experience,
-      status:
-        experienceScore >= 75
-          ? "excellent"
-          : experienceScore >= 60
-            ? "good"
-            : "needs_work",
-      strengths: [
-        `Identified ${metricsCount} metric data points and action statements`,
-      ],
-      problems:
-        metricsCount < 2
-          ? [
-              "Bullet points rely heavily on task descriptions rather than measurable results",
-            ]
-          : [],
-      suggestions: [
-        "Structure bullets with Google's X-Y-Z formula: 'Accomplished [X], measured by [Y], by doing [Z]'.",
-      ],
-    },
-    {
-      sectionName: "Technical Skills",
-      score: sectionScores.skills,
-      status: skillsScore >= 75 ? "excellent" : "good",
-      strengths: [
-        `Recognized ${techFound.length} technical skills matching ATS filters`,
-      ],
-      problems:
-        missingKeywords.length > 3
-          ? ["Could benefit from additional modern industry keywords"]
-          : [],
-      suggestions: [
-        "Organize skills into clear subheadings (Languages, Frameworks, Cloud, Developer Tools).",
-      ],
-    },
-    {
-      sectionName: "Education & Credentials",
-      score: sectionScores.education,
-      status: hasEducation ? "excellent" : "needs_work",
-      strengths: hasEducation
-        ? ["Degree and academic qualifications formatted clearly"]
-        : [],
-      problems: hasEducation
-        ? []
-        : ["Education section not distinctly identified"],
-      suggestions: [
-        "List degree name, institution, graduation year, and relevant honors/coursework.",
-      ],
-    },
-  ];
-
-  // 11. Bullet Point Improvements
-  const rawBullets = clean
-    .split("\n")
-    .map((l) => l.trim().replace(/^[-*•]\s*/, ""))
-    .filter(
-      (l) =>
-        l.length >= 25 &&
-        l.length <= 160 &&
-        !l.includes(":") &&
-        !l.toLowerCase().startsWith("education"),
-    );
-
-  const sampleBullets = rawBullets.slice(0, 3);
-  const bulletPointImprovements: BulletPointImprovement[] = sampleBullets.map(
-    (orig, i) => {
-      const firstWord = orig.split(" ")[0] || "Worked";
-      return {
-        id: `bullet-${i + 1}`,
-        original: orig,
-        problem: "Lacks quantifiable metrics and high-impact action verbs.",
-        whyItMatters:
-          "Recruiters and ATS scanners heavily favor bullets that showcase direct business impact with measurable scale.",
-        improved: `Spearheaded ${orig.toLowerCase().replace(/^(worked on|responsible for|helped|assisted)\s*/i, "")}, driving a 35% improvement in delivery speed and supporting 10,000+ active users.`,
-        category: i % 2 === 0 ? "metrics" : "action_verb",
-        metricAddedSuggestion:
-          "Add percentage gains, dollar revenue, team size, or latency reductions.",
-      };
-    },
-  );
-
-  if (bulletPointImprovements.length === 0) {
-    bulletPointImprovements.push({
-      id: "bullet-demo-1",
-      original:
-        "Worked with team to build web application features and fix bugs.",
-      problem:
-        "Passive language ('worked with') and zero quantifiable results.",
-      whyItMatters:
-        "Passive verbs diminish perceived leadership and technical ownership.",
-      improved:
-        "Engineered 12+ responsive web application features using React and TypeScript, decreasing bug turnaround time by 40%.",
-      category: "action_verb",
-      metricAddedSuggestion:
-        "Specify feature count and bug resolution reduction rate.",
-    });
-  }
-
-  // 12. Formatting Issues
-  const formattingIssues: FormattingIssue[] = [];
-  if (wordCount < 200) {
-    formattingIssues.push({
-      severity: "medium",
-      category: "Word Count",
-      issue: "Resume is shorter than the standard 400-600 word benchmark.",
-      fix: "Add 2-3 additional high-impact bullet points to each job experience.",
-    });
-  }
-  if (!clean.includes("@")) {
-    formattingIssues.push({
-      severity: "high",
-      category: "Contact Details",
-      issue: "No email address found in the document.",
-      fix: "Place your email and phone number at the very top of your resume.",
-    });
-  }
-  if (formattingIssues.length === 0) {
-    formattingIssues.push({
-      severity: "low",
-      category: "Header Spacing",
-      issue:
-        "Ensure 1-inch margins and standard 10-12pt typography for optimal print/PDF readability.",
-      fix: "Use single-column layout with clean standard bullet points.",
-    });
-  }
-
-  // 13. Insights
-  const experienceInsight: ExperienceInsight = {
-    jobTitlesDetected: ["Software Engineer", "Developer", "Specialist"].filter(
-      (t) => lower.includes(t.toLowerCase()),
-    ),
-    estimatedYearsExperience: wordCount > 400 ? "3 - 5 Years" : "1 - 3 Years",
-    measurableResultsCount: metricsCount,
-    actionVerbStrength:
-      strongVerbCount >= 4
-        ? "strong"
-        : strongVerbCount >= 2
-          ? "moderate"
-          : "weak",
-    summaryRemarks: `Found ${metricsCount} measurable outcomes and ${strongVerbCount} action verbs throughout experience entries.`,
-  };
-
-  const educationInsight: EducationInsight = {
-    degreeDetected: hasEducation
-      ? "Bachelor of Science / Degree detected"
-      : undefined,
-    institutionDetected: hasEducation ? "University / College" : undefined,
-    summaryRemarks: hasEducation
-      ? "Education records are clearly formatted."
-      : "Ensure education details are easily discoverable.",
+    targetRoleFit,
   };
 
   return {
     id: "analysis_" + Math.random().toString(36).substring(2, 10),
-    userId,
-    resumeId: "res_" + Math.random().toString(36).substring(2, 10),
     filename,
+    targetRole,
     createdAt: new Date().toISOString(),
+    overallScore,
     atsScore,
     scoreTier,
-    summary: `Comprehensive ATS audit calculated an overall score of ${atsScore}/100. Identified ${techFound.length} technical skills, ${metricsCount} quantifiable outcomes, and ${strongVerbCount} action verbs.`,
+    skillsMatch,
+    experienceRelevance,
+    educationRelevance,
+    projectsRelevance,
+    keywordMatch,
+    structureScore,
+    targetRoleFit,
+    summary,
+    candidate,
+    matchedSkills,
+    partialSkills,
+    missingSkills,
     strengths,
     weaknesses,
-    missingKeywords,
+    recommendedImprovements,
+    atsIssues,
+    missingKeywords: missingSkills.concat(["Git", "Unit Testing", "Documentation"]),
+    highPrioritySuggestions,
+    mediumPrioritySuggestions,
+    lowPrioritySuggestions,
     detectedSkills,
     categoryScores,
-    sectionScores,
-    sectionDetails,
-    bulletPointImprovements,
-    formattingIssues,
-    experienceInsight,
-    educationInsight,
-    extractedTextSnippet: clean.substring(0, 400),
-    targetRole: targetRole || "Software Professional",
+    extractedTextSnippet: clean.substring(0, 600),
+    jobDescriptionSnippet: jobDescription ? jobDescription.substring(0, 300) : undefined,
   };
 }
 
@@ -524,7 +541,6 @@ export function runClientJobMatch(
   resumeText: string,
   jobDescription: string,
   jobTitle = "Target Role",
-  userId = "demo-user-123",
 ): JobMatchResult {
   const resumeLower = resumeText.toLowerCase();
   const jdLower = jobDescription.toLowerCase();
@@ -532,16 +548,24 @@ export function runClientJobMatch(
   const matching: string[] = [];
   const missing: string[] = [];
 
-  COMMON_TECH_SKILLS.forEach((skill) => {
-    const reg = new RegExp(
-      `\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
-      "i",
-    );
-    if (reg.test(jobDescription)) {
-      if (reg.test(resumeText)) {
-        matching.push(skill);
+  const allKeywords = [
+    ...ROLE_SKILL_PROFILES["embedded systems engineer"].keywords,
+    ...ROLE_SKILL_PROFILES["software engineer"].keywords,
+    ...ROLE_SKILL_PROFILES["vlsi engineer"].keywords,
+    ...ROLE_SKILL_PROFILES["automotive engineer"].keywords,
+    ...ROLE_SKILL_PROFILES["data analyst"].keywords,
+  ];
+
+  const unique = Array.from(new Set(allKeywords));
+
+  unique.forEach((skill) => {
+    const reg = new RegExp(`\\b${skill.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i");
+    if (reg.test(jdLower)) {
+      const pretty = skill.charAt(0).toUpperCase() + skill.slice(1);
+      if (reg.test(resumeLower)) {
+        matching.push(pretty);
       } else {
-        missing.push(skill);
+        missing.push(pretty);
       }
     }
   });
@@ -549,16 +573,11 @@ export function runClientJobMatch(
   const matchRatio =
     matching.length + missing.length > 0
       ? matching.length / (matching.length + missing.length)
-      : 0.7;
-  const matchScore = Math.max(
-    35,
-    Math.min(95, Math.round(matchRatio * 75 + 20)),
-  );
+      : 0.75;
+  const matchScore = Math.max(35, Math.min(95, Math.round(matchRatio * 70 + 25)));
 
   return {
     id: "match_" + Math.random().toString(36).substring(2, 10),
-    userId,
-    resumeId: "res_active",
     jobTitle,
     jobDescriptionSnippet: jobDescription.substring(0, 180),
     matchScore,
@@ -570,24 +589,6 @@ export function runClientJobMatch(
       `Integrate missing keywords: ${missing.slice(0, 3).join(", ") || "target role frameworks"} into your experience section.`,
       `Highlight recent projects that align with ${jobTitle} requirements.`,
       "Quantify your accomplishments using metrics similar to the job requirements.",
-    ],
-    sectionsToImprove: [
-      {
-        section: "Technical Skills",
-        advice: `Add ${missing.slice(0, 3).join(", ") || "relevant tooling"} if you have experience with them.`,
-      },
-      {
-        section: "Experience Bullets",
-        advice:
-          "Tailor your project descriptions to mirror the core responsibilities in this job description.",
-      },
-    ],
-    tailoredBulletSuggestions: [
-      {
-        original: "Developed web application components and APIs.",
-        tailoredForJob: `Architected scalable web components aligned with ${jobTitle} standards, integrating ${matching[0] || "modern frameworks"} to enhance response times by 30%.`,
-        reason: `Directly emphasizes ${jobTitle} terminology and business outcomes.`,
-      },
     ],
     createdAt: new Date().toISOString(),
   };

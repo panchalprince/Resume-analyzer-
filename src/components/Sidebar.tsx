@@ -2,47 +2,29 @@ import React from "react";
 import {
   FileText,
   Brain,
-  History,
-  LogIn,
-  LogOut,
+  Home,
 } from "lucide-react";
-import { UserProfile } from "../types.js";
 
 interface SidebarProps {
   currentView:
     | "landing"
-    | "dashboard"
     | "upload"
-    | "analysis"
-    | "history";
+    | "analysis";
   onNavigate: (
     view:
       | "landing"
-      | "dashboard"
       | "upload"
-      | "analysis"
-      | "history",
+      | "analysis",
   ) => void;
-  user: UserProfile | null;
-  onOpenAuth: (mode?: "login" | "signup") => void;
-  onLogout: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   currentView,
   onNavigate,
-  user,
-  onOpenAuth,
-  onLogout,
 }) => {
   const navItems = [
+    { id: "landing" as const, label: "Home", icon: Home },
     { id: "upload" as const, label: "Resume Analyzer", icon: FileText },
-    { id: "history" as const, label: "History", icon: History },
-    {
-      id: "auth" as const,
-      label: user ? "Logout" : "Login",
-      icon: user ? LogOut : LogIn,
-    },
   ];
 
   return (
@@ -69,31 +51,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <nav className="flex-1 px-4 py-2 space-y-1 mt-2">
         {navItems.map((item) => {
           const Icon = item.icon;
-          // Highlight based on currentView (or fallback mapping)
           let isActive = false;
-          if (
+          if (item.id === "landing" && currentView === "landing") {
+            isActive = true;
+          } else if (
             item.id === "upload" &&
-            (currentView === "upload" ||
-              currentView === "analysis" ||
-              currentView === "landing")
-          )
+            (currentView === "upload" || currentView === "analysis")
+          ) {
             isActive = true;
-          if (item.id === "history" && currentView === "history")
-            isActive = true;
-
-          const handleClick = () => {
-            if (item.id === "history") onNavigate("history");
-            else if (item.id === "auth") {
-              if (user) onLogout();
-              else onOpenAuth("login");
-            } else onNavigate("upload");
-          };
+          }
 
           return (
             <button
               key={item.id}
-              onClick={handleClick}
-              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all ${
+              onClick={() => onNavigate(item.id)}
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-[13px] font-medium transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#6366F1]/10 text-[#F5F7FA]"
                   : "text-[#8B93A1] hover:bg-[#151922] hover:text-[#F5F7FA]"

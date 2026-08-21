@@ -46,34 +46,48 @@ export interface AIAnalysisPromptInput {
   filename?: string;
 }
 
-export interface CompactATSAnalysisResult {
+export interface DetailedATSAnalysisResult {
+  overallScore: number;
   atsScore: number;
+  skillsMatch: number;
+  experienceRelevance: number;
+  educationRelevance: number;
+  projectsRelevance: number;
+  keywordMatch: number;
+  structureScore: number;
+  targetRoleFit: number;
+  scoreTier: "Excellent" | "Strong" | "Good" | "Needs Improvement" | "Weak";
+  summary: string;
   candidate: {
     name: string;
     email: string;
     phone: string;
   };
-  skills: string[];
+  matchedSkills: string[];
+  partialSkills: string[];
   missingSkills: string[];
-  experienceMatch: number;
-  educationMatch: number;
-  keywordMatch: number;
-  skillsMatch?: number;
   strengths: string[];
   weaknesses: string[];
-  recommendations: string[];
-  hiringRecommendation: string;
-  experienceSummary?: string;
-  educationSummary?: string;
+  recommendedImprovements: string[];
+  atsIssues: {
+    category: string;
+    issue: string;
+    fix: string;
+    severity: "low" | "medium" | "high";
+  }[];
+  missingKeywords: string[];
+  highPrioritySuggestions: string[];
+  mediumPrioritySuggestions: string[];
+  lowPrioritySuggestions: string[];
 }
+
 
 // Fast Flash-class models prioritized for lowest latency and high quality ATS parsing
 const SUPPORTED_MODELS = [
-  "gemini-3.5-flash-lite",
   "gemini-3.7-flash",
-  "gemini-3.6-flash",
-  "gemini-flash-latest",
   "gemini-3.1-flash-lite",
+  "gemini-flash-latest",
+  "gemini-3.1-pro-preview",
 ];
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -223,39 +237,49 @@ async function callWithRetryAndFallback<T>(
  * - Recommendations
  * - Final Hiring Recommendation
  */
-export async function generateResumeAnalysis(input: AIAnalysisPromptInput): Promise<CompactATSAnalysisResult> {
+export async function generateResumeAnalysis(input: AIAnalysisPromptInput): Promise<DetailedATSAnalysisResult> {
   const ai = getGeminiClient();
 
   const cleanResume = compactText(input.resumeText, 7000);
   const cleanJob = input.jobDescription ? compactText(input.jobDescription, 3000) : "";
-  const roleContext = input.targetRole?.trim() || "";
+  const roleContext = input.targetRole?.trim() || "Software Engineer";
 
-  const prompt = `You are an expert ATS (Applicant Tracking System) and Senior Technical Recruiter.
-Analyze this resume concisely against ATS algorithms and industry standards${cleanJob ? " and the specified Job Description" : roleContext ? ` for the target role: ${roleContext}` : ""}.
+  const prompt = `You are a Principal ATS Evaluator and Senior Technical Hiring Manager specializing in evaluating candidates for the specific target role: "${roleContext}".
 
-RESUME:
+Analyze this candidate's resume strictly and deeply against the requirements, technologies, expectations, and industry standards for the target role: "${roleContext}"${cleanJob ? " and the provided Job Description" : ""}.
+
+RESUME CONTENT:
 """
 ${cleanResume}
 """
 ${cleanJob ? `\nJOB DESCRIPTION:\n"""\n${cleanJob}\n"""` : ""}
 
-Evaluate strictly and return JSON matching this schema:
-- atsScore: Integer 0-100 reflecting overall ATS compatibility, keyword match, and formatting strength.
-- candidate: { name, email, phone } extracted from resume (use empty string "" if not found).
-- skills: array of key technical & professional skills found (max 15).
-- missingSkills: array of high-value missing skills or industry keywords for this profile (max 8).
-- experienceMatch: integer 0-100 rating candidate's work history alignment.
-- educationMatch: integer 0-100 rating candidate's educational credentials.
-- keywordMatch: integer 0-100 rating ATS keyword optimization.
-- skillsMatch: integer 0-100 rating hard/soft skills relevance.
-- strengths: 3 to 4 concise, high-value bullet points.
-- weaknesses: 3 to 4 concise, actionable weakness points.
-- recommendations: 3 to 4 short, high-impact suggestions to improve ATS ranking.
-- hiringRecommendation: one concise phrase (e.g., "Strong Match - Recommended for Interview", "Good Match - Address Missing Skills", "Fair Match - Needs Experience Alignment").
-- experienceSummary: 1 brief sentence on years/level of experience.
-- educationSummary: 1 brief sentence on degree/institution.
+Evaluate rigorously and return strict JSON with these fields:
+- overallScore: Integer (0-100) reflecting overall candidate suitability for "${roleContext}".
+- atsScore: Integer (0-100) reflecting parsing compatibility, structure, and keyword density.
+- skillsMatch: Integer (0-100) specifically for technical skills needed for "${roleContext}".
+- experienceRelevance: Integer (0-100) assessing relevance of past work/internships to "${roleContext}".
+- educationRelevance: Integer (0-100) rating degree and academic alignment.
+- projectsRelevance: Integer (0-100) rating hands-on project work relevant to "${roleContext}".
+- keywordMatch: Integer (0-100) evaluating density of essential domain keywords for "${roleContext}".
+- structureScore: Integer (0-100) evaluating formatting clarity, typography, and section order.
+- targetRoleFit: Integer (0-100) composite fit score for "${roleContext}".
+- scoreTier: One of "Excellent" (85-100), "Strong" (75-84), "Good" (60-74), "Needs Improvement" (45-59), or "Weak" (<45).
+- summary: A concise 1-2 sentence AI summary specifically explaining the candidate's alignment with "${roleContext}" (e.g., "Your resume demonstrates a solid foundation for an Embedded Systems Engineer, highlighted by microcontroller projects and C/C++ experience, but would benefit from explicit hardware communication protocols and RTOS exposure.").
+- candidate: { name, email, phone } (extract from resume or empty string if not found).
+- matchedSkills: Array of detected technical skills strongly matching "${roleContext}" (up to 12 items).
+- partialSkills: Array of detected skills that are tangentially or partially relevant (up to 8 items).
+- missingSkills: Array of high-demand skills and tools commonly required for "${roleContext}" that are absent or under-represented in this resume (up to 8 items).
+- strengths: Array of 3-4 bullet points highlighting the strongest aspects of the resume for "${roleContext}".
+- weaknesses: Array of 3-4 bullet points highlighting gaps, missing qualifications, or weak descriptions.
+- recommendedImprovements: Array of 4-5 practical, actionable recommendations tailored to "${roleContext}" (e.g., "Add measurable throughput or latency metrics to project descriptions", "Specify microcontrollers and communication protocols like SPI/I2C/UART", "Highlight GitHub/Git version control workflow").
+- atsIssues: Array of formatting or parsing issues found, each with { category, issue, fix, severity: "low"|"medium"|"high" }.
+- missingKeywords: Array of 5-8 essential ATS keywords for "${roleContext}" to include.
+- highPrioritySuggestions: Array of 2-3 most important urgent improvements.
+- mediumPrioritySuggestions: Array of 2-3 useful improvements.
+- lowPrioritySuggestions: Array of 2-3 optional polish improvements.
 
-Be concise. Do not repeat the full resume or include markdown filler.`;
+Be objective, accurate, and specific to "${roleContext}". Do not output generic advice.`;
 
   return await callWithRetryAndFallback("Resume Analysis", async (model) => {
     const response = await ai.models.generateContent({
@@ -266,7 +290,17 @@ Be concise. Do not repeat the full resume or include markdown filler.`;
         responseSchema: {
           type: Type.OBJECT,
           properties: {
+            overallScore: { type: Type.INTEGER, description: "Overall score 0-100" },
             atsScore: { type: Type.INTEGER, description: "ATS score 0-100" },
+            skillsMatch: { type: Type.INTEGER, description: "Skills match 0-100" },
+            experienceRelevance: { type: Type.INTEGER, description: "Experience relevance 0-100" },
+            educationRelevance: { type: Type.INTEGER, description: "Education relevance 0-100" },
+            projectsRelevance: { type: Type.INTEGER, description: "Projects relevance 0-100" },
+            keywordMatch: { type: Type.INTEGER, description: "Keyword match 0-100" },
+            structureScore: { type: Type.INTEGER, description: "Structure score 0-100" },
+            targetRoleFit: { type: Type.INTEGER, description: "Target role fit 0-100" },
+            scoreTier: { type: Type.STRING, description: "Excellent | Strong | Good | Needs Improvement | Weak" },
+            summary: { type: Type.STRING, description: "Role-specific summary" },
             candidate: {
               type: Type.OBJECT,
               properties: {
@@ -276,54 +310,90 @@ Be concise. Do not repeat the full resume or include markdown filler.`;
               },
               required: ["name", "email", "phone"],
             },
-            skills: {
+            matchedSkills: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "Detected skills",
+              description: "Strong skill matches",
+            },
+            partialSkills: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+              description: "Partial skill matches",
             },
             missingSkills: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "Missing keywords/skills",
+              description: "Missing role skills",
             },
-            experienceMatch: { type: Type.INTEGER, description: "Experience match 0-100" },
-            educationMatch: { type: Type.INTEGER, description: "Education match 0-100" },
-            keywordMatch: { type: Type.INTEGER, description: "Keyword match 0-100" },
-            skillsMatch: { type: Type.INTEGER, description: "Skills match 0-100" },
             strengths: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "3-4 key strengths",
+              description: "Strengths for target role",
             },
             weaknesses: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "3-4 key weaknesses",
+              description: "Gaps for target role",
             },
-            recommendations: {
+            recommendedImprovements: {
               type: Type.ARRAY,
               items: { type: Type.STRING },
-              description: "3-4 short actionable recommendations",
+              description: "Practical improvements",
             },
-            hiringRecommendation: {
-              type: Type.STRING,
-              description: "Short hiring status recommendation",
+            atsIssues: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  category: { type: Type.STRING },
+                  issue: { type: Type.STRING },
+                  fix: { type: Type.STRING },
+                  severity: { type: Type.STRING },
+                },
+                required: ["category", "issue", "fix", "severity"],
+              },
             },
-            experienceSummary: { type: Type.STRING },
-            educationSummary: { type: Type.STRING },
+            missingKeywords: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+            highPrioritySuggestions: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+            mediumPrioritySuggestions: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+            lowPrioritySuggestions: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
           },
           required: [
+            "overallScore",
             "atsScore",
-            "candidate",
-            "skills",
-            "missingSkills",
-            "experienceMatch",
-            "educationMatch",
+            "skillsMatch",
+            "experienceRelevance",
+            "educationRelevance",
+            "projectsRelevance",
             "keywordMatch",
+            "structureScore",
+            "targetRoleFit",
+            "scoreTier",
+            "summary",
+            "candidate",
+            "matchedSkills",
+            "partialSkills",
+            "missingSkills",
             "strengths",
             "weaknesses",
-            "recommendations",
-            "hiringRecommendation",
+            "recommendedImprovements",
+            "atsIssues",
+            "missingKeywords",
+            "highPrioritySuggestions",
+            "mediumPrioritySuggestions",
+            "lowPrioritySuggestions",
           ],
         },
       },
@@ -333,13 +403,13 @@ Be concise. Do not repeat the full resume or include markdown filler.`;
     try {
       return JSON.parse(raw);
     } catch (parseErr) {
-      // Safe fallback retry once
       console.warn("Initial JSON parse failed, cleaning response...", parseErr);
       const cleaned = raw.replace(/^```json/g, "").replace(/```$/g, "").trim();
       return JSON.parse(cleaned);
     }
   });
 }
+
 
 /**
  * Dedicated bullet rewriter if requested

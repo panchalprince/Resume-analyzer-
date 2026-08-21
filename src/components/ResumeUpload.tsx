@@ -8,6 +8,10 @@ import {
   X,
   CheckCircle2,
   Sparkles,
+  Briefcase,
+  Layers,
+  ArrowRight,
+  Info,
 } from "lucide-react";
 import { formatFileSize } from "../lib/utils.js";
 import { ExtractedResumeData, ResumeAnalysisResult } from "../types.js";
@@ -15,12 +19,19 @@ import { apiExtractResume, apiAnalyzeResume } from "../lib/api.js";
 
 interface ResumeUploadProps {
   onAnalysisComplete: (result: ResumeAnalysisResult) => void;
-  userId?: string;
+  onOpenHistory?: () => void;
 }
+
+const ROLE_SUGGESTIONS = [
+  "Embedded Systems Engineer",
+  "Software Engineer",
+  "VLSI Engineer",
+  "Automotive Engineer",
+  "Data Analyst",
+];
 
 export const ResumeUpload: React.FC<ResumeUploadProps> = ({
   onAnalysisComplete,
-  userId,
 }) => {
   const [file, setFile] = useState<File | null>(null);
   const [pastedText, setPastedText] = useState("");
@@ -44,10 +55,10 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     setExtractedData(null);
     setIsCompleted(false);
 
-    // Validate size (10 MB)
+    // Validate size (10 MB limit)
     if (selectedFile.size > 10 * 1024 * 1024) {
       setError(
-        "File size exceeds 10 MB limit. Please compress or select a smaller document.",
+        "File size exceeds 10 MB limit. Please select a smaller resume file.",
       );
       return;
     }
@@ -59,19 +70,19 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
     if (!isValid) {
       setError(
-        "Invalid file type. Please upload a PDF (.pdf), Microsoft Word (.docx, .doc), or plain text file (.txt).",
+        "Invalid file type. Please upload a PDF (.pdf), Microsoft Word (.docx, .doc), or text file (.txt).",
       );
       return;
     }
 
     setFile(selectedFile);
     setIsExtracting(true);
-    setAnalysisStage("Uploading resume...");
-    setUploadProgress(30);
+    setAnalysisStage("Uploading resume document...");
+    setUploadProgress(25);
 
     try {
-      setAnalysisStage("Extracting resume text...");
-      setUploadProgress(70);
+      setAnalysisStage("Extracting text and structure...");
+      setUploadProgress(65);
       const data = await apiExtractResume(selectedFile);
       setUploadProgress(100);
 
@@ -81,7 +92,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
         data.extractedText.trim().length === 0
       ) {
         throw new Error(
-          "No readable text found in document. Please paste your resume text directly.",
+          "Could not extract readable text from document. Please ensure the file is not password-protected or scanned image.",
         );
       }
 
@@ -92,7 +103,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
       console.error("Extraction error:", err);
       setError(
         err.message ||
-          "Failed to read resume text. You can paste your resume text directly below.",
+          "Failed to read resume document. Please check the file and try again.",
       );
       setAnalysisStage("");
     } finally {
@@ -138,17 +149,22 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const handleAnalyze = async () => {
-    // Prevent simultaneous or double clicks
-    if (isAnalyzing || isRequestInProgressRef.current) {
-      return;
-    }
+  const handleSelectRoleSuggestion = (role: string) => {
+    setTargetRole(role);
+    setError(null);
+  };
 
-    const textToAnalyze = pastedText.trim();
-    if (!textToAnalyze || textToAnalyze.length < 20) {
-      setError(
-        "Please upload a resume or enter at least 20 characters of resume text to analyze.",
-      );
+  const hasResume = Boolean(file || pastedText.trim().length >= 20);
+  const hasTargetRole = Boolean(targetRole.trim());
+  const canAnalyze = hasResume && hasTargetRole && !isAnalyzing && !isExtracting;
+
+  const handleAnalyze = async () => {
+    if (!canAnalyze || isRequestInProgressRef.current) {
+      if (!hasResume) {
+        setError("Please upload a resume file (PDF or DOCX) to begin.");
+      } else if (!hasTargetRole) {
+        setError("Please enter or select a Target Job / Role to evaluate your resume against.");
+      }
       return;
     }
 
@@ -156,42 +172,40 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     setError(null);
     setIsAnalyzing(true);
     setIsCompleted(false);
-    setAnalysisStage("Analyzing skills...");
 
-    // Timed pipeline stages reflecting actual processing steps
-    const t1 = setTimeout(() => {
-      setAnalysisStage("Calculating ATS score...");
-    }, 450);
+    setAnalysisStage(`Evaluating resume against "${targetRole.trim()}"...`);
 
-    const t2 = setTimeout(() => {
-      setAnalysisStage("Generating recommendations...");
-    }, 950);
+    const stageTimer1 = setTimeout(() => {
+      setAnalysisStage("Evaluating ATS parsing & keyword density...");
+    }, 500);
+
+    const stageTimer2 = setTimeout(() => {
+      setAnalysisStage("Generating role-specific recommendations...");
+    }, 1100);
 
     try {
       const data = await apiAnalyzeResume({
-        resumeText: textToAnalyze,
+        resumeText: pastedText.trim(),
         filename: file?.name || extractedData?.filename || "My_Resume.pdf",
-        userId: userId || "demo-user-123",
-        targetRole: targetRole.trim() || undefined,
+        targetRole: targetRole.trim(),
         jobDescription: jobDescription.trim() || undefined,
       });
 
-      clearTimeout(t1);
-      clearTimeout(t2);
-      setAnalysisStage("Complete");
+      clearTimeout(stageTimer1);
+      clearTimeout(stageTimer2);
+      setAnalysisStage("Analysis complete!");
       setIsCompleted(true);
 
-      // Brief completion indication before routing to dashboard
       setTimeout(() => {
         onAnalysisComplete(data);
-      }, 400);
+      }, 350);
     } catch (err: any) {
-      clearTimeout(t1);
-      clearTimeout(t2);
+      clearTimeout(stageTimer1);
+      clearTimeout(stageTimer2);
       console.error("Analysis failure:", err);
       setError(
         err.message ||
-          "Failed to analyze resume. Please check connection and try again.",
+          "Failed to complete resume analysis. Please try again.",
       );
       setAnalysisStage("");
     } finally {
@@ -201,191 +215,258 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
   };
 
   return (
-    <div
-      id="resume-upload-page"
-      className="max-w-4xl mx-auto px-6 py-10"
-    >
-      {/* Header */}
-      <div className="mb-10 text-center md:text-left">
-        <h1 className="text-2xl font-semibold text-[#F5F7FA] tracking-tight">
+    <div id="resume-upload-view" className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      {/* Title & Context */}
+      <div className="mb-8 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#F5F7FA] tracking-tight mb-2">
           Resume Analyzer
         </h1>
-        <p className="text-[14px] text-[#8B93A1] mt-1">
-          Upload a resume and analyze its ATS compatibility using AI.
+        <p className="text-[14px] text-[#8B93A1] max-w-lg mx-auto">
+          Evaluate your resume's ATS compatibility, skill alignment, and scoring
+          specifically targeted to your desired job title.
         </p>
       </div>
 
-      {/* Main Upload Container */}
-      <div className="grid grid-cols-1 gap-8">
-        {/* Upload Box */}
-        <div className="bg-[#151922] rounded-xl border border-[#242A35] p-8">
-          {!file ? (
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              onClick={handleBrowseClick}
-              className={`border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center ${
-                isDragging
-                  ? "border-[#6366F1] bg-[#6366F1]/5"
-                  : "border-[#242A35] hover:border-[#6366F1] hover:bg-[#101318]/50"
-              }`}
-            >
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                accept=".pdf,.docx,.doc,.txt"
-                className="hidden"
-              />
-              <div className="text-4xl mb-4">📄</div>
-              <h3 className="text-base font-medium text-[#F5F7FA] mb-2">
-                Drop your resume here
-              </h3>
-              <p className="text-[13px] text-[#8B93A1] mb-6">
-                PDF, DOC, DOCX up to 10MB
-              </p>
-              <button
-                type="button"
-                className="px-5 py-2 rounded-lg bg-transparent border border-[#242A35] text-[#F5F7FA] text-[13px] font-medium hover:bg-[#242A35] transition-colors cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleBrowseClick();
-                }}
-              >
-                Choose Resume
-              </button>
-            </div>
-          ) : (
-            <div className="rounded-xl border border-[#242A35] bg-[#101318] p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-[#6366F1]/10 text-[#6366F1] flex items-center justify-center shrink-0 border border-[#6366F1]/20">
-                    <FileType className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium text-[#F5F7FA] truncate max-w-[200px] sm:max-w-md">
-                      {file.name}
-                    </h4>
-                    <p className="text-[12px] text-[#8B93A1] mt-0.5">
-                      {formatFileSize(file.size)}
-                    </p>
-                  </div>
-                </div>
+      {/* Main Analysis Card */}
+      <div className="bg-[#161B22] rounded-2xl border border-[#242A35] shadow-xl overflow-hidden">
+        <div className="p-6 sm:p-8 space-y-7">
+          {/* Section 1: Resume Upload Area */}
+          <div>
+            <label className="block text-[13px] font-semibold text-[#F5F7FA] mb-2.5 flex items-center justify-between">
+              <span>1. Upload Resume</span>
+              <span className="text-[11px] font-normal text-[#8B93A1]">
+                PDF, DOCX up to 10MB
+              </span>
+            </label>
 
+            {!file ? (
+              <div
+                id="dropzone-area"
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                onClick={handleBrowseClick}
+                className={`border-2 border-dashed rounded-xl p-8 sm:p-10 text-center cursor-pointer transition-all duration-200 flex flex-col items-center justify-center ${
+                  isDragging
+                    ? "border-[#6366F1] bg-[#6366F1]/10"
+                    : "border-[#2E3644] hover:border-[#6366F1]/80 hover:bg-[#1C222D]"
+                }`}
+              >
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept=".pdf,.docx,.doc,.txt"
+                  className="hidden"
+                />
+                <div className="w-12 h-12 rounded-xl bg-[#6366F1]/10 text-[#818CF8] flex items-center justify-center mb-3.5 border border-[#6366F1]/20">
+                  <UploadCloud className="w-6 h-6" />
+                </div>
+                <h3 className="text-sm font-semibold text-[#F5F7FA] mb-1">
+                  Drag and drop your resume here
+                </h3>
+                <p className="text-[12px] text-[#8B93A1] mb-4">
+                  Supports PDF or Word documents
+                </p>
                 <button
                   type="button"
-                  onClick={handleRemoveFile}
-                  disabled={isAnalyzing}
-                  className="p-2 text-[#EF4444] hover:bg-[#EF4444]/10 rounded-lg transition-colors cursor-pointer disabled:opacity-40"
-                  title="Remove file"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBrowseClick();
+                  }}
+                  className="px-4 py-2 rounded-lg bg-[#21262D] hover:bg-[#2B323D] border border-[#30363D] text-[#F5F7FA] text-[13px] font-medium transition-colors cursor-pointer"
                 >
-                  <Trash2 className="w-4 h-4" />
+                  Browse File
                 </button>
               </div>
+            ) : (
+              <div className="rounded-xl border border-[#242A35] bg-[#0E1117] p-4.5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-10 h-10 rounded-lg bg-[#6366F1]/15 text-[#818CF8] flex items-center justify-center shrink-0 border border-[#6366F1]/30">
+                      <FileType className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-medium text-[#F5F7FA] truncate">
+                        {file.name}
+                      </h4>
+                      <p className="text-[12px] text-[#8B93A1]">
+                        {formatFileSize(file.size)} • {file.name.split(".").pop()?.toUpperCase()}
+                      </p>
+                    </div>
+                  </div>
 
-              {/* Extraction progress indicator */}
-              {isExtracting && (
-                <div>
-                  <div className="flex justify-between text-[11px] font-medium text-[#6366F1] mb-1.5">
-                    <span>{analysisStage || "Extracting resume text..."}</span>
-                    <span>{uploadProgress}%</span>
-                  </div>
-                  <div className="w-full h-1.5 bg-[#242A35] rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#6366F1] rounded-full transition-all duration-300"
-                      style={{ width: `${uploadProgress}%` }}
-                    />
-                  </div>
+                  <button
+                    type="button"
+                    onClick={handleRemoveFile}
+                    disabled={isAnalyzing || isExtracting}
+                    className="p-2 text-[#8B93A1] hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors cursor-pointer disabled:opacity-40"
+                    title="Remove file"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
-              )}
-            </div>
-          )}
-          
-          <div className="mt-4 text-[12px] text-[#8B93A1]">
-            Supported formats: PDF, DOC, DOCX
-          </div>
-        </div>
 
-        {/* Job Description Area */}
-        <div className="bg-[#151922] rounded-xl border border-[#242A35] p-8">
-           <h3 className="text-[15px] font-medium text-[#F5F7FA] mb-4">
-            Target Role & Job Description
-           </h3>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#8B93A1] mb-2">
-                Target Job Title (Optional)
+                {/* Extraction progress indicator */}
+                {isExtracting && (
+                  <div>
+                    <div className="flex justify-between text-[11px] font-medium text-[#818CF8] mb-1.5">
+                      <span>{analysisStage || "Extracting resume text..."}</span>
+                      <span>{uploadProgress}%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-[#21262D] rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#6366F1] rounded-full transition-all duration-300"
+                        style={{ width: `${uploadProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Section 2: Target Job / Role */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-[13px] font-semibold text-[#F5F7FA]">
+                2. Target Job / Role <span className="text-rose-400">*</span>
               </label>
+              <span className="text-[11px] text-[#8B93A1]">
+                Required for role matching
+              </span>
+            </div>
+
+            <div className="relative mb-2.5">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#8B93A1]">
+                <Briefcase className="w-4 h-4" />
+              </div>
               <input
+                id="target-role-input"
                 type="text"
                 value={targetRole}
-                onChange={(e) => setTargetRole(e.target.value)}
+                onChange={(e) => {
+                  setTargetRole(e.target.value);
+                  setError(null);
+                }}
                 disabled={isAnalyzing}
-                placeholder="e.g. Senior Software Engineer"
-                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1] disabled:opacity-60"
+                placeholder="e.g. Embedded Systems Engineer"
+                className="w-full pl-10 pr-4 py-2.5 text-[13px] rounded-xl border border-[#2E3644] bg-[#0E1117] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#64748B] transition-colors"
               />
             </div>
+
+            {/* Role Suggestion Chips */}
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#8B93A1] mb-2">
-                Paste Job Description (Optional)
-              </label>
-              <textarea
-                rows={2}
-                value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
-                disabled={isAnalyzing}
-                placeholder="Paste the job description to match skills and keywords..."
-                className="w-full px-4 py-2.5 text-[13px] rounded-lg border border-[#242A35] bg-[#101318] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#8B93A1] resize-none disabled:opacity-60"
-              />
+              <div className="text-[11px] text-[#8B93A1] mb-1.5 font-medium">
+                Quick Suggestions:
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {ROLE_SUGGESTIONS.map((role) => (
+                  <button
+                    key={role}
+                    type="button"
+                    onClick={() => handleSelectRoleSuggestion(role)}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all cursor-pointer ${
+                      targetRole.toLowerCase() === role.toLowerCase()
+                        ? "bg-[#6366F1] text-white border border-[#6366F1]"
+                        : "bg-[#0E1117] hover:bg-[#21262D] text-[#94A3B8] border border-[#2E3644] hover:text-[#F5F7FA]"
+                    }`}
+                  >
+                    {role}
+                  </button>
+                ))}
+              </div>
             </div>
-           </div>
+          </div>
 
-           {/* Loading Stage status banner */}
-           {isAnalyzing && analysisStage && (
-             <div className="mb-4 p-3.5 rounded-lg bg-[#6366F1]/10 border border-[#6366F1]/20 flex items-center justify-between text-[13px] text-[#A5B4FC]">
-               <div className="flex items-center gap-2.5">
-                 <span className="w-3.5 h-3.5 border-2 border-[#A5B4FC] border-t-transparent rounded-full animate-spin shrink-0" />
-                 <span>{analysisStage}</span>
-               </div>
-               <span className="text-[11px] text-[#8B93A1] font-mono">1-Pass Fast Engine</span>
-             </div>
-           )}
+          {/* Section 3: Job Description (Optional) */}
+          <div>
+            <label className="block text-[13px] font-semibold text-[#F5F7FA] mb-2 flex items-center justify-between">
+              <span>3. Job Description (Optional)</span>
+              <span className="text-[11px] text-[#8B93A1]">For deep tailoring</span>
+            </label>
+            <textarea
+              id="job-description-textarea"
+              rows={3}
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+              disabled={isAnalyzing}
+              placeholder="Paste job description or requirements here for deeper keyword match and customized suggestions..."
+              className="w-full px-3.5 py-2.5 text-[13px] rounded-xl border border-[#2E3644] bg-[#0E1117] text-[#F5F7FA] focus:outline-hidden focus:border-[#6366F1] placeholder:text-[#64748B] resize-none transition-colors"
+            />
+          </div>
 
-           {/* Error Notice */}
+          {/* Error Banner */}
           {error && (
-            <div className="mb-4 p-4 rounded-lg bg-[#EF4444]/10 border border-[#EF4444]/20 text-[13px] text-[#EF4444] flex items-start justify-between gap-3">
-              <div className="flex items-start gap-2">
+            <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-[13px] text-rose-400 flex items-start justify-between gap-3 animate-in fade-in">
+              <div className="flex items-start gap-2.5">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                 <p>{error}</p>
               </div>
-              <button onClick={() => setError(null)} className="cursor-pointer">
-                <X className="w-4 h-4 hover:text-[#EF4444]/80" />
+              <button
+                type="button"
+                onClick={() => setError(null)}
+                className="cursor-pointer text-rose-400 hover:text-rose-300 p-0.5"
+              >
+                <X className="w-4 h-4" />
               </button>
             </div>
           )}
 
-           <button
-             id="analyze-resume-submit-btn"
-             type="button"
-             onClick={handleAnalyze}
-             disabled={isAnalyzing || isExtracting || (!file && !pastedText.trim())}
-             className="px-6 py-2.5 rounded-lg bg-[#6366F1] hover:bg-[#4F46E5] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium text-[13px] transition-colors flex items-center gap-2 cursor-pointer"
-           >
-             {isAnalyzing ? (
-               <>
-                 <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                 <span>Analyzing Resume...</span>
-               </>
-             ) : isCompleted ? (
-               <>
-                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                 <span>Analysis Complete</span>
-               </>
-             ) : (
-               <span>Analyze Resume</span>
-             )}
-           </button>
+          {/* Live Analysis Progress Bar & Stage */}
+          {isAnalyzing && (
+            <div className="p-4 rounded-xl bg-[#6366F1]/10 border border-[#6366F1]/20 space-y-2">
+              <div className="flex items-center justify-between text-[12px] font-medium text-[#A5B4FC]">
+                <div className="flex items-center gap-2">
+                  <span className="w-3.5 h-3.5 border-2 border-[#A5B4FC] border-t-transparent rounded-full animate-spin shrink-0" />
+                  <span>{analysisStage}</span>
+                </div>
+                <span className="text-[11px] text-[#8B93A1]">AI Evaluator</span>
+              </div>
+              <div className="w-full h-1.5 bg-[#21262D] rounded-full overflow-hidden">
+                <div className="h-full bg-[#6366F1] rounded-full animate-pulse w-full" />
+              </div>
+            </div>
+          )}
+
+          {/* Submit Action Button */}
+          <div className="pt-2">
+            <button
+              id="analyze-resume-submit-btn"
+              type="button"
+              onClick={handleAnalyze}
+              disabled={!canAnalyze}
+              className={`w-full py-3 px-6 rounded-xl font-semibold text-[14px] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg ${
+                canAnalyze
+                  ? "bg-[#6366F1] hover:bg-[#4F46E5] text-white shadow-[#6366F1]/20 hover:shadow-[#6366F1]/30 active:scale-[0.99]"
+                  : "bg-[#21262D] text-[#64748B] border border-[#2E3644] cursor-not-allowed opacity-60"
+              }`}
+            >
+              {isAnalyzing ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>Analyzing Resume against {targetRole || "Role"}...</span>
+                </>
+              ) : isCompleted ? (
+                <>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>Analysis Ready!</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4 text-indigo-300" />
+                  <span>Analyze Resume</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+
+            {!hasTargetRole && hasResume && (
+              <p className="text-center text-[11px] text-[#8B93A1] mt-2">
+                Please enter or select a target role above to enable analysis.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

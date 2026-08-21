@@ -1,58 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Sidebar } from "./components/Sidebar.js";
-import { LandingPage } from "./components/LandingPage.js";
+import { Navbar } from "./components/Navbar.js";
 import { ResumeUpload } from "./components/ResumeUpload.js";
 import { AnalysisDashboard } from "./components/AnalysisDashboard.js";
-import { HistoryView } from "./components/HistoryView.js";
-import { AuthModal } from "./components/AuthModal.js";
+import { HistoryModal } from "./components/HistoryModal.js";
 import { ToastContainer, ToastMessage } from "./components/ToastContainer.js";
-import { UserProfile, ResumeAnalysisResult } from "./types.js";
+import { ResumeAnalysisResult, ResumeHistoryItem } from "./types.js";
 import {
-  getStoredUser,
-  verifySession,
-  logoutUser,
-  getAuthToken,
-} from "./lib/auth.js";
+  getStoredHistory,
+  saveAnalysisToHistory,
+  deleteStoredHistoryItem,
+  clearAllStoredHistory,
+} from "./lib/history.js";
 
-type ViewMode = "landing" | "upload" | "analysis" | "history";
+type ViewMode = "upload" | "analysis";
 
 export default function App() {
   // Navigation & View state
-  const [currentView, setCurrentView] = useState<ViewMode>("landing");
-
-  // Auth state initialized from stored session if available
-  const [user, setUser] = useState<UserProfile | null>(() => {
-    return getStoredUser();
-  });
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authModalTab, setAuthModalTab] = useState<"login" | "signup">("login");
-
-  // Session verification on mount
-  useEffect(() => {
-    const checkSession = async () => {
-      const token = getAuthToken();
-      if (token) {
-        try {
-          const verifiedUser = await verifySession();
-          if (verifiedUser) {
-            setUser(verifiedUser);
-          } else {
-            setUser(null);
-          }
-        } catch {
-          // Keep current stored user if network transiently drops
-        }
-      }
-    };
-    checkSession();
-  }, []);
+  const [currentView, setCurrentView] = useState<ViewMode>("upload");
 
   // Active Analysis state
   const [currentAnalysis, setCurrentAnalysis] =
     useState<ResumeAnalysisResult | null>(null);
 
+  // Temporary browser history state
+  const [historyItems, setHistoryItems] = useState<ResumeHistoryItem[]>([]);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+
   // Toast Notification state
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Load history from localStorage on initial load
+  useEffect(() => {
+    const loaded = getStoredHistory();
+    setHistoryItems(loaded);
+  }, []);
 
   const showToast = (
     title: string,
@@ -72,58 +53,62 @@ export default function App() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
-  const handleOpenAuth = (tab: "login" | "signup" = "login") => {
-    setAuthModalTab(tab);
-    setAuthModalOpen(true);
+  const handleAnalysisComplete = (result: ResumeAnalysisResult) => {
+    setCurrentAnalysis(result);
+    setCurrentView("analysis");
+
+    // Automatically persist to temporary browser history
+    const updatedHistory = saveAnalysisToHistory(result);
+    setHistoryItems(updatedHistory);
+
+    showToast(
+      "Analysis Complete!",
+      `Match Score: ${result.overallScore || result.atsScore}/100 calculated for ${result.targetRole || "target role"}.`,
+      "success",
+    );
   };
 
-  const handleLogout = async () => {
-    await logoutUser();
-    setUser(null);
-    setCurrentView("landing");
+  const handleSelectHistoryItem = (analysis: ResumeAnalysisResult) => {
+    setCurrentAnalysis(analysis);
+    setCurrentView("analysis");
     showToast(
-      "Signed Out",
-      "You have been logged out of your session.",
+      "Report Loaded",
+      `Viewing analysis for ${analysis.targetRole || "target role"}.`,
       "info",
     );
   };
 
-  const handleAnalysisComplete = (result: ResumeAnalysisResult) => {
-    setCurrentAnalysis(result);
-    setCurrentView("analysis");
-    showToast(
-      "Analysis Complete!",
-      `ATS Score: ${result.atsScore}/100 calculated.`,
-      "success",
-    );
+  const handleDeleteHistoryItem = (id: string) => {
+    const updated = deleteStoredHistoryItem(id);
+    setHistoryItems(updated);
+    showToast("History Item Removed", "Item deleted from session history.", "info");
+  };
+
+  const handleClearAllHistory = () => {
+    clearAllStoredHistory();
+    setHistoryItems([]);
+    showToast("History Cleared", "All temporary analyses have been removed.", "info");
   };
 
   return (
     <div
       id="sp-resumai-root"
-      className="min-h-screen bg-[#0B0D10] text-[#F5F7FA] flex font-sans overflow-hidden"
+      className="min-h-screen bg-[#0E1117] text-[#F5F7FA] flex flex-col font-sans selection:bg-[#6366F1]/30 selection:text-white"
     >
-      {/* Navigation Sidebar */}
-      <Sidebar
-        currentView={currentView as any}
-        onNavigate={(view) => setCurrentView(view as ViewMode)}
-        user={user}
-        onOpenAuth={handleOpenAuth}
-        onLogout={handleLogout}
+      {/* Top Navbar */}
+      <Navbar
+        historyCount={historyItems.length}
+        onOpenHistory={() => setIsHistoryOpen(true)}
+        currentView={currentView}
+        onNewAnalysis={() => setCurrentView("upload")}
       />
 
-      {/* Main App Content View Switcher */}
-      <main className="flex-1 h-screen overflow-y-auto">
-        {currentView === "landing" && (
-          <LandingPage
-            onStartUpload={() => setCurrentView("upload")}
-          />
-        )}
-
+      {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto">
         {currentView === "upload" && (
           <ResumeUpload
             onAnalysisComplete={handleAnalysisComplete}
-            userId={user?.id}
+            onOpenHistory={() => setIsHistoryOpen(true)}
           />
         )}
 
@@ -131,37 +116,20 @@ export default function App() {
           <AnalysisDashboard
             analysis={currentAnalysis}
             onNewAnalysis={() => setCurrentView("upload")}
+            onOpenHistory={() => setIsHistoryOpen(true)}
             onShowToast={showToast}
-          />
-        )}
-
-        {currentView === "history" && (
-          <HistoryView
-            userId={user?.id}
-            onSelectAnalysis={(analysis) => {
-              setCurrentAnalysis(analysis);
-              setCurrentView("analysis");
-            }}
-            onStartNewAnalysis={() => setCurrentView("upload")}
-            onShowToast={showToast}
-            onOpenAuth={handleOpenAuth}
           />
         )}
       </main>
 
-      {/* Authentication Modal */}
-      <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
-        initialTab={authModalTab}
-        onSuccess={(loggedUser) => {
-          setUser(loggedUser);
-          showToast(
-            "Welcome to SP ResumAI",
-            `Signed in as ${loggedUser.fullName}`,
-            "success",
-          );
-        }}
+      {/* Temporary History Modal */}
+      <HistoryModal
+        isOpen={isHistoryOpen}
+        onClose={() => setIsHistoryOpen(false)}
+        historyItems={historyItems}
+        onSelectAnalysis={handleSelectHistoryItem}
+        onDeleteHistoryItem={handleDeleteHistoryItem}
+        onClearAllHistory={handleClearAllHistory}
       />
 
       {/* Global Toast Notifications */}

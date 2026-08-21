@@ -21,7 +21,7 @@ import { ResumeAnalysisResult, JobMatchResult } from "./src/types.js";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   // CORS & Security Headers
   app.use((req, res, next) => {
